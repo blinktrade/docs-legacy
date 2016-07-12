@@ -260,7 +260,7 @@ Name               | Type   | Description
   high             | number | Price of the highest purchase in the last 24 hours.
   low              | number | Price of the lowest purchase in the last 24 hours.
   vol              | number | Trading volume in the last 24 hours.
-  vol_\<CURRENCY\> | number | Trading volume in the last 24 hours in \<CURRENCY\>.
+  vol_\<CURRENCY\> | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies).
   buy              | number | Price of the most recent buy order.
   sell             | number | Price of the most recent sell order.
 
@@ -309,7 +309,7 @@ The response is an object where:
 
 Name       | Type          | Description
 -----------|---------------|------------
-pair       | string        | \<SYMBOL\>, currency pair being used.
+pair       | string        | [\<SYMBOL\>](#currencies), currency pair being used.
 bids       | array(array)  | Array of bids from buyers.
 asks       | array(array)  | Array of asks from sellers.
 
@@ -576,7 +576,7 @@ Returns your balance for each [BrokerID](#brokers).
 Name         | Type    | Description/Value
 -------------|---------|------------------
 MsgType      | string  | "U3" UserBalanceResponse message.
-\<BROKER_ID\>| object  | The BrokerID containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the BrokerID number 5.
+\<BROKER_ID\>| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
@@ -821,6 +821,8 @@ ClOrdID | number | Unique identifier for an Order as assigned by you.
 
 ### Response
 
+> __MESSAGE RESPONSE__
+
 ```json
 {
 	"Status": 200, 
@@ -983,7 +985,7 @@ FixedFee          | number  | Fixed fee in satoshis
 
 ## Request FIAT deposit
 
-__MESSAGE EXAMPLE__
+> __MESSAGE EXAMPLE__
 
 ```json
 {
@@ -1005,7 +1007,7 @@ Value000000,    | number | Amount in satoshis
 Currency        | string | Currency. 
 BrokerID        | number | Exchange ID.
 
-__RESPONSE EXAMPLE__
+> __RESPONSE EXAMPLE__
 
 ```json
 {
@@ -1186,23 +1188,17 @@ Status        | string | "0" = Unconfirmed (in this case, you must confirm withd
 }
 ```
 
-> __RESPONSE EXAMPLE__
-
-```json
-{}
-```
-
 See the [response for Bitcoin Withdrawal](#request-bitcoin-withdrawal). Check with the exchange all the methods and required fields in the Data field.
 
-Exchange    |Methods               | Required Data fields                                                   |
-------------|----------------------|------------------------------------------------------------------------|
-4-FOXBIT    |bradesco              | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                    |
-4-FOXBIT    |bb                    | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                    |
-4-FOXBIT    |Caixa                 | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                    |
-4-FOXBIT    |ted                   | BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ   |
-3-VBTC      |banktransfer          | BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift    |
-3-VBTC      |VPBankinternaltransfer| VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift              |
-3-VBTC      |cashtoID              | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient|
+Exchange    | Methods              | Required Data fields
+------------|----------------------|---------------------
+4-FOXBIT    |bradesco              | AccountBranch, AccountNumber, AccountType, CPF_CNPJ
+4-FOXBIT    |bb                    | AccountBranch, AccountNumber, AccountType, CPF_CNPJ
+4-FOXBIT    |Caixa                 | AccountBranch, AccountNumber, AccountType, CPF_CNPJ
+4-FOXBIT    |ted                   | BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ
+3-VBTC      |banktransfer          | BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift
+3-VBTC      |VPBankinternaltransfer| VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift
+3-VBTC      |cashtoID              | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient
 
 
 ## Request a List of Withdrawals
