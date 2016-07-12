@@ -547,8 +547,6 @@ Name         | Type   | Description/Value
 MsgType      | string | "U2"
 BalanceReqID | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
 
-### Response
-
 > __RESPONSE EXAMPLE__
 
 ```json
