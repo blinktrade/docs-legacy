@@ -722,10 +722,10 @@ MsgType  | string | "D" New Order Single message. Check for a full doc here: htt
 ClOrdID  | number | Unique identifier for Order as assigned by you
 Symbol   | string | "BTCUSD", "BTCBRL", "BTCPKR", "BTCVND", "BTCVEF", "BTCCLP".
 Side     | string | "1" = Buy, "2" = Sell
-OrdType  | string | [TODO]
+OrdType  | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 Price    | number | Price in satoshis
 OrderQty | number | Qty in satoshis
-BrokerID | number | BrokerID(#brokers).
+BrokerID | number | [Your broker ID](#brokers).
 
 > __RESPONSE EXAMPLE__
 
@@ -953,32 +953,32 @@ BrokerID     | number | As listed on [Broker ID](#broker-id)
 
 ### Response
 
-Name              | Type          | Description/Value
-------------------|---------------|------------------
-MsgType           |               | "U19" Deposit response 
-DepositReqID      |               | Deposit Request ID
-Currency          |               | Currency
-BrokerID          |               | Exchange ID
-DepositMethodID   |               | Deposit Method ID
-DepositMethodName |               | Deposit method name
-DepositID         |               | Deposit ID
-UserID            |               | Your account ID
-ControlNumber     |               | Control number. Only used for FIAT deposits 
-Type              |               | CRY = Crypto Currency 
-Username          |               | Your username 
-AccountID         |               | Account ID
-Data              |               |               
-Data.InputAddress |               | The address that you have to deposit               
-Data.Destination  |               | This is the exchange wallet. DO NOT DEPOSIT IN THIS ADDRESS.              
-ClOrdID           |               | Unique identifier for Order as assigned by you
-Status            |               | 0 - New 
-Created           |               | Creation date GMT
-Value             |               | Amount
-PaidValue         |               | Paid amount 
-ReasonID          |               | Reason for the rejection - ID
-Reason            |               | Reason for the rejection - Description
-PercentFee        |               | Percent fee to process this deposit 
-FixedFee          |               | Fixed fee in satoshis 
+Name              | Type    | Description/Value
+------------------|---------|------------------
+MsgType           | string  | "U19" Deposit response 
+DepositReqID      | number  | Deposit Request ID
+Currency          | string  | Currency
+BrokerID          | number  | Exchange ID
+DepositMethodID   | number  | Deposit Method ID
+DepositMethodName | string  | Deposit method name
+DepositID         | string  | Deposit ID
+UserID            | number  | Your account ID
+ControlNumber     | number  | Control number. Only used for FIAT deposits 
+Type              | string  | CRY = Crypto Currency 
+Username          | string  | Your username 
+AccountID         | number  | Account ID
+Data              |         |               
+Data.InputAddress | string  | The address that you have to deposit               
+Data.Destination  | string  | This is the exchange wallet. DO NOT DEPOSIT IN THIS ADDRESS.
+ClOrdID           | string  | Unique identifier for Order as assigned by you
+Status            | string  | 0 - New 
+Created           | string  | Creation date GMT
+Value             | number  | Amount
+PaidValue         | number  | Paid amount 
+ReasonID          | string  | Reason for the rejection - ID
+Reason            | string  | Reason for the rejection - Description
+PercentFee        | number  | Percent fee to process this deposit 
+FixedFee          | number  | Fixed fee in satoshis 
 
 
 ## Request FIAT deposit
@@ -1146,7 +1146,7 @@ BalanceReqID | number | This should match the BalanceReqID sent on the message "
 
 
 Name          | Type   | Description/Value
------------------------|---------------|------------------
+--------------|--------|------------------
 MsgType       | string | "U7" Withdrawal Response
 WithdrawReqID | number | Withdraw Request ID
 WithdrawID    | number | Withdraw ID. You should keep this number in case you want to cancel the Withdraw request.
@@ -1167,8 +1167,6 @@ ReasonID      | string | Reason for the rejection - ID.
 Status        | string | "0" = Unconfirmed (in this case, you must confirm withdrawal using a second factor of authentication), "1" = Pending, "2" = In Progress, "4" = Completed, "8" - Cancelled
 
 ## Request a FIAT Withdrawal
-
-[TODO]
 
 > __MESSAGE EXAMPLE__
 
@@ -1193,6 +1191,18 @@ Status        | string | "0" = Unconfirmed (in this case, you must confirm withd
 ```json
 {}
 ```
+
+See the [response for Bitcoin Withdrawal](#request-bitcoin-withdrawal). Check with the exchange all the methods and required fields in the Data field.
+
+Exchange    |Methods               | Required Data fields                                                   |
+------------|----------------------|------------------------------------------------------------------------|
+4-FOXBIT    |bradesco              | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                    |
+4-FOXBIT    |bb                    | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                    |
+4-FOXBIT    |Caixa                 | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                    |
+4-FOXBIT    |ted                   | BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ   |
+3-VBTC      |banktransfer          | BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift    |
+3-VBTC      |VPBankinternaltransfer| VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift              |
+3-VBTC      |cashtoID              | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient|
 
 
 ## Request a List of Withdrawals
@@ -1276,6 +1286,34 @@ StatusList        | array(string) | Array of strings where: "1" is Pending, "2" 
 	]
 }
 ```
+
+Name               | Type          | Description/Value
+-------------------|---------------|------------------
+MsgType            | string        | "U27" Withdrawal List Response Type.
+WithdrawListReqID  | number        | WithdrawList Request ID.
+Page               | number        | Page number.
+PageSize           | number        | Page size - Max of 100.
+Columns            | array(string) | Description of all columns for all withdrawals in `WithdrawListGrp`.
+WithdrawListGrp    | array(array)  | Response array containing all withdrawals.
+
+Index Array (Name) | Type   | Description/Value
+-------------------|--------|------------------
+0  ("WithdrawID")  | number | Withdrawal ID 
+1  ("Method")      | string | Withdrawal Method 
+2  ("Currency")    | string | Currency 
+3  ("Amount")      | number | Amount requested
+4  ("Data")        | object | Data associated with the withdrawal 
+5  ("Created")     | string | Creation date
+6  ("Status")      | string | "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled 
+7  ("ReasonID")    | number | Cancellation Reason ID.
+8  ("Reason")      | string | Cancellation Reason description.
+9  ("PercentFee")  | number | Fee in % charged for this operation.
+10 ("FixedFee")    | number | Fixe Fee charged for this operation.
+11 ("PaidAmount")  | number | Amount paid.
+12 ("UserID")      | number | Account ID.
+13 ("Username")    | string | Account Username.
+14 ("BrokerID")    | number | Exchange ID.
+15 ("ClOrdID")     | number | Unique identifier for Order as assigned by you.
 
 
 # WebSocket API
