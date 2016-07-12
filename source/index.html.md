@@ -257,7 +257,7 @@ Name      | Type   | Description
   sell    | number | Price for an active sell order of 1 BTC.
 
 
-### Orderbook
+## Orderbook
 
 Order book is a list of orders that shows the interest of buyers (bids) and sellers (asks).
 
@@ -304,7 +304,7 @@ asks[1] | number        | Amount of BTC to sell
 asks[2] | number        | User ID
 
 
-### Trades
+## Trades
 
 A list of last 100 trades executed in a exchange since a chosen date.
 
