@@ -181,9 +181,13 @@ B1  |: [VerifyCustomerRefresh]()
 
 # Rest API
 
-The public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>` where `<CURRENCY>` value must be one of the following:
+## Public API
+
+The Public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>`.
 
 An `HTTP GET` request method should be used to fetch data.
+
+> `<API_URL>` is a complete Public API URL pointing to a resource.
 
 ```shell
 curl '<API_URL>'
@@ -227,8 +231,13 @@ Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
+> __EXAMPLE URL__
 
-> __EXAMPLE RESPONSE__ (Assuming `<CURRENCY>` = `BRL` and `crypto_currency` = `BTC`)
+```
+https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC
+```
+
+> __EXAMPLE RESPONSE__
 
 ```json
 {
@@ -245,16 +254,16 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
 ### Response
 
-Name      | Type   | Description
-----------|--------|------------
-  pair    | string | Currency pair being used.
-  last    | number | Value of the last purchase of 1 BTC in the last 24 hours.
-  high    | number | Price of the highest purchase in the last 24 hours.
-  low     | number | Price of the lowest purchase in the last 24 hours.
-  vol     | number | Trading volume in the last 24 hours (BTC).
-  vol_brl | number | Trading volume in the last 24 hours (BRL for this example).
-  buy     | number | Price for an active buy order of 1 BTC.
-  sell    | number | Price for an active sell order of 1 BTC.
+Name               | Type   | Description
+-------------------|--------|------------
+  pair             | string | \<SYMBOL\>, currency pair being used.
+  last             | number | Value of the last purchase in the last 24 hours.
+  high             | number | Price of the highest purchase in the last 24 hours.
+  low              | number | Price of the lowest purchase in the last 24 hours.
+  vol              | number | Trading volume in the last 24 hours.
+  vol_\<CURRENCY\> | number | Trading volume in the last 24 hours in \<CURRENCY\>.
+  buy              | number | Price of the most recent buy order.
+  sell             | number | Price of the most recent sell order.
 
 
 ## Orderbook
@@ -271,7 +280,13 @@ Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
-> __EXAMPLE RESPONSE__ (Assuming `<CURRENCY>` = `BRL` and `crypto_currency` = `BTC`)
+> __EXAMPLE URL__
+
+```
+https://api.blinktrade.com/api/v1/BRL/orderbook?crypto_currency=BTC
+```
+
+> __EXAMPLE RESPONSE__
 
 ```json
 {
@@ -289,20 +304,23 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 }
 ```
 
+### Response
+
 The response is an object where:
 
-Name    | Type          | Description
-------- |---------------|------------
-pair    | string        | Currency pair being used.
-bids    | array(number) | Array of bids from buyers.
-bids[0] | number        | BTC unit price
-bids[1] | number        | Amount of BTC to buy
-bids[2] | number        | User ID
-asks    | array(number) | Array of asks from sellers.
-asks[0] | number        | BTC unit price
-asks[1] | number        | Amount of BTC to sell
-asks[2] | number        | User ID
+Name       | Type          | Description
+-----------|---------------|------------
+pair       | string        | \<SYMBOL\>, currency pair being used.
+bids       | array(array)  | Array of bids from buyers.
+asks       | array(array)  | Array of asks from sellers.
 
+For each element of `bids` or `asks` array:
+
+Index Array | Type    | Description
+:----------:|---------|------------
+0           | number  | Unit price.
+1           | number  | Amount to buy/sell.
+2           | number  | User ID.
 
 ## Trades
 
@@ -310,20 +328,26 @@ A list of last 100 trades executed in a exchange since a chosen date.
 
 ### HTTP Request
 
-`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<UNIX_TIMESTAMP>`
+`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>`
 
 ### Parameters
 
 Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
-since           | Date which executed trades must be fetched from. `<UNIX_TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade.
+since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade.
 
 ### Response
 
-> __EXAMPLE RESPONSE__ (Assuming `<CURRENCY>` = `BRL`, `crypto_currency` = `BTC` and `since` = `1467990302`)
+> __EXAMPLE URL__
 
 ```
+https://api.blinktrade.com/api/v1/BRL/trades?crypto_currency=BTC&since=1467990302
+```
+
+> __EXAMPLE RESPONSE__
+
+```json
 [
 	{
 		"tid": 404681,
@@ -348,9 +372,9 @@ Name   | Type   | Description
 -------|--------|------------
 tid    | number | Trade ID.
 date   | number | Executed date in Unix Time.
-price  | number | BTC unit price.
-amount | number | Amount of BTC bought/sold.
-side   | string | "buy" for a buy order or "sell" for sell order.
+price  | number | Unit price.
+amount | number | Amount bought/sold.
+side   | string | "buy" for a buy order or "sell" for a sell order.
 
 
 Trade API
@@ -380,19 +404,6 @@ APIKey       | Your API Key generated from your exchange or testnet environment.
 Nonce        | Must be an integer, always greater than the previous one.
 Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key.
 Content-Type | `application/json`
-
-### Code Example (Trade API)
-
-The following code snippets can be used to send a message to the Trade API where:
-
-### Parameters
-
-Name         | Description
--------------|------------
-API_URL      | either production `https://api.blinktrade.com/tapi/v1/message` or testing `https://api.testnet.blinktrade.com/tapi/v1/message`
-API_KEY      | your API Key generated when you created the API
-API_SECRET   | your API Secret generated when you created the API
-JSON_MESSAGE | the message you want to send
 
 ```shell
   #!/bin/bash
@@ -506,6 +517,17 @@ def send(message):
 	# Send a POST message to API URL
 	return requests.post(api_url, json=message, verify=True, headers=headers).json()
 ```
+
+### Code Example (Trade API)
+
+The following parameters are used in the code snippets:
+
+Name         | Description
+-------------|------------
+API_URL      | Either production `https://api.blinktrade.com/tapi/v1/message` or testing `https://api.testnet.blinktrade.com/tapi/v1/message`
+API_KEY      | Your API Key generated when you created the API.
+API_SECRET   | Your API Secret generated when you created the API.
+JSON_MESSAGE | The message you want to send.
 
 
 ## Request Balance
