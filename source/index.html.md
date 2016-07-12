@@ -572,7 +572,8 @@ BalanceReqID | number | An ID assigned by you. It can be any number. The respons
 ```
 
 ### Response
-Returns your balance for each BrokerID
+
+Returns your balance for each [BrokerID](#brokers).
 
 Name         | Type    | Description/Value
 -------------|---------|------------------
@@ -688,7 +689,7 @@ Index Array (Name) | Type   | Description/Value
 4  ("LeavesQty")   | number | Quantity open for further execution.
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | "BTCUSD", "BTCBRL", "BTCPKR", "BTCVND", "BTCVEF", "BTCCLP"
+7  ("Symbol")      | string | [\<SYMBOL\>](#currencies), currency pair being used.
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
 9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
@@ -726,7 +727,7 @@ Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | [TODO]
 Price    | number | Price in satoshis
 OrderQty | number | Qty in satoshis
-BrokerID | number | Broker ID as defined in table [Broker ID](#broker-id)
+BrokerID | number | BrokerID(#brokers).
 
 > __RESPONSE EXAMPLE__
 
@@ -769,13 +770,11 @@ BrokerID | number | Broker ID as defined in table [Broker ID](#broker-id)
 ```
 __NOTE__: In this example, the request returned 2 messages.
 
-The response is an object where:
-
 ### Balance Response
 
 field        | Type    | Description/Value
 -------------|---------|------------------
-\<BROKER_ID\>| object  | The BrokerID containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the BrokerID number 5.
+\<BROKER_ID\>| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 MsgType      | string  | "U3" Balance response. Problably because the request also change your account balance.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
@@ -784,7 +783,7 @@ BalanceReqID | number  | This should match the BalanceReqID sent on the message 
 
 field       | Type   | Description/Value
 ------------|--------|------------------
-MsgType     | string | Execution Report. Check for a full fix doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html
+MsgType     | string | Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
 OrderID     | number | Unique identifier for Order as assigned by broker.
 ExecID      | number | Unique identifier of execution message as assigned by broker.
 ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
@@ -806,7 +805,7 @@ AvgPx       | number | Calculated average price of all fills on this order.
 
 ## Cancel Order Sent
 
-__MESSAGE EXAMPLE__
+> __MESSAGE EXAMPLE__
 
 ```json
 {
@@ -815,10 +814,12 @@ __MESSAGE EXAMPLE__
 }
 ```
 
+### Parameters
+
 Name    | Type   | Description/Value
 --------|--------|------------------
-MsgType | string | "F" Order Cancel Request message. Check for a full doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html 
-ClOrdID | number | Unique identifier for an Order as assigned by you
+MsgType | string | "F" Order Cancel Request message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html).
+ClOrdID | number | Unique identifier for an Order as assigned by you.
 
 ### Response
 
@@ -871,7 +872,7 @@ ClientID      | number | Your account ID.
 
 Name        | Type   | Description/Value
 ------------|--------|------------------
-MsgType     | string | Execution Report. Check for a full fix doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html
+MsgType     | string | Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
 OrderID     | number | Unique identifier for Order as assigned by broker
 ExecID      | number | Unique identifier of execution message as assigned by broker
 ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New 
@@ -909,9 +910,9 @@ AvgPx       | number | Calculated average price of all fills on this order.
 
 Name         | Type   | Description/Value
 -------------|--------|------------------
-MsgType      | string | "U18" Deposit Request
+MsgType      | string | "U18" Deposit Request.
 DepositReqID | number | An ID chosen by you.
-Currency     | string | Currency Code
+Currency     | string | Currency Code.
 BrokerID     | number | As listed on [Broker ID](#broker-id)
 
 > __RESPONSE EXAMPLE__
@@ -951,6 +952,8 @@ BrokerID     | number | As listed on [Broker ID](#broker-id)
 	]
 }
 ```
+
+### Response
 
 Name              | Type          | Description/Value
 ------------------|---------------|------------------
