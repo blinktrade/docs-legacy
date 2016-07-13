@@ -597,7 +597,6 @@ USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (o
 
 > __MESSAGE EXAMPLE__
 
-
 ```json
 {
 	"MsgType": "U4",
@@ -616,7 +615,7 @@ MsgType     | string        | "U4"
 OrdersReqID | number        | An ID assigned by you.
 Page        | number        | **Optional**; defaults to 0.
 PageSize    | number        | **Optional**; defaults to 20.
-Filter      | array(string) | Set it to "has_leaves_qty eq 1" to get open orders, "has_cum_qty eq 1" to get executed orders, "has_cxl_qty eq 1" to get cancelled orders
+Filter      | array(string) | Set it to "has_leaves_qty eq 1" to get open orders, "has_cum_qty eq 1" to get executed orders, "has_cxl_qty eq 1" to get cancelled orders.
 
 > __RESPONSE EXAMPLE__
 
@@ -678,14 +677,14 @@ Name        | Type          | Description/Value
 MsgType     | string        | "U5" OrdersListResponse message.
 OrdersReqID | number        | Match the request OrdersReqID field
 Page        | number        | Starts at 0.
-PageSize    | number        | The page size. If the length of the array `OrdListGrp` is greather or equal to the `PageSize`, you should issue a new request incrementing the `Page`
-Columns     | array(string) | Description of all columns of the all orders in `OrdListGrp`.
+PageSize    | number        | The page size. If the length of the array `OrdListGrp` is greather or equal to the `PageSize`, you should issue a new request incrementing the `Page`.
+Columns     | array(string) | Description of all columns of all orders in `OrdListGrp`.
 
 
 Index Array (Name) | Type   | Description/Value
 -------------------|--------|------------------
-0  ("ClOrdID")     | string | Client order ID. Set by you.
-1  ("OrderID")     | number | Order ID. Set by BlinkTrade.
+0  ("ClOrdID")     | string | Client order ID set by you.
+1  ("OrderID")     | number | Order ID set by BlinkTrade.
 2  ("CumQty")      | number | The executed quantity of this order.
 3  ("OrdStatus")   | string | "0" = New, "1" = Partially filled, "2" = Filled, "4" = Cancelled, "8" = Rejected, "A" = Pending New
 4  ("LeavesQty")   | number | Quantity open for further execution.
@@ -724,11 +723,11 @@ Name     | Type   | Description/Value
 ---------|--------|------------------
 MsgType  | string | "D" New Order Single message. Check for a full doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html 
 ClOrdID  | number | Unique identifier for Order as assigned by you
-Symbol   | string | "BTCUSD", "BTCBRL", "BTCPKR", "BTCVND", "BTCVEF", "BTCCLP".
+Symbol   | string | [\<SYMBOL\>](#currencies)
 Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
-Price    | number | Price in satoshis
-OrderQty | number | Qty in satoshis
+Price    | number | Price in satoshis.
+OrderQty | number | Quantity in satoshis.
 BrokerID | number | [Your broker ID](#brokers).
 
 > __RESPONSE EXAMPLE__
@@ -779,18 +778,17 @@ field        | Type    | Description/Value
 \<BROKER_ID\>| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 MsgType      | string  | "U3" Balance response. Problably because the request also change your account balance.
 ClientID     | number  | Your account ID.
-BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
 ### Execution Report Response
 
 field       | Type   | Description/Value
 ------------|--------|------------------
-MsgType     | string | Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
+MsgType     | string | "8" Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
 OrderID     | number | Unique identifier for Order as assigned by broker.
 ExecID      | number | Unique identifier of execution message as assigned by broker.
 ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
 OrdStatus   | string | "0" = New, "1" = Partially fill, "2 "= Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
-LeavesQty   | number | Quantity open for further execution
+LeavesQty   | number | Quantity open for further execution.
 Symbol      | string | Currency pair being used.
 OrderQty    | number | Quantity ordered in satoshis.
 LastShares  | number | Quantity of shares bought/sold on this fill.
@@ -821,7 +819,7 @@ AvgPx       | number | Calculated average price of all fills on this order.
 Name    | Type   | Description/Value
 --------|--------|------------------
 MsgType | string | "F" Order Cancel Request message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html).
-ClOrdID | number | Unique identifier for an Order as assigned by you.
+ClOrdID | number | ID for an Order as assigned by you.
 
 ### Response
 
@@ -869,7 +867,7 @@ The response of Cancel Order Request is almost identical to the New Order Single
 Name          | Type   | Description/Value
 --------------|--------|------------------
 MsgType       | string | "U3" Balance response. Problably because the request also change your account balance.
-\<BROKER_ID\> | object | The BrokerID containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the BrokerID number 5.
+\<BROKER_ID\> | object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 ClientID      | number | Your account ID.
 
 #### Execution Report Response
@@ -877,11 +875,11 @@ ClientID      | number | Your account ID.
 Name        | Type   | Description/Value
 ------------|--------|------------------
 MsgType     | string | Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
-OrderID     | number | Unique identifier for Order as assigned by broker
-ExecID      | number | Unique identifier of execution message as assigned by broker
+OrderID     | number | Unique identifier for Order as assigned by broker.
+ExecID      | number | Unique identifier of execution message as assigned by broker.
 ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New 
 OrdStatus   | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New 
-LeavesQty   | number | Quantity open for further execution
+LeavesQty   | number | Quantity open for further execution.
 Symbol      | string | Currency pair being used.
 OrderQty    | number | Quantity ordered in satoshis.
 LastShares  | number | Quantity of shares bought/sold on this fill.
@@ -970,14 +968,14 @@ DepositMethodName | string  | Deposit method name
 DepositID         | string  | Deposit ID
 UserID            | number  | Your account ID
 ControlNumber     | number  | Control number. Only used for FIAT deposits 
-Type              | string  | CRY = Crypto Currency 
+Type              | string  | "CRY" = Crypto Currency 
 Username          | string  | Your username 
 AccountID         | number  | Account ID
-Data              |         |               
-Data.InputAddress | string  | The address that you have to deposit               
+Data              | object  |               
+Data.InputAddress | string  | The address that you have to deposit.
 Data.Destination  | string  | This is the exchange wallet. DO NOT DEPOSIT IN THIS ADDRESS.
 ClOrdID           | string  | Unique identifier for Order as assigned by you
-Status            | string  | 0 - New 
+Status            | string  | "0" = New 
 Created           | string  | Creation date GMT
 Value             | number  | Amount
 PaidValue         | number  | Paid amount 
