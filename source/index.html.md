@@ -1005,8 +1005,8 @@ Name            | Type   | Description/Value
 MsgType         | string | "U18" Deposit request.
 DepositReqID    | number | Deposit Request ID. 
 DepositMethodID | number | Deposit Method ID - Check with your exchange. 
-Value000000,    | number | Amount in satoshis
-Currency        | string | Currency. 
+Value           | number | Amount in satoshis
+Currency        | string | [\<Currency\>](#currencies). 
 BrokerID        | number | Exchange ID.
 
 > __RESPONSE EXAMPLE__
@@ -1018,28 +1018,28 @@ BrokerID        | number | Exchange ID.
 	"Responses": [
 		{
 			"MsgType": "U19", 
+			"DepositReqID": 6000745, 
+			"DepositMethodID": 403, 
 			"DepositMethodName": "bb", 
+			"Value": 150000000000, 
+			"Currency": "BRL", 
+			"BrokerID": 4, 
+			"DepositID": "a637e243382f4b768b5faccb97878ab3", 
 			"UserID": 90800025, 
 			"ControlNumber": 402000057, 
-			"State": "UNCONFIRMED", 
 			"Type": "DTP", 
 			"AccountID": 90800025, 
 			"Username": "user", 
 			"CreditProvided": 0, 
-			"DepositReqID": 6000745, 
-			"DepositID": "a637e243382f4b768b5faccb97878ab3", 
-			"Reason": None, 
 			"PercentFee": 0.0, 
 			"Data": {},
 			"ClOrdID": None, 
 			"Status": "0", 
 			"Created": "2016-03-28 20:28:02", 
-			"DepositMethodID": 403, 
-			"Value": 150000000000, 
-			"BrokerID": 4, 
+			"Reason": None, 
 			"PaidValue": 0, 
-			"Currency": "BRL", 
 			"ReasonID": None, 
+			"State": "UNCONFIRMED", 
 			"FixedFee": 0
 		}
 	]
@@ -1049,7 +1049,13 @@ BrokerID        | number | Exchange ID.
 Name              | Type   | Description/Value
 ------------------|--------|------------------
 MsgType           | string | "U19"
+DepositReqID      | number | 
+DepositMethodID   | number | 
 DepositMethodName | string | 
+Value             | number | 
+Currency          | string | 
+BrokerID          | number | 
+DepositID         | string | 
 UserID            | number | 
 ControlNumber     | number | 
 State             | string | 
@@ -1057,19 +1063,13 @@ Type              | string |
 AccountID         | number | 
 Username          | string | 
 CreditProvided    | number | 
-DepositReqID      | number | 
-DepositID         | string | 
 Reason            |        | 
 PercentFee        | number | 
 Data              | object | 
 ClOrdID           |        | 
 Status            | string | 
 Created           | string | 
-DepositMethodID   | number | 
-Value             | number | 
-BrokerID          | number | 
 PaidValue         | number | 
-Currency          | string | 
 ReasonID          |        | 
 FixedFee          | number | 
 
@@ -1090,6 +1090,7 @@ FixedFee          | number |
 	}
 }
 ```
+
 Paramenters
 
 Params        | Type   | Description/Value
