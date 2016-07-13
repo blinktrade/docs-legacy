@@ -405,37 +405,41 @@ Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key.
 Content-Type | `application/json`
 
 ```shell
-  #!/bin/bash
-  # usage: ./this-script '<JSON_MESSAGE>'
+#!/bin/bash
+# usage: ./this-script '<JSON_MESSAGE>'
 
-  # Get message from first command line argument
-  [ "$1" ] || {
-    echo "error: missing JSON message to be sent"
-    echo "usage: ./this-script '<JSON_MESSAGE>'"
-    exit 1
-  }
-  message="$1"
+# Get message from first command line argument
+[ "$1" ] || {
+	echo "error: missing JSON message to be sent"
+	echo "usage: ./this-script '<JSON_MESSAGE>'"
+	exit 1
+}
+message="$1"
 
-  # Trade API URL
-  api_url='<API_URL>'
+# Trade API URL
+api_url='<API_URL>'
 
-  # Set API Key and Secret
-  api_key='<API_KEY>'
-  api_secret='<API_SECRET>'
+# Set API Key and Secret
+api_key='<API_KEY>'
+api_secret='<API_SECRET>'
 
-  # Generate a nonce
-  nonce=$(date +%s)
+# Generate a nonce
+nonce=$(date +%s)
 
-  # Sign the nonce with secret using HMAC-SHA256
-  signature=$(echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret | cut -d ' ' -f 2)
+# Sign the nonce with secret using HMAC-SHA256
+signature=$( \
+	echo -n $nonce | \
+	openssl dgst -sha256 -hex -hmac $api_secret | \
+	cut -d ' ' -f 2 \
+)
 
-  # Send a POST message to API URL
-  curl -X POST "$api_url" \
-    -H "APIKey:$api_key" \
-    -H "Nonce:$nonce" \
-    -H "Signature:$signature" \
-    -H "Content-Type:application/json" \
-    -d "$message"
+# Send a POST message to API URL
+curl -X POST "$api_url" \
+	-H "APIKey:$api_key" \
+	-H "Nonce:$nonce" \
+	-H "Signature:$signature" \
+	-H "Content-Type:application/json" \
+	-d "$message"
 ```
 
 ```php
