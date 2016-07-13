@@ -121,11 +121,11 @@
 
 <h3 id="overview">OVERVIEW</h3>
 
-<p>BlinkTrade provides a simple and robust WebSocket API to integrate our platform, we strongly recommend you to use over the Rest API</p>
+<p>BlinkTrade provides a simple and robust <a href="#websocket-api">WebSocket API</a> to integrate our platform, we strongly recommend you to use over the <a href="#rest-api">Rest API</a>.</p>
 
 <h3 id="fix">FIX</h3>
 
-<p>Our API is based on the <a href="http://www.onixs.biz/fix-dictionary/4.4/index.html">fix protocol</a></p>
+<p>Our API is based on the <a href="http://www.onixs.biz/fix-dictionary/4.4/index.html">fix protocol</a>.</p>
 
 <h2 id="blinktrade-endpoints">BlinkTrade Endpoints</h2>
 
@@ -238,7 +238,7 @@
 
 <p>List of Messages Based on the Fix Protocol</p>
 
-<h3 id="user-messages">USER MESSAGES</h3>
+<h3 id="user-messages">User Messages</h3>
 
 <table><thead>
 <tr>
@@ -248,79 +248,79 @@
 </thead><tbody>
 <tr>
 <td>0</td>
-<td><a href="#">Heartbeat</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_0_0.html">Heartbeat</a></td>
 </tr>
 <tr>
 <td>1</td>
-<td><a href="#">TestRequest</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_1_1.html">TestRequest</a></td>
 </tr>
 <tr>
 <td>C</td>
-<td><a href="#">Email</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_C_67.html">Email</a></td>
 </tr>
 <tr>
 <td>V</td>
-<td><a href="#">MarketDataRequest</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_V_86.html">MarketDataRequest</a></td>
 </tr>
 <tr>
 <td>W</td>
-<td><a href="#">MarketDataFullRefresh</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_W_87.html">MarketDataFullRefresh</a></td>
 </tr>
 <tr>
 <td>X</td>
-<td><a href="#">MarketDataIncrementalRefresh</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_X_88.html">MarketDataIncrementalRefresh</a></td>
 </tr>
 <tr>
 <td>Y</td>
-<td><a href="#">MarketDataRequestReject</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_Y_89.html">MarketDataRequestReject</a></td>
 </tr>
 <tr>
 <td>BE</td>
-<td><a href="#">UserRequest</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html">UserRequest</a></td>
 </tr>
 <tr>
 <td>BF</td>
-<td><a href="#">UserResponse</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html">UserResponse</a></td>
 </tr>
 <tr>
 <td>D</td>
-<td><a href="#">NewOrderSingle</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html">NewOrderSingle</a></td>
 </tr>
 <tr>
 <td>F</td>
-<td><a href="#">OrderCancelRequest</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html">OrderCancelRequest</a></td>
 </tr>
 <tr>
 <td>8</td>
-<td><a href="#">ExecutionReport</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html">ExecutionReport</a></td>
 </tr>
 <tr>
 <td>x</td>
-<td><a href="#">SecurityListRequest</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_x_120.html">SecurityListRequest</a></td>
 </tr>
 <tr>
 <td>y</td>
-<td><a href="#">SecurityList</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_y_121.html">SecurityList</a></td>
 </tr>
 <tr>
 <td>e</td>
-<td><a href="#">SecurityStatusRequest</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_e_101.html">SecurityStatusRequest</a></td>
 </tr>
 <tr>
 <td>f</td>
-<td><a href="#">SecurityStatus</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_f_102.html">SecurityStatus</a></td>
 </tr>
 <tr>
 <td>AN</td>
-<td><a href="#">RequestForPositions</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_AN_6578.html">RequestForPositions</a></td>
 </tr>
 <tr>
 <td>AO</td>
-<td><a href="#">RequestForPositionsAck</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_AO_6579.html">RequestForPositionsAck</a></td>
 </tr>
 <tr>
 <td>AP</td>
-<td><a href="#">PositionReport</a></td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_AP_6580.html">PositionReport</a></td>
 </tr>
 <tr>
 <td>U0</td>
@@ -596,7 +596,7 @@
 </tr>
 </tbody></table>
 
-<h3 id="broker-messages">BROKER MESSAGES</h3>
+<h3 id="broker-messages">Broker Messages</h3>
 
 <table><thead>
 <tr>
@@ -646,15 +646,26 @@
 </tr>
 <tr>
 <td>B1</td>
-<td>: <a href="#">VerifyCustomerRefresh</a></td>
+<td><a href="#">VerifyCustomerRefresh</a></td>
 </tr>
 </tbody></table>
 
-<h1 id="rest-api">Rest API</h1>
+<ul>
+<li><a href="https://gist.github.com/pinhopro/60b1fd213b36d576505e">pinhopro/blinktrade_example_restapi.py</a></li>
+<li><a href="http://www.onixs.biz/fix-dictionary/4.4/index.html">FIX 4.4 - FIX Dictionary - Onix Solutions</a></li>
+</ul>
 
-<p>The public API can be accessed under <code class="prettyprint">/api/v1/&lt;CURRENCY&gt;</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/api/v1/&lt;CURRENCY&gt;</code> where <code class="prettyprint">&lt;CURRENCY&gt;</code> value must be one of the following:</p>
+          <h1 id="rest-api">Rest API</h1>
+
+<h2 id="public-api">Public API</h2>
+
+<p>The Public API can be accessed under <code class="prettyprint">/api/v1/&lt;CURRENCY&gt;</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/api/v1/&lt;CURRENCY&gt;</code>.</p>
 
 <p>An <code class="prettyprint">HTTP GET</code> request method should be used to fetch data.</p>
+
+<blockquote>
+<p><code class="prettyprint">&lt;API_URL&gt;</code> is a complete Public API URL pointing to a resource.</p>
+</blockquote>
 <pre class="highlight shell"><code>curl <span class="s1">'&lt;API_URL&gt;'</span>
 </code></pre>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
@@ -700,7 +711,13 @@
 </tbody></table>
 
 <blockquote>
-<p><strong>EXAMPLE RESPONSE</strong> (Assuming <code class="prettyprint">&lt;CURRENCY&gt;</code> = <code class="prettyprint">BRL</code> and <code class="prettyprint">crypto_currency</code> = <code class="prettyprint">BTC</code>)</p>
+<p><strong>EXAMPLE URL</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE</strong></p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCBRL"</span><span class="p">,</span><span class="w">
@@ -726,12 +743,12 @@
 <tr>
 <td>pair</td>
 <td>string</td>
-<td>Currency pair being used.</td>
+<td>&lt;SYMBOL&gt;, currency pair being used.</td>
 </tr>
 <tr>
 <td>last</td>
 <td>number</td>
-<td>Value of the last purchase of 1 BTC in the last 24 hours.</td>
+<td>Value of the last purchase in the last 24 hours.</td>
 </tr>
 <tr>
 <td>high</td>
@@ -746,26 +763,26 @@
 <tr>
 <td>vol</td>
 <td>number</td>
-<td>Trading volume in the last 24 hours (BTC).</td>
+<td>Trading volume in the last 24 hours.</td>
 </tr>
 <tr>
-<td>vol_brl</td>
+<td>vol_&lt;CURRENCY&gt;</td>
 <td>number</td>
-<td>Trading volume in the last 24 hours (BRL for this example).</td>
+<td>Trading volume in the last 24 hours in <a href="#currencies">&lt;CURRENCY&gt;</a>.</td>
 </tr>
 <tr>
 <td>buy</td>
 <td>number</td>
-<td>Price for an active buy order of 1 BTC.</td>
+<td>Price of the most recent buy order.</td>
 </tr>
 <tr>
 <td>sell</td>
 <td>number</td>
-<td>Price for an active sell order of 1 BTC.</td>
+<td>Price of the most recent sell order.</td>
 </tr>
 </tbody></table>
 
-<h3 id="orderbook">Orderbook</h3>
+<h2 id="orderbook">Orderbook</h2>
 
 <p>Order book is a list of orders that shows the interest of buyers (bids) and sellers (asks).</p>
 
@@ -788,7 +805,13 @@
 </tbody></table>
 
 <blockquote>
-<p><strong>EXAMPLE RESPONSE</strong> (Assuming <code class="prettyprint">&lt;CURRENCY&gt;</code> = <code class="prettyprint">BRL</code> and <code class="prettyprint">crypto_currency</code> = <code class="prettyprint">BTC</code>)</p>
+<p><strong>EXAMPLE URL</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>https://api.blinktrade.com/api/v1/BRL/orderbook?crypto_currency=BTC
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE</strong></p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCBRL"</span><span class="p">,</span><span class="w">
@@ -805,6 +828,8 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h3 id="response">Response</h3>
+
 <p>The response is an object where:</p>
 
 <table><thead>
@@ -817,57 +842,53 @@
 <tr>
 <td>pair</td>
 <td>string</td>
-<td>Currency pair being used.</td>
+<td><a href="#currencies">&lt;SYMBOL&gt;</a>, currency pair being used.</td>
 </tr>
 <tr>
 <td>bids</td>
-<td>array(number)</td>
+<td>array(array)</td>
 <td>Array of bids from buyers.</td>
 </tr>
 <tr>
-<td>bids[0]</td>
-<td>number</td>
-<td>BTC unit price</td>
-</tr>
-<tr>
-<td>bids[1]</td>
-<td>number</td>
-<td>Amount of BTC to buy</td>
-</tr>
-<tr>
-<td>bids[2]</td>
-<td>number</td>
-<td>User ID</td>
-</tr>
-<tr>
 <td>asks</td>
-<td>array(number)</td>
+<td>array(array)</td>
 <td>Array of asks from sellers.</td>
-</tr>
-<tr>
-<td>asks[0]</td>
-<td>number</td>
-<td>BTC unit price</td>
-</tr>
-<tr>
-<td>asks[1]</td>
-<td>number</td>
-<td>Amount of BTC to sell</td>
-</tr>
-<tr>
-<td>asks[2]</td>
-<td>number</td>
-<td>User ID</td>
 </tr>
 </tbody></table>
 
-<h3 id="trades">Trades</h3>
+<p>For each element of <code class="prettyprint">bids</code> or <code class="prettyprint">asks</code> array:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Index Array</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">0</td>
+<td>number</td>
+<td>Unit price.</td>
+</tr>
+<tr>
+<td style="text-align: center">1</td>
+<td>number</td>
+<td>Amount to buy/sell.</td>
+</tr>
+<tr>
+<td style="text-align: center">2</td>
+<td>number</td>
+<td>User ID.</td>
+</tr>
+</tbody></table>
+
+<h2 id="trades">Trades</h2>
 
 <p>A list of last 100 trades executed in a exchange since a chosen date.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/trades?crypto_currency=BTC&amp;since=&lt;UNIX_TIMESTAMP&gt;</code></p>
+<p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/trades?crypto_currency=BTC&amp;since=&lt;TIMESTAMP&gt;</code></p>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -883,32 +904,38 @@
 </tr>
 <tr>
 <td>since</td>
-<td>Date which executed trades must be fetched from. <code class="prettyprint">&lt;UNIX_TIMESTAMP&gt;</code> is in Unix Time date format. <strong>Optional</strong>; defaults to the date of the first executed trade.</td>
+<td>Date which executed trades must be fetched from. <code class="prettyprint">&lt;TIMESTAMP&gt;</code> is in Unix Time date format. <strong>Optional</strong>; defaults to the date of the first executed trade.</td>
 </tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
 
 <blockquote>
-<p><strong>EXAMPLE RESPONSE</strong> (Assuming <code class="prettyprint">&lt;CURRENCY&gt;</code> = <code class="prettyprint">BRL</code>, <code class="prettyprint">crypto_currency</code> = <code class="prettyprint">BTC</code> and <code class="prettyprint">since</code> = <code class="prettyprint">1467990302</code>)</p>
+<p><strong>EXAMPLE URL</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>[
-    {
-        "tid": 404681,
-        "date": 1467990302,
-        "price": 2280.89,
-        "amount": 0.53487892,
-        "side": "buy"
-    },
-    {
-        "tid": 404682,
-        "date": 1467990492,
-        "price": 2261.01,
-        "amount": 0.0373,
-        "side": "sell"
-    }
-]
+<pre class="highlight plaintext"><code>https://api.blinktrade.com/api/v1/BRL/trades?crypto_currency=BTC&amp;since=1467990302
 </code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="mi">404681</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1467990302</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">2280.89</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.53487892</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="mi">404682</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1467990492</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">2261.01</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0373</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
 
 <p>The response is an array of objects where for each object:</p>
 
@@ -932,17 +959,17 @@
 <tr>
 <td>price</td>
 <td>number</td>
-<td>BTC unit price.</td>
+<td>Unit price.</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>number</td>
-<td>Amount of BTC bought/sold.</td>
+<td>Amount bought/sold.</td>
 </tr>
 <tr>
 <td>side</td>
 <td>string</td>
-<td>&ldquo;buy&rdquo; for a buy order or &ldquo;sell&rdquo; for sell order.</td>
+<td>&ldquo;buy&rdquo; for a buy order or &ldquo;sell&rdquo; for a sell order.</td>
 </tr>
 </tbody></table>
 
@@ -990,62 +1017,36 @@
 <td><code class="prettyprint">application/json</code></td>
 </tr>
 </tbody></table>
+<pre class="highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="c"># usage: ./this-script '&lt;JSON_MESSAGE&gt;'</span>
 
-<h3 id="code-example-trade-api">Code Example (Trade API)</h3>
-
-<p>The following code snippets can be used to send a message to the Trade API where:</p>
-
-<h3 id="parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>API_URL</td>
-<td>either production <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code> or testing <code class="prettyprint">https://api.testnet.blinktrade.com/tapi/v1/message</code></td>
-</tr>
-<tr>
-<td>API_KEY</td>
-<td>your API Key generated when you created the API</td>
-</tr>
-<tr>
-<td>API_SECRET</td>
-<td>your API Secret generated when you created the API</td>
-</tr>
-<tr>
-<td>JSON_MESSAGE</td>
-<td>the message you want to send</td>
-</tr>
-</tbody></table>
-<pre class="highlight shell"><code>  <span class="c">#!/bin/bash</span>
-  <span class="c"># usage: ./this-script '&lt;JSON_MESSAGE&gt;'</span>
-
-  <span class="c"># Get message from first command line argument</span>
-  <span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span> <span class="o">||</span> <span class="o">{</span>
+<span class="c"># Get message from first command line argument</span>
+<span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span> <span class="o">||</span> <span class="o">{</span>
     <span class="nb">echo</span> <span class="s2">"error: missing JSON message to be sent"</span>
     <span class="nb">echo</span> <span class="s2">"usage: ./this-script '&lt;JSON_MESSAGE&gt;'"</span>
     <span class="nb">exit </span>1
-  <span class="o">}</span>
-  <span class="nv">message</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="o">}</span>
+<span class="nv">message</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 
-  <span class="c"># Trade API URL</span>
-  <span class="nv">api_url</span><span class="o">=</span><span class="s1">'&lt;API_URL&gt;'</span>
+<span class="c"># Trade API URL</span>
+<span class="nv">api_url</span><span class="o">=</span><span class="s1">'&lt;API_URL&gt;'</span>
 
-  <span class="c"># Set API Key and Secret</span>
-  <span class="nv">api_key</span><span class="o">=</span><span class="s1">'&lt;API_KEY&gt;'</span>
-  <span class="nv">api_secret</span><span class="o">=</span><span class="s1">'&lt;API_SECRET&gt;'</span>
+<span class="c"># Set API Key and Secret</span>
+<span class="nv">api_key</span><span class="o">=</span><span class="s1">'&lt;API_KEY&gt;'</span>
+<span class="nv">api_secret</span><span class="o">=</span><span class="s1">'&lt;API_SECRET&gt;'</span>
 
-  <span class="c"># Generate a nonce</span>
-  <span class="nv">nonce</span><span class="o">=</span><span class="k">$(</span>date +%s<span class="k">)</span>
+<span class="c"># Generate a nonce</span>
+<span class="nv">nonce</span><span class="o">=</span><span class="k">$(</span>date +%s<span class="k">)</span>
 
-  <span class="c"># Sign the nonce with secret using HMAC-SHA256</span>
-  <span class="nv">signature</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span> | cut -d <span class="s1">' '</span> -f 2<span class="k">)</span>
+<span class="c"># Sign the nonce with secret using HMAC-SHA256</span>
+<span class="nv">signature</span><span class="o">=</span><span class="k">$(</span> <span class="se">\</span>
+    <span class="nb">echo</span> -n <span class="nv">$nonce</span> | <span class="se">\</span>
+    openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span> | <span class="se">\</span>
+    cut -d <span class="s1">' '</span> -f 2 <span class="se">\</span>
+<span class="k">)</span>
 
-  <span class="c"># Send a POST message to API URL</span>
-  curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span class="s2">"</span> <span class="se">\</span>
+<span class="c"># Send a POST message to API URL</span>
+curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
@@ -1128,6 +1129,34 @@
     <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
 
+<h3 id="code-example-trade-api">Code Example (Trade API)</h3>
+
+<p>The following parameters are used in the code snippets:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>API_URL</td>
+<td>Either production <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code> or testing <code class="prettyprint">https://api.testnet.blinktrade.com/tapi/v1/message</code></td>
+</tr>
+<tr>
+<td>API_KEY</td>
+<td>Your API Key generated when you created the API.</td>
+</tr>
+<tr>
+<td>API_SECRET</td>
+<td>Your API Secret generated when you created the API.</td>
+</tr>
+<tr>
+<td>JSON_MESSAGE</td>
+<td>The message you want to send.</td>
+</tr>
+</tbody></table>
+
 <h2 id="request-balance">Request Balance</h2>
 
 <h3 id="parameters">Parameters</h3>
@@ -1160,8 +1189,6 @@
 </tr>
 </tbody></table>
 
-<h3 id="response">Response</h3>
-
 <blockquote>
 <p><strong>RESPONSE EXAMPLE</strong></p>
 </blockquote>
@@ -1186,7 +1213,7 @@
 
 <h3 id="response">Response</h3>
 
-<p>Returns your balance for each BrokerID</p>
+<p>Returns your balance for each <a href="#brokers">BrokerID</a>.</p>
 
 <table><thead>
 <tr>
@@ -1203,7 +1230,7 @@
 <tr>
 <td>&lt;BROKER_ID&gt;</td>
 <td>object</td>
-<td>The BrokerID containing your BTC and FIAT balance, e.g.: &ldquo;5&rdquo; stands for your balance with the BrokerID number 5.</td>
+<td>The <a href="#brokers">BrokerID</a> containing your BTC and FIAT balance, e.g.: &ldquo;5&rdquo; stands for your balance with the <a href="#brokers">BrokerID</a> number 5.</td>
 </tr>
 <tr>
 <td>ClientID</td>
@@ -1294,7 +1321,7 @@
 <tr>
 <td>Filter</td>
 <td>array(string)</td>
-<td>Set it to &ldquo;has_leaves_qty eq 1&rdquo; to get open orders, &ldquo;has_cum_qty eq 1&rdquo; to get executed orders, &ldquo;has_cxl_qty eq 1&rdquo; to get cancelled orders</td>
+<td>Set it to &ldquo;has_leaves_qty eq 1&rdquo; to get open orders, &ldquo;has_cum_qty eq 1&rdquo; to get executed orders, &ldquo;has_cxl_qty eq 1&rdquo; to get cancelled orders.</td>
 </tr>
 </tbody></table>
 
@@ -1378,12 +1405,12 @@
 <tr>
 <td>PageSize</td>
 <td>number</td>
-<td>The page size. If the length of the array <code class="prettyprint">OrdListGrp</code> is greather or equal to the <code class="prettyprint">PageSize</code>, you should issue a new request incrementing the <code class="prettyprint">Page</code></td>
+<td>The page size. If the length of the array <code class="prettyprint">OrdListGrp</code> is greather or equal to the <code class="prettyprint">PageSize</code>, you should issue a new request incrementing the <code class="prettyprint">Page</code>.</td>
 </tr>
 <tr>
 <td>Columns</td>
 <td>array(string)</td>
-<td>Description of all columns of the all orders in <code class="prettyprint">OrdListGrp</code>.</td>
+<td>Description of all columns of all orders in <code class="prettyprint">OrdListGrp</code>.</td>
 </tr>
 </tbody></table>
 
@@ -1397,12 +1424,12 @@
 <tr>
 <td>0  (&ldquo;ClOrdID&rdquo;)</td>
 <td>string</td>
-<td>Client order ID. Set by you.</td>
+<td>Client order ID set by you.</td>
 </tr>
 <tr>
 <td>1  (&ldquo;OrderID&rdquo;)</td>
 <td>number</td>
-<td>Order ID. Set by BlinkTrade.</td>
+<td>Order ID set by BlinkTrade.</td>
 </tr>
 <tr>
 <td>2  (&ldquo;CumQty&rdquo;)</td>
@@ -1432,7 +1459,7 @@
 <tr>
 <td>7  (&ldquo;Symbol&rdquo;)</td>
 <td>string</td>
-<td>&ldquo;BTCUSD&rdquo;, &ldquo;BTCBRL&rdquo;, &ldquo;BTCPKR&rdquo;, &ldquo;BTCVND&rdquo;, &ldquo;BTCVEF&rdquo;, &ldquo;BTCCLP&rdquo;</td>
+<td><a href="#currencies">&lt;SYMBOL&gt;</a>, currency pair being used.</td>
 </tr>
 <tr>
 <td>8  (&ldquo;Side&rdquo;)</td>
@@ -1510,7 +1537,7 @@
 <tr>
 <td>Symbol</td>
 <td>string</td>
-<td>&ldquo;BTCUSD&rdquo;, &ldquo;BTCBRL&rdquo;, &ldquo;BTCPKR&rdquo;, &ldquo;BTCVND&rdquo;, &ldquo;BTCVEF&rdquo;, &ldquo;BTCCLP&rdquo;.</td>
+<td><a href="#currencies">&lt;SYMBOL&gt;</a></td>
 </tr>
 <tr>
 <td>Side</td>
@@ -1520,22 +1547,22 @@
 <tr>
 <td>OrdType</td>
 <td>string</td>
-<td>[TODO]</td>
+<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit, &ldquo;G&rdquo; = Swap, &ldquo;P&rdquo; = Pegged</td>
 </tr>
 <tr>
 <td>Price</td>
 <td>number</td>
-<td>Price in satoshis</td>
+<td>Price in satoshis.</td>
 </tr>
 <tr>
 <td>OrderQty</td>
 <td>number</td>
-<td>Qty in satoshis</td>
+<td>Quantity in satoshis.</td>
 </tr>
 <tr>
 <td>BrokerID</td>
 <td>number</td>
-<td>Broker ID as defined in table <a href="#broker-id">Broker ID</a></td>
+<td><a href="#brokers">Your broker ID</a>.</td>
 </tr>
 </tbody></table>
 
@@ -1580,8 +1607,6 @@
 
 <p><strong>NOTE</strong>: In this example, the request returned 2 messages.</p>
 
-<p>The response is an object where:</p>
-
 <h3 id="balance-response">Balance Response</h3>
 
 <table><thead>
@@ -1594,7 +1619,7 @@
 <tr>
 <td>&lt;BROKER_ID&gt;</td>
 <td>object</td>
-<td>The BrokerID containing your BTC and FIAT balance, e.g.: &ldquo;5&rdquo; stands for your balance with the BrokerID number 5.</td>
+<td>The <a href="#brokers">BrokerID</a> containing your BTC and FIAT balance, e.g.: &ldquo;5&rdquo; stands for your balance with the <a href="#brokers">BrokerID</a> number 5.</td>
 </tr>
 <tr>
 <td>MsgType</td>
@@ -1605,11 +1630,6 @@
 <td>ClientID</td>
 <td>number</td>
 <td>Your account ID.</td>
-</tr>
-<tr>
-<td>BalanceReqID</td>
-<td>number</td>
-<td>This should match the BalanceReqID sent on the message &ldquo;U2&rdquo;.</td>
 </tr>
 </tbody></table>
 
@@ -1625,7 +1645,7 @@
 <tr>
 <td>MsgType</td>
 <td>string</td>
-<td>Execution Report. Check for a full fix doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html</td>
+<td>&ldquo;8&rdquo; Execution Report. Check for a full fix doc here: <a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html">http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html</a>.</td>
 </tr>
 <tr>
 <td>OrderID</td>
@@ -1650,7 +1670,7 @@
 <tr>
 <td>LeavesQty</td>
 <td>number</td>
-<td>Quantity open for further execution</td>
+<td>Quantity open for further execution.</td>
 </tr>
 <tr>
 <td>Symbol</td>
@@ -1721,12 +1741,16 @@
 
 <h2 id="cancel-order-sent">Cancel Order Sent</h2>
 
+<blockquote>
 <p><strong>MESSAGE EXAMPLE</strong></p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ClOrdID"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<h3 id="parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -1738,16 +1762,20 @@
 <tr>
 <td>MsgType</td>
 <td>string</td>
-<td>&ldquo;F&rdquo; Order Cancel Request message. Check for a full doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html</td>
+<td>&ldquo;F&rdquo; Order Cancel Request message. Check for a full doc here: <a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html">http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html</a>.</td>
 </tr>
 <tr>
 <td>ClOrdID</td>
 <td>number</td>
-<td>Unique identifier for an Order as assigned by you</td>
+<td>ID for an Order as assigned by you.</td>
 </tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
+
+<blockquote>
+<p><strong>MESSAGE RESPONSE</strong></p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"Status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w"> 
@@ -1801,7 +1829,7 @@
 <tr>
 <td>&lt;BROKER_ID&gt;</td>
 <td>object</td>
-<td>The BrokerID containing your BTC and FIAT balance, e.g.: &ldquo;5&rdquo; stands for your balance with the BrokerID number 5.</td>
+<td>The <a href="#brokers">BrokerID</a> containing your BTC and FIAT balance, e.g.: &ldquo;5&rdquo; stands for your balance with the <a href="#brokers">BrokerID</a> number 5.</td>
 </tr>
 <tr>
 <td>ClientID</td>
@@ -1822,17 +1850,17 @@
 <tr>
 <td>MsgType</td>
 <td>string</td>
-<td>Execution Report. Check for a full fix doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html</td>
+<td>Execution Report. Check for a full fix doc here: <a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html">http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html</a>.</td>
 </tr>
 <tr>
 <td>OrderID</td>
 <td>number</td>
-<td>Unique identifier for Order as assigned by broker</td>
+<td>Unique identifier for Order as assigned by broker.</td>
 </tr>
 <tr>
 <td>ExecID</td>
 <td>number</td>
-<td>Unique identifier of execution message as assigned by broker</td>
+<td>Unique identifier of execution message as assigned by broker.</td>
 </tr>
 <tr>
 <td>ExecType</td>
@@ -1847,7 +1875,7 @@
 <tr>
 <td>LeavesQty</td>
 <td>number</td>
-<td>Quantity open for further execution</td>
+<td>Quantity open for further execution.</td>
 </tr>
 <tr>
 <td>Symbol</td>
@@ -1941,7 +1969,7 @@
 <tr>
 <td>MsgType</td>
 <td>string</td>
-<td>&ldquo;U18&rdquo; Deposit Request</td>
+<td>&ldquo;U18&rdquo; Deposit Request.</td>
 </tr>
 <tr>
 <td>DepositReqID</td>
@@ -1951,7 +1979,7 @@
 <tr>
 <td>Currency</td>
 <td>string</td>
-<td>Currency Code</td>
+<td>Currency Code.</td>
 </tr>
 <tr>
 <td>BrokerID</td>
@@ -1998,6 +2026,8 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<h3 id="response">Response</h3>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2007,129 +2037,131 @@
 </thead><tbody>
 <tr>
 <td>MsgType</td>
-<td></td>
+<td>string</td>
 <td>&ldquo;U19&rdquo; Deposit response</td>
 </tr>
 <tr>
 <td>DepositReqID</td>
-<td></td>
+<td>number</td>
 <td>Deposit Request ID</td>
 </tr>
 <tr>
 <td>Currency</td>
-<td></td>
+<td>string</td>
 <td>Currency</td>
 </tr>
 <tr>
 <td>BrokerID</td>
-<td></td>
+<td>number</td>
 <td>Exchange ID</td>
 </tr>
 <tr>
 <td>DepositMethodID</td>
-<td></td>
+<td>number</td>
 <td>Deposit Method ID</td>
 </tr>
 <tr>
 <td>DepositMethodName</td>
-<td></td>
+<td>string</td>
 <td>Deposit method name</td>
 </tr>
 <tr>
 <td>DepositID</td>
-<td></td>
+<td>string</td>
 <td>Deposit ID</td>
 </tr>
 <tr>
 <td>UserID</td>
-<td></td>
+<td>number</td>
 <td>Your account ID</td>
 </tr>
 <tr>
 <td>ControlNumber</td>
-<td></td>
+<td>number</td>
 <td>Control number. Only used for FIAT deposits</td>
 </tr>
 <tr>
 <td>Type</td>
-<td></td>
-<td>CRY = Crypto Currency</td>
+<td>string</td>
+<td>&ldquo;CRY&rdquo; = Crypto Currency</td>
 </tr>
 <tr>
 <td>Username</td>
-<td></td>
+<td>string</td>
 <td>Your username</td>
 </tr>
 <tr>
 <td>AccountID</td>
-<td></td>
+<td>number</td>
 <td>Account ID</td>
 </tr>
 <tr>
 <td>Data</td>
-<td></td>
+<td>object</td>
 <td></td>
 </tr>
 <tr>
 <td>Data.InputAddress</td>
-<td></td>
-<td>The address that you have to deposit</td>
+<td>string</td>
+<td>The address that you have to deposit.</td>
 </tr>
 <tr>
 <td>Data.Destination</td>
-<td></td>
+<td>string</td>
 <td>This is the exchange wallet. DO NOT DEPOSIT IN THIS ADDRESS.</td>
 </tr>
 <tr>
 <td>ClOrdID</td>
-<td></td>
+<td>string</td>
 <td>Unique identifier for Order as assigned by you</td>
 </tr>
 <tr>
 <td>Status</td>
-<td></td>
-<td>0 - New</td>
+<td>string</td>
+<td>&ldquo;0&rdquo; = New</td>
 </tr>
 <tr>
 <td>Created</td>
-<td></td>
+<td>string</td>
 <td>Creation date GMT</td>
 </tr>
 <tr>
 <td>Value</td>
-<td></td>
+<td>number</td>
 <td>Amount</td>
 </tr>
 <tr>
 <td>PaidValue</td>
-<td></td>
+<td>number</td>
 <td>Paid amount</td>
 </tr>
 <tr>
 <td>ReasonID</td>
-<td></td>
+<td>string</td>
 <td>Reason for the rejection - ID</td>
 </tr>
 <tr>
 <td>Reason</td>
-<td></td>
+<td>string</td>
 <td>Reason for the rejection - Description</td>
 </tr>
 <tr>
 <td>PercentFee</td>
-<td></td>
+<td>number</td>
 <td>Percent fee to process this deposit</td>
 </tr>
 <tr>
 <td>FixedFee</td>
-<td></td>
+<td>number</td>
 <td>Fixed fee in satoshis</td>
 </tr>
 </tbody></table>
 
 <h2 id="request-fiat-deposit">Request FIAT deposit</h2>
 
+<blockquote>
 <p><strong>MESSAGE EXAMPLE</strong></p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U18"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"DepositReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -2163,14 +2195,14 @@
 <td>Deposit Method ID - Check with your exchange.</td>
 </tr>
 <tr>
-<td>Value000000,</td>
+<td>Value</td>
 <td>number</td>
 <td>Amount in satoshis</td>
 </tr>
 <tr>
 <td>Currency</td>
 <td>string</td>
-<td>Currency.</td>
+<td><a href="#currencies">&lt;Currency&gt;</a>.</td>
 </tr>
 <tr>
 <td>BrokerID</td>
@@ -2179,35 +2211,37 @@
 </tr>
 </tbody></table>
 
+<blockquote>
 <p><strong>RESPONSE EXAMPLE</strong></p>
+</blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"Status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w"> 
     </span><span class="nt">"Responses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U19"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"DepositReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000745</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"DepositMethodID"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"DepositMethodName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bb"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"Value"</span><span class="p">:</span><span class="w"> </span><span class="mi">150000000000</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BRL"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"DepositID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a637e243382f4b768b5faccb97878ab3"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"UserID"</span><span class="p">:</span><span class="w"> </span><span class="mi">90800025</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"ControlNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">402000057</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCONFIRMED"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"Type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DTP"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"AccountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">90800025</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"Username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"CreditProvided"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"DepositReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000745</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"DepositID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a637e243382f4b768b5faccb97878ab3"</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"Reason"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"PercentFee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
             </span><span class="nt">"ClOrdID"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"Created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-28 20:28:02"</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"DepositMethodID"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"Value"</span><span class="p">:</span><span class="w"> </span><span class="mi">150000000000</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"Reason"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"PaidValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-            </span><span class="nt">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BRL"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"ReasonID"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"State"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCONFIRMED"</span><span class="p">,</span><span class="w"> 
             </span><span class="nt">"FixedFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -2227,7 +2261,37 @@
 <td>&ldquo;U19&rdquo;</td>
 </tr>
 <tr>
+<td>DepositReqID</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>DepositMethodID</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
 <td>DepositMethodName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>Value</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>BrokerID</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>DepositID</td>
 <td>string</td>
 <td></td>
 </tr>
@@ -2267,16 +2331,6 @@
 <td></td>
 </tr>
 <tr>
-<td>DepositReqID</td>
-<td>number</td>
-<td></td>
-</tr>
-<tr>
-<td>DepositID</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
 <td>Reason</td>
 <td></td>
 <td></td>
@@ -2307,28 +2361,8 @@
 <td></td>
 </tr>
 <tr>
-<td>DepositMethodID</td>
-<td>number</td>
-<td></td>
-</tr>
-<tr>
-<td>Value</td>
-<td>number</td>
-<td></td>
-</tr>
-<tr>
-<td>BrokerID</td>
-<td>number</td>
-<td></td>
-</tr>
-<tr>
 <td>PaidValue</td>
 <td>number</td>
-<td></td>
-</tr>
-<tr>
-<td>Currency</td>
-<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -2571,8 +2605,6 @@
 
 <h2 id="request-a-fiat-withdrawal">Request a FIAT Withdrawal</h2>
 
-<p>[TODO]</p>
-
 <blockquote>
 <p><strong>MESSAGE EXAMPLE</strong></p>
 </blockquote>
@@ -2591,11 +2623,51 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<blockquote>
-<p><strong>RESPONSE EXAMPLE</strong></p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{}</span><span class="w">
-</span></code></pre>
+<p>See the <a href="#request-bitcoin-withdrawal">response for Bitcoin Withdrawal</a>. Check with the exchange all the methods and required fields in the Data field.</p>
+
+<table><thead>
+<tr>
+<th>Exchange</th>
+<th>Methods</th>
+<th>Required Data fields</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>4-FOXBIT</td>
+<td>bradesco</td>
+<td>AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
+</tr>
+<tr>
+<td>4-FOXBIT</td>
+<td>bb</td>
+<td>AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
+</tr>
+<tr>
+<td>4-FOXBIT</td>
+<td>Caixa</td>
+<td>AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
+</tr>
+<tr>
+<td>4-FOXBIT</td>
+<td>ted</td>
+<td>BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
+</tr>
+<tr>
+<td>3-VBTC</td>
+<td>banktransfer</td>
+<td>BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift</td>
+</tr>
+<tr>
+<td>3-VBTC</td>
+<td>VPBankinternaltransfer</td>
+<td>VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift</td>
+</tr>
+<tr>
+<td>3-VBTC</td>
+<td>cashtoID</td>
+<td>BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient</td>
+</tr>
+</tbody></table>
 
 <h2 id="request-a-list-of-withdrawals">Request a List of Withdrawals</h2>
 
@@ -2705,7 +2777,135 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="websocket-api">WebSocket API</h1>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description/Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>&ldquo;U27&rdquo; Withdrawal List Response Type.</td>
+</tr>
+<tr>
+<td>WithdrawListReqID</td>
+<td>number</td>
+<td>WithdrawList Request ID.</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>number</td>
+<td>Page number.</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>number</td>
+<td>Page size - Max of 100.</td>
+</tr>
+<tr>
+<td>Columns</td>
+<td>array(string)</td>
+<td>Description of all columns for all withdrawals in <code class="prettyprint">WithdrawListGrp</code>.</td>
+</tr>
+<tr>
+<td>WithdrawListGrp</td>
+<td>array(array)</td>
+<td>Response array containing all withdrawals.</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Index Array (Name)</th>
+<th>Type</th>
+<th>Description/Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0  (&ldquo;WithdrawID&rdquo;)</td>
+<td>number</td>
+<td>Withdrawal ID</td>
+</tr>
+<tr>
+<td>1  (&ldquo;Method&rdquo;)</td>
+<td>string</td>
+<td>Withdrawal Method</td>
+</tr>
+<tr>
+<td>2  (&ldquo;Currency&rdquo;)</td>
+<td>string</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>3  (&ldquo;Amount&rdquo;)</td>
+<td>number</td>
+<td>Amount requested</td>
+</tr>
+<tr>
+<td>4  (&ldquo;Data&rdquo;)</td>
+<td>object</td>
+<td>Data associated with the withdrawal</td>
+</tr>
+<tr>
+<td>5  (&ldquo;Created&rdquo;)</td>
+<td>string</td>
+<td>Creation date</td>
+</tr>
+<tr>
+<td>6  (&ldquo;Status&rdquo;)</td>
+<td>string</td>
+<td>&ldquo;1&rdquo; = Pending, &ldquo;2&rdquo; = In Progress, &ldquo;4&rdquo; = Completed, &ldquo;8&rdquo; = Cancelled</td>
+</tr>
+<tr>
+<td>7  (&ldquo;ReasonID&rdquo;)</td>
+<td>number</td>
+<td>Cancellation Reason ID.</td>
+</tr>
+<tr>
+<td>8  (&ldquo;Reason&rdquo;)</td>
+<td>string</td>
+<td>Cancellation Reason description.</td>
+</tr>
+<tr>
+<td>9  (&ldquo;PercentFee&rdquo;)</td>
+<td>number</td>
+<td>Fee in % charged for this operation.</td>
+</tr>
+<tr>
+<td>10 (&ldquo;FixedFee&rdquo;)</td>
+<td>number</td>
+<td>Fixe Fee charged for this operation.</td>
+</tr>
+<tr>
+<td>11 (&ldquo;PaidAmount&rdquo;)</td>
+<td>number</td>
+<td>Amount paid.</td>
+</tr>
+<tr>
+<td>12 (&ldquo;UserID&rdquo;)</td>
+<td>number</td>
+<td>Account ID.</td>
+</tr>
+<tr>
+<td>13 (&ldquo;Username&rdquo;)</td>
+<td>string</td>
+<td>Account Username.</td>
+</tr>
+<tr>
+<td>14 (&ldquo;BrokerID&rdquo;)</td>
+<td>number</td>
+<td>Exchange ID.</td>
+</tr>
+<tr>
+<td>15 (&ldquo;ClOrdID&rdquo;)</td>
+<td>number</td>
+<td>Unique identifier for Order as assigned by you.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="websocket-api">WebSocket API</h1>
 
 <p>With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation <a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784">here</a></p>
 
@@ -2713,9 +2913,259 @@
 
 <h3 id="heartbeat">Heartbeat</h3>
 
+<p>In </p>
+
+<h3 id="paratemers">Paratemers</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TestReqID</td>
+<td>string</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>SendTime</td>
+<td>object</td>
+<td>Time Stamp</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>0</td>
+</tr>
+<tr>
+<td>TestReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>SendTime</td>
+<td>number</td>
+<td>Time Stamp</td>
+</tr>
+<tr>
+<td>ServerTimestamp</td>
+<td>number</td>
+<td>Server Time Stamp</td>
+</tr>
+</tbody></table>
+
 <h2 id="authentication">Authentication</h2>
 
+<p>Most of websocket calls requires authentication, once you login with your username / password on the websocket connection, you will be able to access your account.
+You can also logged with your APIKey and APIPassword, you only be allowed to send messages that your APIKey has permission to it</p>
+
+<p>NOTE that when you logged with your APIKey you only be</p>
+
+<h3 id="fingerprint">FingerPrint</h3>
+
+<p>Each request requires that you pass a fingerprint from your browser, there&rsquo;s a few finger prints implementations that you can use.</p>
+
+<ul>
+<li><a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/util/util.js#L96-L157">Our google closure implementation</a></li>
+<li><a href="https://github.com/Valve/fingerprintjs2">fingerprintjs2</a></li>
+</ul>
+
 <h3 id="login">Login</h3>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html">BE</a></td>
+</tr>
+<tr>
+<td>UserReqID</td>
+<td>number</td>
+<td>Request Id</td>
+</tr>
+<tr>
+<td>BrokerID</td>
+<td>number</td>
+<td>The ID of the broker</td>
+</tr>
+<tr>
+<td>Username</td>
+<td>string</td>
+<td>The email address or username of the user</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>string</td>
+<td>The password of the user</td>
+</tr>
+<tr>
+<td>UserReqTyp</td>
+<td>string</td>
+<td>1</td>
+</tr>
+<tr>
+<td>UserAgent</td>
+<td>string</td>
+<td>Brower user agent navigator</td>
+</tr>
+<tr>
+<td>UserAgentLanguage</td>
+<td>string</td>
+<td>User agent language</td>
+</tr>
+<tr>
+<td>UserAgentTimezoneOffset</td>
+<td>integer</td>
+<td>User agent timezone offset</td>
+</tr>
+<tr>
+<td>UserAgentPlatform</td>
+<td>string</td>
+<td>User agent platform</td>
+</tr>
+<tr>
+<td>FingerPrint</td>
+<td>string</td>
+<td>Browser finger print</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td><a href="http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html">BF</a></td>
+</tr>
+<tr>
+<td>Broker</td>
+<td>object</td>
+<td>Broker model object</td>
+</tr>
+<tr>
+<td>BrokerID</td>
+<td>number</td>
+<td>Broker ID</td>
+</tr>
+<tr>
+<td>DepositFixedFee</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>DepositPercentFee</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>EmailLang</td>
+<td>string</td>
+<td>Email Language</td>
+</tr>
+<tr>
+<td>HasLineOfC3redit</td>
+<td>bool</td>
+<td>bool indicating whether user has line of credit</td>
+</tr>
+<tr>
+<td>IsBroker</td>
+<td>bool</td>
+<td>bool whether user is a broker</td>
+</tr>
+<tr>
+<td>IsMSB</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>Profile</td>
+<td>object</td>
+<td>Profile model object</td>
+</tr>
+<tr>
+<td>TakerTransactionFeeBuy</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>TakerTransactionFeeSell</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>TransactionFeeBuy</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>TransactionFeeSell</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>TwoFactorEnabled</td>
+<td>bool</td>
+<td>bool indicating whether user has two factor enabled</td>
+</tr>
+<tr>
+<td>UserID</td>
+<td>number</td>
+<td>Integer with the user ID</td>
+</tr>
+<tr>
+<td>UserStatus</td>
+<td>number</td>
+<td>1 = Logged In, 2 = Not Logged In</td>
+</tr>
+<tr>
+<td>Username</td>
+<td>string</td>
+<td>String with the username of the user</td>
+</tr>
+<tr>
+<td>WithdrawFixedFee</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>WithdrawPercentFee</td>
+<td>number</td>
+<td></td>
+</tr>
+</tbody></table>
 
 <h3 id="sign-up">Sign Up</h3>
 
@@ -2723,11 +3173,162 @@
 
 <h3 id="change-password">Change password</h3>
 
+<p>In order to change your password, you do the same as a login request, but passing <code class="prettyprint">UserReqTyp</code> as 3 and the new password on <code class="prettyprint">Password</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>BE</td>
+</tr>
+<tr>
+<td>UserReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>UserReqTyp</td>
+<td>number</td>
+<td>Should be 3</td>
+</tr>
+<tr>
+<td>BrokerID</td>
+<td>number</td>
+<td>Current Logged BrokerID</td>
+</tr>
+<tr>
+<td>Username</td>
+<td>string</td>
+<td>Username</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>string</td>
+<td>New password</td>
+</tr>
+<tr>
+<td>SecondFactor</td>
+<td>number</td>
+<td>Optional Second Factor Authentication</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>Returns should be the same as login</p>
+
 <h2 id="brokers">Brokers</h2>
+
+<h3 id="request-broker-list">Request Broker List</h3>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U28</td>
+</tr>
+<tr>
+<td>BrokerListReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>number</td>
+<td>Page Index</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>number</td>
+<td>Page Size.</td>
+</tr>
+<tr>
+<td>StatusList</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
 <h2 id="profile">Profile</h2>
 
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U38</td>
+</tr>
+<tr>
+<td>UpdateReqID</td>
+<td>string</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Fields</td>
+<td>object</td>
+<td>Fields that you want to update</td>
+</tr>
+<tr>
+<td>UserID</td>
+<td>number</td>
+<td>Optional UserID</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
 <h2 id="balances">Balances</h2>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U2</td>
+</tr>
+<tr>
+<td>BalanceReqID</td>
+<td>string</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>ClientID</td>
+<td>object</td>
+<td>Optional ClientID</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
 
 <h2 id="market-data">Market Data</h2>
 
@@ -2755,12 +3356,328 @@
 
 <h2 id="withdraws">Withdraws</h2>
 
-<h1 id="references">References</h1>
+<h2 id="api-key">API Key</h2>
 
-<ul>
-<li><a href="https://gist.github.com/pinhopro/60b1fd213b36d576505e">pinhopro/blinktrade_example_restapi.py</a></li>
-<li><a href="http://www.onixs.biz/fix-dictionary/4.4/index.html">FIX 4.4 - FIX Dictionary - Onix Solutions</a></li>
-</ul>
+<p>BlinkTrades provides a flexible way to you handle your APIs, you can choose any permission for an individual message type</p>
+
+<h4 id="permissions">Permissions</h4>
+
+<p>You can choose any individual message type permission to your APIKey, some messages also requires some</p>
+
+<blockquote>
+<p>Permissions</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"BF"</span><span class="p">:</span><span class="w">  </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U4"</span><span class="p">:</span><span class="w">  </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U34"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U26"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U2"</span><span class="p">:</span><span class="w">  </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U30"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U24"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"D"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Side"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"OrdType"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Side"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"OrdType"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Side"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"OrdType"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Side"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"OrdType"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"F"</span><span class="p">:</span><span class="w">   </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"U6"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Method"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PayPal"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Method"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Test2"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Method"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Test3"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Method"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bitcoin"</span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"U18"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"Currency"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"DepositMethodID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"501"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"DepositMethodID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span><span class="w"> </span><span class="s2">"502"</span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="list-apikeys">List APIKeys</h3>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U50</td>
+</tr>
+<tr>
+<td>APIKeyListReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>number</td>
+<td>Page number</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>number</td>
+<td>Page Size</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U50</td>
+</tr>
+<tr>
+<td>APIKeyListReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>number</td>
+<td>Page number</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>number</td>
+<td>Page Size</td>
+</tr>
+<tr>
+<td>Columns</td>
+<td>array</td>
+<td>Description of all columns of the all orders in ApiKeyListGrp</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-apikeylistgrp">Response ApiKeyListGrp</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0 (&ldquo;APIKey&rdquo;)</td>
+<td>string</td>
+<td>APIKey</td>
+</tr>
+<tr>
+<td>1 (&ldquo;Label&rdquo;)</td>
+<td>string</td>
+<td>API Label</td>
+</tr>
+<tr>
+<td>2 (&ldquo;IPWhiteList&rdquo;)</td>
+<td>array</td>
+<td>API IP white list</td>
+</tr>
+<tr>
+<td>3 (&ldquo;PermissionList&rdquo;)</td>
+<td>object</td>
+<td>API Permissions</td>
+</tr>
+<tr>
+<td>4 (&ldquo;Created&rdquo;)</td>
+<td>string</td>
+<td>String time when API was created</td>
+</tr>
+<tr>
+<td>5 (&ldquo;LastUsed)&rdquo;</td>
+<td>string</td>
+<td>The last time when API Key was used</td>
+</tr>
+</tbody></table>
+
+<h3 id="create-apikey">Create APIKey</h3>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U52</td>
+</tr>
+<tr>
+<td>APIKeyCreateReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>string</td>
+<td>API Label</td>
+</tr>
+<tr>
+<td>PermissionList</td>
+<td>object</td>
+<td>Stringify object containing API Permissions</td>
+</tr>
+<tr>
+<td>IPWhiteList</td>
+<td>array</td>
+<td>Stringify array containing IP White list</td>
+</tr>
+<tr>
+<td>Revocable</td>
+<td>bool</td>
+<td>Revocable API</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U53</td>
+</tr>
+<tr>
+<td>APIKeyCreateReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>APIKey</td>
+<td>string</td>
+<td>Your API Key</td>
+</tr>
+<tr>
+<td>APIPassword</td>
+<td>string</td>
+<td>Your API Password</td>
+</tr>
+<tr>
+<td>APISecret</td>
+<td>string</td>
+<td>Your API Secret</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>string</td>
+<td>API Label</td>
+</tr>
+<tr>
+<td>PermissionList</td>
+<td>object</td>
+<td>Stringify object containing API Permissions</td>
+</tr>
+<tr>
+<td>IPWhiteList</td>
+<td>array</td>
+<td>Stringify array containing IP White list</td>
+</tr>
+<tr>
+<td>Revocable</td>
+<td>bool</td>
+<td>Revocable API</td>
+</tr>
+<tr>
+<td>Created</td>
+<td>string</td>
+<td>String time when API was created</td>
+</tr>
+<tr>
+<td>LastUsed</td>
+<td>string</td>
+<td>The last time when API Key was used</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>number</td>
+<td>API Status</td>
+</tr>
+</tbody></table>
+
+<h3 id="revoke-apikey">Revoke APIKey</h3>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U54</td>
+</tr>
+<tr>
+<td>APIKeyRevokeReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>APIKey</td>
+<td>string</td>
+<td>API Key that you want to revoke</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>U55</td>
+</tr>
+<tr>
+<td>APIKeyRevokeReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>APIKey</td>
+<td>string</td>
+<td>API Key revoked</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>number</td>
+<td>API Status</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
