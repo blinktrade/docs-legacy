@@ -17,11 +17,11 @@ search: true
 
 ### OVERVIEW
 
-BlinkTrade provides a simple and robust [WebSocket API](#websocket-api) to integrate our platform, we strongly recommend you to use over the [Rest API](#rest-api).
+BlinkTrade provides a simple and robust [WebSocket API](#websocket-api) to integrate our platform, we strongly recommend you to use it over the [Rest API](#rest-api).
 
 ### FIX
 
-Our API is based on the [fix protocol](http://www.onixs.biz/fix-dictionary/4.4/index.html).
+BlinkTrade's API is based on the [FIX protocol](http://www.onixs.biz/fix-dictionary/4.4/index.html).
 
 ## BlinkTrade Endpoints
 
@@ -30,46 +30,46 @@ There are two working environments: `prod` for production purporses and `testnet
 * `testnet` base URL endpoint is `https://api.testnet.blinktrade.com`
 * `prod` base URL endpoint is `https://api.blinktrade.com`
 
-Some features are accessed publicly and others require an authentication API Key. All data messages and responses are in JSON format.
+Some features are accessed publicly and others require an API Key based authentication. All data messages and responses are in JSON format.
 
 
 ## Brokers
 
 A broker ID is assigned for each exchange powered by BlinkTrade:
 
-Broker       | ID
--------------|---
-SurBitcoin   | 1
-VBTC         | 3
-FoxBit       | 4
-**Testnet**  | **5**
-UrduBit      | 8
-ChileBit     | 9
+Broker                                         | ID
+-----------------------------------------------|------
+[SurBitcoin](https://surbitcoin.com)           | 1
+[VBTC](https://vbtc.vn)                        | 3
+[FoxBit](https://foxbit.com.br)                | 4
+[**Testnet**](https://testnet.blinktrade.com/) | **5**
+[UrduBit](https://urdubit.com/)                | 8
+[ChileBit](https://chilebit.net)               | 9
 
 
 ## Currencies
 
 `<CURRENCY>` | Description
 -------------|------------
-BRL        | Brazil Reals (FoxBit)
-VEF        | Venezuelan Bolivares (SurBitcoin)
-CLP        | Chilean Pesos (ChileBit.NET)
-VND        | Vietnamise Dongs (VBTC)
-PKR        | Pakistani Ruppe (UrduBit)
+VEF          | Venezuelan Bolivares (SurBitcoin)
+VND          | Vietnamise Dongs (VBTC)
+BRL          | Brazil Reals (FoxBit)
+PKR          | Pakistani Ruppe (UrduBit)
+CLP          | Chilean Pesos (ChileBit.NET)
 
-### Symbols
+## Symbols
 
 `<SYMBOL>` | Description
 -----------|------------
-BTCBRL     | BTC Pair - Brazil Reals (FoxBit)
-BTCCLP     | BTC Pair - Chilean Pesos (ChileBit.NET)
-BTCPKR     | BTC Pair - Pakistani Ruppe (UrduBit)
 BTCVEF     | BTC Pair - Venezuelan Bolivares (SurBitcoin)
 BTCVND     | BTC Pair - Vietnamise Dongs (VBTC)
+BTCBRL     | BTC Pair - Brazil Reals (FoxBit)
+BTCPKR     | BTC Pair - Pakistani Ruppe (UrduBit)
+BTCCLP     | BTC Pair - Chilean Pesos (ChileBit.NET)
 
 ## Messages
 
-List of Messages Based on the Fix Protocol
+List of Messages Based on the FIX Protocol.
 
 ### User Messages
 
@@ -167,17 +167,18 @@ U79   | [WithdrawCommentResponse]()
 
 Code  | Description/Function
 ------|---------------------
-B0  |  [ProcessDeposit]()
-B1  |  [ProcessDepositResponse]()
-B2  |  [CustomerListRequest]()
-B3  |  [CustomerListResponse]()
-B4  |  [CustomerRequest]()
-B5  |  [CustomerResponse]()
-B6  |  [ProcessWithdraw]()
-B7  |  [ProcessWithdrawResponse]()
-B8  |  [VerifyCustomerRequest]()
-B9  |  [VerifyCustomerResponse]()
-B1  |  [VerifyCustomerRefresh]()
+B0    |  [ProcessDeposit]()
+B1    |  [ProcessDepositResponse]()
+B2    |  [CustomerListRequest]()
+B3    |  [CustomerListResponse]()
+B4    |  [CustomerRequest]()
+B5    |  [CustomerResponse]()
+B6    |  [ProcessWithdraw]()
+B7    |  [ProcessWithdrawResponse]()
+B8    |  [VerifyCustomerRequest]()
+B9    |  [VerifyCustomerResponse]()
+B1    |  [VerifyCustomerRefresh]()
 
-* [pinhopro/blinktrade_example_restapi.py](https://gist.github.com/pinhopro/60b1fd213b36d576505e)
+### REFERENCE
+
 * [FIX 4.4 - FIX Dictionary - Onix Solutions](http://www.onixs.biz/fix-dictionary/4.4/index.html)

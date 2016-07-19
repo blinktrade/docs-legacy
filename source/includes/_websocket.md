@@ -1,6 +1,6 @@
 # WebSocket API
 
-With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation [here](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784)
+With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation [here](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784).
 
 ## Connectivity
 
@@ -166,7 +166,7 @@ In order to change your password, you do the same as a login request, but passin
 
 ### Response
 
-Returns should be the same as login
+Returns should be the same as login.
 
 ## Brokers
 
@@ -176,7 +176,7 @@ Returns should be the same as login
 
 | Name            | Type   | Description |
 |-----------------|--------|-------------|
-| MsgType         | string | U28         |
+| MsgType         | string | "U28"       |
 | BrokerListReqID | number | Request ID  |
 | Page            | number | Page Index  |
 | PageSize        | number | Page Size.  |
@@ -190,16 +190,72 @@ Users can only change a few fields, such as `TwoFactorEnabled`, `EmailLang` and 
 
 | Name        | Type   | Description                    |
 |-------------|--------|--------------------------------|
-| MsgType     | string | U38                            |
+| MsgType     | string | "U38"                          |
 | UpdateReqID | string | Request ID                     |
 | Fields      | object | Fields that you want to update |
 | UserID      | number | Optional UserID                |
+
+> EXAMPLE RESPONSE
+
+```json
+{
+    "Username": "cesaraugusto",
+    "WithdrawPercentFee": 0.0,
+    "TakerTransactionFeeSell": 500,
+    "IsMSB": true,
+    "TransactionFeeBuy": 500,
+    "UserID": 90800127,
+    "TakerTransactionFeeBuy": 500,
+    "TransactionFeeSell": 500,
+    "EmailTwoFactorEnabled": false,
+    "HasLineOfCredit": false,
+    "TwoFactorEnabled": false,
+    "Profile": {
+        "VerificationData": [{
+            "177.18.234.69:2048362583": ["cesaraugusto", "rodrigo"]
+        }],
+        "Verified": 3,
+        "UserID": 90800127,
+        "TwoFactorEnabled": false,
+        "EmailLang": "en",
+        "EmailTwoFactorEnabled": false,
+        "Type": "USER",
+        "Email": "cesardeazevedo@outlook.com",
+        "Username": "cesaraugusto",
+        "IsMSB": true,
+        "CountryCode": "US",
+        "WithdrawFixedFee": null,
+        "HasLineOfCredit": false,
+        "TakerTransactionFeeSell": 500,
+        "ConfirmationOrder": false,
+        "Country": "US",
+        "TakerTransactionFeeBuy": 500,
+        "IsMarketMaker": false,
+        "ID": 90800127,
+        "DepositPercentFee": null,
+        "DepositFixedFee": null,
+        "WithdrawPercentFee": null,
+        "TransactionFeeBuy": 500,
+        "State": "NY",
+        "TransactionFeeSell": 500,
+        "NeedWithdrawEmail": false
+    },
+    "MsgType": "U39",
+    "IsMarketMaker": false,
+    "WithdrawFixedFee": null,
+    "BrokerID": 5,
+    "IsBroker": false,
+    "UpdateReqID": 367266,
+    "DepositPercentFee": 0.0,
+    "DepositFixedFee": null
+}
+```
 
 ### Response
 
 | Name                    | Type   | Description                            |
 |-------------------------|--------|----------------------------------------|
-| MsgType                 | string | U39                                    |
+| MsgType                 | string | "U39"                                  |
 | UpdateReqID             | number | Request ID                             |
 | UserID                  | number | User ID                                |
 | Username                | string | Username Profile                       |
@@ -245,64 +301,6 @@ Users can only change a few fields, such as `TwoFactorEnabled`, `EmailLang` and 
 | TransactionFeeBuy       | number | Maker fee for buy orders                   |
 | TransactionFeeSell      | number | Maker fee for sell orders                  |
 
-
-
-> EXAMPLE RESPONSE
-
-```json
-{
-    "Username": "cesaraugusto",
-    "WithdrawPercentFee": 0.0,
-    "TakerTransactionFeeSell": 500,
-    "IsMSB": true,
-    "TransactionFeeBuy": 500,
-    "UserID": 90800127,
-    "TakerTransactionFeeBuy": 500,
-    "TransactionFeeSell": 500,
-    "EmailTwoFactorEnabled": false,
-    "HasLineOfCredit": false,
-    "TwoFactorEnabled": false,
-    "Profile": {
-        "VerificationData": [{
-            "177.18.234.69:2048362583": ["cesaraugusto", "rodrigo"],
-        }],
-        "Verified": 3,
-        "UserID": 90800127,
-        "TwoFactorEnabled": false,
-        "EmailLang": "en",
-        "EmailTwoFactorEnabled": false,
-        "Type": "USER",
-        "Email": "cesardeazevedo@outlook.com",
-        "Username": "cesaraugusto",
-        "IsMSB": true,
-        "CountryCode": "US",
-        "WithdrawFixedFee": null,
-        "HasLineOfCredit": false,
-        "TakerTransactionFeeSell": 500,
-        "ConfirmationOrder": false,
-        "Country": "US",
-        "TakerTransactionFeeBuy": 500,
-        "IsMarketMaker": false,
-        "ID": 90800127,
-        "DepositPercentFee": null,
-        "DepositFixedFee": null,
-        "WithdrawPercentFee": null,
-        "TransactionFeeBuy": 500,
-        "State": "NY",
-        "TransactionFeeSell": 500,
-        "NeedWithdrawEmail": false
-    },
-    "MsgType": "U39",
-    "IsMarketMaker": false,
-    "WithdrawFixedFee": null,
-    "BrokerID": 5,
-    "IsBroker": false,
-    "UpdateReqID": 367266,
-    "DepositPercentFee": 0.0,
-    "DepositFixedFee": null
-}
-```
-
 ## Balances
 
 ### Parameters
@@ -336,7 +334,7 @@ Returns your balance for each [BrokerID](#brokers).
 Name         | Type    | Description/Value
 -------------|---------|------------------
 MsgType      | string  | "U3" UserBalanceResponse message.
-\<BROKER_ID\>| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
@@ -361,10 +359,10 @@ each Market Data Entry is composed by a bid, offer or a trade occured.
 
 | Name                    | Type   | Description                                                        |
 |-------------------------|--------|--------------------------------------------------------------------|
-| MsgType                 | string | V                                                                  |
+| MsgType                 | string | "V"                                                                |
 | MDReqID                 | number | Request ID                                                         |
-| SubscriptionRequestType | string | 1 = Subscribe, 2 = Unsubscribe                                     |
-| MarketDepth             | string | 0 = Full Book, 1 = Top of Book                                     |
+| SubscriptionRequestType | string | "1" = Subscribe, "2" = Unsubscribe                                 |
+| MarketDepth             | string | "0" = Full Book, "1" = Top of Book                                 |
 | [MDEntryTypes](http://www.onixs.biz/fix-dictionary/4.4/tagNum_269.html) | array(string) | "0" = Bid, "1" = Offer |
 | [MDUpdateType](http://www.onixs.biz/fix-dictionary/4.4/tagNum_265.html) | string | "0" = Full Refresh, "1" = Incremental RefreshRefresh                                            |
 | Instruments             | array(string) | Array with the symbols that you want to subscribe e.g.: ['BTCBRL'] |
@@ -373,14 +371,14 @@ each Market Data Entry is composed by a bid, offer or a trade occured.
 
 | Name        | Type   | Description                    |
 |-------------|--------|--------------------------------|
-| MsgType     | string | W                              |
+| MsgType     | string | "W"                            |
 | MDReqID     | number | Request ID                     |
-| MarketDepth | string | 0 = Full Book, 1 = Top of Book |
+| MarketDepth | string | "0" = Full Book, "1" = Top of Book |
 | Symbol      | string | Instrument symbol subscribed   |
 | MDFullGrp   | object | Object containing all orders   |
 
 
-> EXAMPLE RESPONSE FULL ORDER BOOK
+> __EXAMPLE RESPONSE FULL ORDER BOOK__
 
 ```json
 {
@@ -409,29 +407,14 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 
 | Name     | Type   | Description                         |
 |----------|--------|-------------------------------------|
-| MsgType  | string | X                                   |
+| MsgType  | string | "X"                                 |
 | MDReqID  | number | Request ID                          |
-| MDBkTyp  | string | 3 = Order Depth                     |
+| MDBkTyp  | string | "3" = Order Depth                   |
 | MDIncGrp | array  | Array containing the new data entry |
 
 ### Response MDIncGrp Entry
 
-| Name              | Type   | Description                                                      |
-|-------------------|--------|------------------------------------------------------------------|
-| OrderID           | number | Order ID                                                         |
-| MDEntryPx         | number | Order Price                                                      |
-| MDUpdateAction    | string | 0 = New, 1 = Update, 2 = Delete, 3 = Delete Thru                 |
-| MDEntryTime       | string | Time when order was created                                      |
-| Symbol            | string | Order symbol that you have subscribed on market data e.g: BTCUSD |
-| UserID            | number | User ID                                                          |
-| Broker            | string | Broker name that order belongs to                                |
-| MDEntryType       | string | 0 = Bid, 1 = Offer, 2 = Trade                                    |
-| MDEntryPositionNo | number | Order position on the book                                       |
-| MDEntrySize       | number | Order size amount                                                |
-| MDEntryID         | number | Market data entry ID                                             |
-| MDEntryDate       | string | Date when market data was received                               |
-
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 {
@@ -454,6 +437,21 @@ While you are subscribed to incremental updates, you will receive bids, asks and
     }]
 }
 ```
+
+| Name              | Type   | Description                                                        |
+|-------------------|--------|--------------------------------------------------------------------|
+| OrderID           | number | Order ID                                                           |
+| MDEntryPx         | number | Order Price                                                        |
+| MDUpdateAction    | string | "0" = New, "1" = Update, "2" = Delete, "3" = Delete Thru           |
+| MDEntryTime       | string | Time when order was created                                        |
+| Symbol            | string | Order symbol that you have subscribed on market data e.g: "BTCUSD" |
+| UserID            | number | User ID                                                            |
+| Broker            | string | Broker name that order belongs to                                  |
+| MDEntryType       | string | "0" = Bid, "1" = Offer, "2" = Trade                                |
+| MDEntryPositionNo | number | Order position on the book                                         |
+| MDEntrySize       | number | Order size amount                                                  |
+| MDEntryID         | number | Market data entry ID                                               |
+| MDEntryDate       | string | Date when market data was received                                 |
 
 ## Security Status
 
@@ -545,7 +543,7 @@ Index Array (Name) | Type   | Description/Value
 4  ("LeavesQty")   | number | Quantity open for further execution.
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | [\<SYMBOL\>](#currencies), currency pair being used.
+7  ("Symbol")      | string | [\<SYMBOL\>](#symbols), currency pair being used.
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
 9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
@@ -612,7 +610,7 @@ You can setup a permission that is only allowed to send a buy order as follows:
         ["Currency", "eq", "BTC"],
         ["DepositMethodID", "eq", "501"],
         ["DepositMethodID", "eq", "502"]
-    ],
+    ]
 }
 ```
 
@@ -620,7 +618,7 @@ You can setup a permission that is only allowed to send a buy order as follows:
 
 Returns all your APIKeys, **note** that your APISecret and APIPassword are only shown when you created the APIKey
 
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 {
@@ -646,7 +644,7 @@ Returns all your APIKeys, **note** that your APISecret and APIPassword are only 
 
 | Name            | Type   | Description |
 |-----------------|--------|-------------|
-| MsgType         | string | U50         |
+| MsgType         | string | "U50"       |
 | APIKeyListReqID | number | Request ID  |
 | Page            | number | Page number |
 | PageSize        | number | Page Size   |
@@ -656,7 +654,7 @@ Returns all your APIKeys, **note** that your APISecret and APIPassword are only 
 
 | Name            | Type   | Description                                                   |
 |-----------------|--------|---------------------------------------------------------------|
-| MsgType         | string | U51                                                           |
+| MsgType         | string | "U51"                                                         |
 | APIKeyListReqID | number | Request ID                                                    |
 | Page            | number | Page number                                                   |
 | PageSize        | number | Page Size                                                     |
@@ -678,7 +676,7 @@ Returns all your APIKeys, **note** that your APISecret and APIPassword are only 
 
 ### Create APIKey
 
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 {
@@ -728,31 +726,32 @@ Returns all your APIKeys, **note** that your APISecret and APIPassword are only 
 
 ### Revoke APIKey
 
-> EXAMPLE RESPONSE
-
-```json
-{
-    "Status": 0,
-    "APIKey": "7Y1sKQvbIqRz117aDy3zWHdgv5cswdYZ8D2BFyC01DE",
-    "APIKeyRevokeReqID": 8851626,
-    "MsgType": "U55"
-}
-```
-
 ### Parameters
 
 | Name              | Type   | Description                     |
 |-------------------|--------|---------------------------------|
-| MsgType           | string | U54                             |
+| MsgType           | string | "U54"                           |
 | APIKeyRevokeReqID | number | Request ID                      |
 | APIKey            | string | API Key that you want to revoke |
 
+
+
+> __EXAMPLE RESPONSE__
+
+```json
+{
+    "MsgType": "U55",
+    "APIKeyRevokeReqID": 8851626,
+    "APIKey": "7Y1sKQvbIqRz117aDy3zWHdgv5cswdYZ8D2BFyC01DE",
+    "Status": 0
+}
+```
 
 ### Response
 
 | Name              | Type   | Description     |
 |-------------------|--------|-----------------|
-| MsgType           | string | U55             |
+| MsgType           | string | "U55"           |
 | APIKeyRevokeReqID | number | Request ID      |
 | APIKey            | string | API Key revoked |
 | Status            | number | API Status      |

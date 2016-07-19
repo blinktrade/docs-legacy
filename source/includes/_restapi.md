@@ -1,10 +1,10 @@
 # Rest API
 
+### USAGE EXAMPLE
+
+* [pinhopro/blinktrade_example_restapi.py](https://gist.github.com/pinhopro/60b1fd213b36d576505e)
+
 ## Public API
-
-The Public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>`.
-
-An `HTTP GET` request method should be used to fetch data.
 
 > `<API_URL>` is a complete Public API URL pointing to a resource.
 
@@ -35,6 +35,9 @@ response = requests.get(api_url)
 print response.text
 ```
 
+The Public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>`.
+
+An `HTTP GET` request method should be used to fetch data.
 
 ## Ticker
 
@@ -44,17 +47,17 @@ Ticker is a summary information about the current status of an exchange.
 
 `GET /api/v1/<CURRENCY>/ticker?crypto_currency=BTC`
 
+> __EXAMPLE URL__
+
+```
+https://api.blinktrade.com/api/v1/BRL/ticker
+```
+
 ### Parameters
 
 Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
-
-> __EXAMPLE URL__
-
-```
-https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC
-```
 
 > __EXAMPLE RESPONSE__
 
@@ -75,12 +78,12 @@ https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC
 
 Name               | Type   | Description
 -------------------|--------|------------
-  pair             | string | [\<SYMBOL\>](#currencies), currency pair being used.
+  pair             | string | [\<SYMBOL\>](#symbols), currency pair being used.
   last             | number | Value of the last purchase in the last 24 hours.
   high             | number | Price of the highest purchase in the last 24 hours.
   low              | number | Price of the lowest purchase in the last 24 hours.
   vol              | number | Trading volume in the last 24 hours.
-  vol_\<CURRENCY\> | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies).
+  vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies).
   buy              | number | Price of the most recent buy order.
   sell             | number | Price of the most recent sell order.
 
@@ -93,17 +96,17 @@ Order book is a list of orders that shows the interest of buyers (bids) and sell
 
 `GET /api/v1/<CURRENCY>/orderbook?crypto_currency=BTC`
 
+> __EXAMPLE URL__
+
+```
+https://api.blinktrade.com/api/v1/BRL/orderbook
+```
+
 ### Parameters
 
 Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
-
-> __EXAMPLE URL__
-
-```
-https://api.blinktrade.com/api/v1/BRL/orderbook?crypto_currency=BTC
-```
 
 > __EXAMPLE RESPONSE__
 
@@ -125,11 +128,9 @@ https://api.blinktrade.com/api/v1/BRL/orderbook?crypto_currency=BTC
 
 ### Response
 
-The response is an object where:
-
 Name       | Type          | Description
 -----------|---------------|------------
-pair       | string        | [\<SYMBOL\>](#currencies), currency pair being used.
+pair       | string        | [\<SYMBOL\>](#symbols), currency pair being used.
 bids       | array(array)  | Array of bids from buyers.
 asks       | array(array)  | Array of asks from sellers.
 
@@ -143,11 +144,17 @@ Index Array | Type    | Description
 
 ## Trades
 
-A list of last 100 trades executed in a exchange since a chosen date.
+A list of the last 100 trades executed on an exchange since a chosen date.
 
 ### HTTP Request
 
 `GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>`
+
+> __EXAMPLE URL__
+
+```
+https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302
+```
 
 ### Parameters
 
@@ -157,12 +164,6 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade.
 
 ### Response
-
-> __EXAMPLE URL__
-
-```
-https://api.blinktrade.com/api/v1/BRL/trades?crypto_currency=BTC&since=1467990302
-```
 
 > __EXAMPLE RESPONSE__
 
@@ -196,8 +197,7 @@ amount | number | Amount bought/sold.
 side   | string | "buy" for a buy order or "sell" for a sell order.
 
 
-Trade API
----------
+## Trade API
 
 The Trade API can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`. An API Key is needed in order to authenticate your access.
 
@@ -355,8 +355,6 @@ JSON_MESSAGE | The message you want to send.
 
 ## Request Balance
 
-### Parameters
-
 > __MESSAGE EXAMPLE__
 
 ```json
@@ -365,6 +363,8 @@ JSON_MESSAGE | The message you want to send.
 	"BalanceReqID": 1
 }
 ```
+
+### Parameters
 
 Name         | Type   | Description/Value
 -------------|--------|------------------
@@ -404,7 +404,7 @@ MsgType      | string  | "U3" UserBalanceResponse message.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
-Balance model example for BTC and USD
+Balance model example for BTC and USD:
 
 Name         | Type   | Description
 -------------|--------|------------
@@ -432,7 +432,7 @@ USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (o
 Name        | Type          | Description/Value
 ------------|---------------|------------------
 MsgType     | string        | "U4"
-OrdersReqID | number        | An ID assigned by you.
+OrdersReqID | number        | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
 Page        | number        | **Optional**; defaults to 0.
 PageSize    | number        | **Optional**; defaults to 20.
 Filter      | array(string) | Set it to "has_leaves_qty eq 1" to get open orders, "has_cum_qty eq 1" to get executed orders, "has_cxl_qty eq 1" to get cancelled orders.
@@ -510,11 +510,11 @@ Index Array (Name) | Type   | Description/Value
 4  ("LeavesQty")   | number | Quantity open for further execution.
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | [\<SYMBOL\>](#currencies), currency pair being used.
+7  ("Symbol")      | string | [\<SYMBOL\>](#symbols), currency pair being used.
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
 9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
-11 ("Price")       | number | Price per unit in "satoshis" of your local currency. Example: $ 2,125.89 = 212589000000
+11 ("Price")       | number | Price per unit in "satoshis" of your local currency.
 12 ("OrderDate")   | string | Order date in UTC.
 13 ("Volume")      | number | Quantity * Price 
 14 ("TimeInForce") | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
@@ -541,14 +541,14 @@ Index Array (Name) | Type   | Description/Value
 
 Name     | Type   | Description/Value
 ---------|--------|------------------
-MsgType  | string | "D" New Order Single message. Check for a full doc here: http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html 
+MsgType  | string | "D" New Order Single message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html)
 ClOrdID  | number | Unique identifier for Order as assigned by you
-Symbol   | string | [\<SYMBOL\>](#currencies)
+Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 Price    | number | Price in satoshis.
 OrderQty | number | Quantity in satoshis.
-BrokerID | number | [Your broker ID](#brokers).
+BrokerID | number | Your [broker ID](#brokers).
 
 > __RESPONSE EXAMPLE__
 
@@ -589,13 +589,14 @@ BrokerID | number | [Your broker ID](#brokers).
 	]
 }
 ```
+
 __NOTE__: In this example, the request returned 2 messages.
 
 ### Balance Response
 
 field        | Type    | Description/Value
 -------------|---------|------------------
-\<BROKER_ID\>| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 MsgType      | string  | "U3" Balance response. Problably because the request also change your account balance.
 ClientID     | number  | Your account ID.
 
@@ -690,7 +691,7 @@ MsgType       | string | "U3" Balance response. Problably because the request al
 [\<BROKER_ID\>](#currencies) | object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 ClientID      | number | Your account ID.
 
-#### Execution Report Response
+### Execution Report Response
 
 Name        | Type   | Description/Value
 ------------|--------|------------------
@@ -735,7 +736,7 @@ Name         | Type   | Description/Value
 MsgType      | string | "U18" Deposit Request.
 DepositReqID | number | An ID chosen by you.
 Currency     | string | Currency Code.
-BrokerID     | number | As listed on [Broker ID](#broker-id)
+BrokerID     | number | Your [broker ID](#brokers)
 
 > __RESPONSE EXAMPLE__
 
@@ -820,14 +821,16 @@ FixedFee          | number  | Fixed fee in satoshis
 }
 ```
 
+### Parameters
+
 Name            | Type   | Description/Value
 ----------------|--------|------------------
 MsgType         | string | "U18" Deposit request.
 DepositReqID    | number | Deposit Request ID. 
 DepositMethodID | number | Deposit Method ID - Check with your exchange. 
 Value           | number | Amount in satoshis
-Currency        | string | [\<Currency\>](#currencies). 
-BrokerID        | number | Exchange ID.
+Currency        | string | [\<CURRENCY\>](#currencies).
+BrokerID        | number | Your [broker ID](#brokers).
 
 > __RESPONSE EXAMPLE__
 
@@ -865,6 +868,8 @@ BrokerID        | number | Exchange ID.
 	]
 }
 ```
+
+### Response
 
 Name              | Type   | Description/Value
 ------------------|--------|------------------
@@ -911,7 +916,7 @@ FixedFee          | number |
 }
 ```
 
-Paramenters
+### Paramenters
 
 Params        | Type   | Description/Value
 --------------|--------|------------------
@@ -962,9 +967,11 @@ Data          | object | Data object containing your wallet address e.g.: {"Data
 }
 ```
 
+### Response
+
 Name         | Type   | Description/Value
 -------------|--------|------------------
-\<BROKER_ID\>| object | The BrokerID containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the BrokerID number 5.
+[\<BROKER_ID\>](#brokers)| object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 MsgType      | string | "U3" Balance response. Problably because the request also change your account balance.
 ClientID     | number | Your account ID.
 BalanceReqID | number | This should match the BalanceReqID sent on the message "U2".
@@ -991,7 +998,7 @@ Reason        | string | Reason for the rejection - Description.
 ReasonID      | string | Reason for the rejection - ID.
 Status        | string | "0" = Unconfirmed (in this case, you must confirm withdrawal using a second factor of authentication), "1" = Pending, "2" = In Progress, "4" = Completed, "8" - Cancelled
 
-## Request a FIAT Withdrawal
+## Request FIAT Withdrawal
 
 > __MESSAGE EXAMPLE__
 
@@ -1024,7 +1031,7 @@ Exchange    | Methods              | Required Data fields
 3-VBTC      |cashtoID              | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient
 
 
-## Request a List of Withdrawals
+## Request List of Withdrawals
 
 > __MESSAGE EXAMPLE__
 
@@ -1037,6 +1044,8 @@ Exchange    | Methods              | Required Data fields
 	"StatusList": ["1", "2"]
 }
 ```
+
+### Parameters
 
 Name              | Type          | Description/Value
 ------------------|---------------|------------------
@@ -1105,6 +1114,7 @@ StatusList        | array(string) | Array of strings where: "1" is Pending, "2" 
 	]
 }
 ```
+### Response
 
 Name               | Type          | Description/Value
 -------------------|---------------|------------------
