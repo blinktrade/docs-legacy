@@ -75,7 +75,7 @@ https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC
 
 Name               | Type   | Description
 -------------------|--------|------------
-  pair             | string | \<SYMBOL\>, currency pair being used.
+  pair             | string | [\<SYMBOL\>](#currencies), currency pair being used.
   last             | number | Value of the last purchase in the last 24 hours.
   high             | number | Price of the highest purchase in the last 24 hours.
   low              | number | Price of the lowest purchase in the last 24 hours.
@@ -400,7 +400,7 @@ Returns your balance for each [BrokerID](#brokers).
 Name         | Type    | Description/Value
 -------------|---------|------------------
 MsgType      | string  | "U3" UserBalanceResponse message.
-\<BROKER_ID\>| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
@@ -687,7 +687,7 @@ The response of Cancel Order Request is almost identical to the New Order Single
 Name          | Type   | Description/Value
 --------------|--------|------------------
 MsgType       | string | "U3" Balance response. Problably because the request also change your account balance.
-\<BROKER_ID\> | object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#currencies) | object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
 ClientID      | number | Your account ID.
 
 #### Execution Report Response
