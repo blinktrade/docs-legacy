@@ -144,11 +144,11 @@ Index Array | Type    | Description
 
 ## Trades
 
-A list of the last 100 trades executed on an exchange since a chosen date.
+A list of the last trades executed on an exchange since a chosen date.
 
 ### HTTP Request
 
-`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>`
+`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>&limit=1000`
 
 > __EXAMPLE URL__
 
@@ -162,6 +162,7 @@ Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade.
+limit           | Limit of trades that will be returned, defaults to 100 trades
 
 ### Response
 
