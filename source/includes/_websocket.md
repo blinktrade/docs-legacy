@@ -458,9 +458,101 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 
 ## Orders
 
-### Request Orders List
+### Order List Request
 
-  Resquests orders List...
+> __EXAMPLE MESSAGE__
+
+```json
+{
+  "MsgType": "U4",
+  "OrdersReqID": 123
+}
+```
+
+| Name         | Type   | Description                   |
+|--------------|--------|-------------------------------|
+| MsgType      | string | U4                            |
+| BalanceReqID | string | Request ID                    |
+| Page         | number | **Optional**; defaults to 0.  |
+| PageSize     | number | **Optional**; defaults to 20. |
+
+
+> __EXAMPLE RESPONSE__
+
+```json
+{
+  "MsgType": "U5",
+  "OrdersReqID": 123,
+  "Page": 0,
+  "PageSize": 20,
+  "Columns": [
+    "ClOrdID",
+    "OrderID",
+    "CumQty",
+    "OrdStatus",
+    "LeavesQty",
+    "CxlQty",
+    "AvgPx",
+    "Symbol",
+    "Side",
+    "OrdType",
+    "OrderQty",
+    "Price",
+    "OrderDate",
+    "Volume",
+    "TimeInForce"
+  ],
+  "OrdListGrp": [
+    [
+      "7891067",
+      1459028474127,
+      100000000,
+      "2",
+      0,
+      0,
+      66563000000,
+      "BTCUSD",
+      "1",
+      "2",
+      100000000,
+      66563000000,
+      "2016-07-17 18:32:21",
+      66563000000.0,
+      "1"
+    ]
+  ]
+}
+```
+
+### Order List Response
+
+Name        | Type          | Description/Value
+------------|---------------|------------------
+MsgType     | string        | "U5" OrdersListResponse message.
+OrdersReqID | number        | Match the request OrdersReqID field
+Page        | number        | Starts at 0.
+PageSize    | number        | The page size. If the length of the array `OrdListGrp` is greather or equal to the `PageSize`, you should issue a new request incrementing the `Page`.
+Columns     | array(string) | Description of all columns of all orders in `OrdListGrp`.
+
+
+Index Array (Name) | Type   | Description/Value
+-------------------|--------|------------------
+0  ("ClOrdID")     | string | Client order ID set by you.
+1  ("OrderID")     | number | Order ID set by BlinkTrade.
+2  ("CumQty")      | number | The executed quantity of this order.
+3  ("OrdStatus")   | string | "0" = New, "1" = Partially filled, "2" = Filled, "4" = Cancelled, "8" = Rejected, "A" = Pending New
+4  ("LeavesQty")   | number | Quantity open for further execution.
+5  ("CxlQty")      | number | Total quantity canceled for this order.
+6  ("AvgPx")       | number | Calculated average price of all fills on this order.
+7  ("Symbol")      | string | [\<SYMBOL\>](#currencies), currency pair being used.
+8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
+9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
+10 ("OrderQty")    | number | Quantity ordered in satoshis.
+11 ("Price")       | number | Price per unit in "satoshis" of your local currency. Example: $ 2,125.89 = 212589000000
+12 ("OrderDate")   | string | Order date in UTC.
+13 ("Volume")      | number | Quantity * Price
+14 ("TimeInForce") | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
+
 
 ### Send Order
 
