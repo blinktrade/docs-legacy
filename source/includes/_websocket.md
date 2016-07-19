@@ -363,7 +363,7 @@ each Market Data Entry is composed by a bid, offer or a trade occured.
 | MDReqID                 | number | Request ID                                                         |
 | SubscriptionRequestType | string | "1" = Subscribe, "2" = Unsubscribe                                 |
 | MarketDepth             | string | "0" = Full Book, "1" = Top of Book                                 |
-| [MDEntryTypes](http://www.onixs.biz/fix-dictionary/4.4/tagNum_269.html) | array(string) | "0" = Bid, "1" = Offer |
+| [MDEntryTypes](http://www.onixs.biz/fix-dictionary/4.4/tagNum_269.html) | array(string) | "0" = Bid, "1" = Offer, "2" = Trade |
 | [MDUpdateType](http://www.onixs.biz/fix-dictionary/4.4/tagNum_265.html) | string | "0" = Full Refresh, "1" = Incremental RefreshRefresh                                            |
 | Instruments             | array(string) | Array with the symbols that you want to subscribe e.g.: ['BTCBRL'] |
 
