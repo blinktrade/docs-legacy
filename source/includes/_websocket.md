@@ -6,26 +6,48 @@ With the WebSocket API, you have full access to the exchange, you can also check
 
 ### Heartbeat
 
+> __EXAMPLE MESSAGE__
+
+```json
+{
+    "MsgType": "1",
+    "TestReqID": "123",
+    "SendTime": 1469031953
+}
+```
+
 ### Paratemers
-| Name      | Type   | Description |
-|-----------|--------|-------------|
-| MsgType   | string | 1           |
-| TestReqID | string | Request ID  |
-| SendTime  | object | Time Stamp  |
+
+Name      | Type   | Description
+----------|--------|------------
+MsgType   | string | [1](http://www.onixs.biz/fix-dictionary/4.4/msgType_1_1.html)
+[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
+SendTime  | number | Unix Time Stamp.
+
+
+> __EXAMPLE RESPONSE__
+
+```json
+{
+    "MsgType": "0",
+    "TestReqID": "123",
+    "SendTime": 1469031953,
+    "ServerTimestamp": 1469032804
+}
+```
 
 ### Response
 
-| Name            | Type   | Description       |
-|-----------------|--------|-------------------|
-| MsgType         | string | 0                 |
-| TestReqID       | number | Request ID        |
-| SendTime        | number | Time Stamp        |
-| ServerTimestamp | number | Server Time Stamp |
+Name            | Type   | Description
+----------------|--------|------------
+MsgType         | string | [0](http://www.onixs.biz/fix-dictionary/4.4/msgType_0_0.html)
+[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | This should match the TestReqID sent on the message.
+SendTime        | number | This should match your SendTime.
+ServerTimestamp | number | Server Unix Time Stamp.
 
 ## Authentication
 
-Most of websocket calls requires authentication, once you login with your username / password on the websocket connection, you will be able to access your account.
-You can also logged with your APIKey and APIPassword, you only be allowed to send messages that your APIKey has permission to send.
+Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection, you will be able to access your account. You can also login with your API Key and API Password, you only be allowed to send messages that your API Key has permission to send.
 
 ### FingerPrint
 
@@ -34,28 +56,41 @@ Each request requires that you pass a fingerprint from your browser, there's a f
 * [Our google closure implementation](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/util/util.js#L96-L157)
 * [fingerprintjs2](https://github.com/Valve/fingerprintjs2)
 
-
 ### Login
+
+> __EXAMPLE MESSAGE__
+
+```json
+{
+    "MsgType": "BE",
+    "UserReqID": 1123107,
+    "BrokerID": 5,
+    "Username": "TYD3ZilY0FDB1QdkD1iDdlqvcRdnV0sZILNh3D18ZKs",
+    "Password": "ySIMrLdTqSDo3vL",
+    "UserReqTyp": "1",
+    "FingerPrint": "b959a35c7f3f5e9315c99b5a25c2bbda"
+}
+```
 
 ### Parameters
 
-| Name | Type | Description |
-|------|------|-------------|
-| MsgType | string | [BE](http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html) |
-| UserReqID | number | Request Id |
-| BrokerID | number | The ID of the broker |
-| Username | string | The email address or username of the user |
-| Password | string | The password of the user |
-| UserReqTyp | string | 1 |
-| UserAgent | string | Brower user agent navigator |
-| UserAgentLanguage | string | User agent language |
-| UserAgentTimezoneOffset | integer | User agent timezone offset |
-| UserAgentPlatform | string | User agent platform |
-| FingerPrint | string | Browser finger print |
+Name                    | Type | Description
+------------------------|------|------------
+MsgType                 | string | [BE](http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html)
+UserReqID               | number | Request Id
+BrokerID                | number | [\<BROKER_ID\>](#brokers)
+Username                | string | The email address, username or API Key of the user.
+Password                | string | The password of the user.
+UserReqTyp              | string | "1"
+UserAgent               | string | Browser user agent navigator. **Optional**.
+UserAgentLanguage       | string | User agent language. **Optional**.
+UserAgentTimezoneOffset | number | User agent timezone offset. **Optional**.
+UserAgentPlatform       | string | User agent platform. **Optional**.
+FingerPrint             | string | Browser [fingerprint](#fingerprint).
 
 ### Response
 
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 {
@@ -120,53 +155,109 @@ Each request requires that you pass a fingerprint from your browser, there's a f
 }
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| MsgType   | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html) |
-| Broker | object | Broker model object |
-| BrokerID | number | Broker ID |
-| DepositFixedFee | number ||
-| DepositPercentFee | number ||
-| EmailLang | string | Email Language |
-| HasLineOfC3redit | bool | bool indicating whether user has line of credit |
-| IsBroker | bool | bool whether user is a broker |
-| IsMSB | bool  ||
-| Profile | object | Profile model object |
-| TakerTransactionFeeBuy | number ||
-| TakerTransactionFeeSell | number ||
-| TransactionFeeBuy | number ||
-| TransactionFeeSell | number ||
-| TwoFactorEnabled | bool | bool indicating whether user has two factor enabled |
-| UserID | number | Integer with the user ID |
-| UserStatus | number | 1 = Logged In, 2 = Not Logged In |
-| Username | string | String with the username of the user |
-| WithdrawFixedFee | number ||
-| WithdrawPercentFee | number ||
+Parameter               | Type   | Description 
+------------------------|--------|-------------
+MsgType                 | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html) 
+Broker                  | object | Broker model object.
+BrokerID                | number | [\<BROKER_ID\>](#brokers)
+DepositFixedFee         | number |
+DepositPercentFee       | number |
+EmailLang               | string | Email Language.
+HasLineOfC3redit        | bool   | `bool` indicating whether user has line of credit.
+IsBroker                | bool   | `bool` whether user is a broker.
+IsMSB                   | bool   |
+Profile                 | object | Profile model object.
+TakerTransactionFeeBuy  | number |
+TakerTransactionFeeSell | number |
+TransactionFeeBuy       | number |
+TransactionFeeSell      | number |
+TwoFactorEnabled        | bool   | `bool` indicating whether user has two factor enabled .
+UserID                  | number | Integer with the user ID 
+UserStatus              | number | "1" = Logged In, "2" = Not Logged In 
+Username                | string | String with the username of the user 
+WithdrawFixedFee        | number |
+WithdrawPercentFee      | number |
 
 
-### Sign Up
+## Sign Up
 
-### Two factor Authentication
+> __MESSAGE EXAMPLE__
 
-### Change password
+```json
+{
+    "MsgType": "U0",
+    "UserReqID": 123,
+    "Username": "mynewusername",
+    "Password": "mynewpassword",
+    "Email": "myemail@example.com",
+    "State": "SP",
+    "CountryCode": "BR",
+    "BrokerID": 5
+}
+```
+
+### Parameters
+
+Name                    | Type   | Description 
+------------------------|--------|-------------
+MsgType                 | string | "U0",
+UserReqID               | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
+Username                | string | Username you want to use
+Password                | string | Password you want use
+Email                   | string | User email.
+State                   | string | State
+CountryCode             | string | ContryCode, e.g. "BR"
+BrokerID                | number | [\<BROKER_ID\>](#brokers)
+
+
+> __EXAMPLE RESPONSE__
+
+```json
+{
+    "MsgType": "BF",
+    "UserReqID": 123,
+    "Username": "",
+    "UserStatus": 3,
+    "NeedSecondFactor": true,
+    "UserStatusText": "MSG_SIGNUP_CONFIRM_EMAIL",
+    "SecondFactorType": "EMAIL"
+}
+```
+
+### Response
+
+Name                    | Type   | Description 
+------------------------|--------|-------------
+MsgType                 | string | "BF"
+UserReqID               | number | 123
+Username                | string | 
+UserStatus              | number | 3,
+NeedSecondFactor        | bool   | true
+UserStatusText          | string | 
+SecondFactorType        | string | 
+
+
+## Two factor Authentication
+
+## Change password
 
 In order to change your password, you do the same as a login request, but passing `UserReqTyp` as 3 and the new password on `Password`
 
 ### Parameters
 
-| Name         | Type   | Description             |
-|--------------|--------|-------------------------|
-| MsgType      | string | BE                      |
-| UserReqID    | number | Request ID              |
-| UserReqTyp   | number | Should be 3             |
-| BrokerID     | number | Current Logged BrokerID |
-| Username     | string | Username                |
-| Password     | string | New password            |
-| SecondFactor | number | Optional Second Factor Authentication  |
+Name         | Type   | Description
+-------------|--------|------------
+MsgType      | string | [BE](http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html)
+UserReqID    | number | Request ID
+UserReqTyp   | number | Should be 3
+BrokerID     | number | Current Logged [\<BROKER_ID\>](#brokers)
+Username     | string | Username
+Password     | string | New password
+SecondFactor | number | Optional Second Factor Authentication
 
 ### Response
 
-Returns should be the same as login.
+Returns should be the same as [Login](#login).
 
 ## Brokers
 
@@ -174,13 +265,13 @@ Returns should be the same as login.
 
 ### Parameters
 
-| Name            | Type   | Description |
-|-----------------|--------|-------------|
-| MsgType         | string | "U28"       |
-| BrokerListReqID | number | Request ID  |
-| Page            | number | Page Index  |
-| PageSize        | number | Page Size.  |
-| StatusList      |        |             |
+Name            | Type   | Description
+----------------|--------|------------
+MsgType         | string | "U28"
+BrokerListReqID | number | Request ID
+Page            | number | Page Index. 
+PageSize        | number | Page Size. 
+StatusList      |        | 
 
 ## Update Profile
 
