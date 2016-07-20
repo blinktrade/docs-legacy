@@ -672,8 +672,6 @@ Returns all your APIKeys, **note** that your APISecret and APIPassword are only 
 | 5 ("LastUsed)"       | string | The last time when API Key was used |
 
 
-
-
 ### Create APIKey
 
 > __EXAMPLE RESPONSE__

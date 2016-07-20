@@ -15,7 +15,7 @@ search: true
 
 # Getting Started
 
-### OVERVIEW
+### Overview
 
 BlinkTrade provides a simple and robust [WebSocket API](#websocket-api) to integrate our platform, we strongly recommend you to use it over the [Rest API](#rest-api).
 
@@ -49,6 +49,8 @@ Broker                                         | ID
 
 ## Currencies
 
+Currency codes and related brokers:
+
 `<CURRENCY>` | Description
 -------------|------------
 VEF          | Venezuelan Bolivares (SurBitcoin)
@@ -58,6 +60,8 @@ PKR          | Pakistani Ruppe (UrduBit)
 CLP          | Chilean Pesos (ChileBit.NET)
 
 ## Symbols
+
+Currency pair symbols:
 
 `<SYMBOL>` | Description
 -----------|------------
@@ -69,7 +73,7 @@ BTCCLP     | BTC Pair - Chilean Pesos (ChileBit.NET)
 
 ## Messages
 
-List of Messages Based on the FIX Protocol.
+List of messages based on the FIX Protocol.
 
 ### User Messages
 
@@ -179,6 +183,6 @@ B8    |  [VerifyCustomerRequest]()
 B9    |  [VerifyCustomerResponse]()
 B1    |  [VerifyCustomerRefresh]()
 
-### REFERENCE
+### Reference
 
 * [FIX 4.4 - FIX Dictionary - Onix Solutions](http://www.onixs.biz/fix-dictionary/4.4/index.html)

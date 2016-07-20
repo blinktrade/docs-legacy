@@ -1,6 +1,10 @@
-# Rest API
+# REST API
 
-### USAGE EXAMPLE
+### Overview
+
+This documentation provides information on available requests and how to interact via [Public](#public-api) and [Trade](#trade-api) APIs. 
+
+### Usage Example
 
 * [pinhopro/blinktrade_example_restapi.py](https://gist.github.com/pinhopro/60b1fd213b36d576505e)
 
@@ -76,16 +80,16 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
 ### Response
 
-Name               | Type   | Description
--------------------|--------|------------
-  pair             | string | [\<SYMBOL\>](#symbols), currency pair being used.
-  last             | number | Value of the last purchase in the last 24 hours.
-  high             | number | Price of the highest purchase in the last 24 hours.
-  low              | number | Price of the lowest purchase in the last 24 hours.
-  vol              | number | Trading volume in the last 24 hours.
-  vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies).
-  buy              | number | Price of the most recent buy order.
-  sell             | number | Price of the most recent sell order.
+Name             | Type   | Description
+-----------------|--------|------------
+pair             | string | [\<SYMBOL\>](#symbols).
+last             | number | Value of the last purchase in the last 24 hours.
+high             | number | Price of the highest purchase in the last 24 hours.
+low              | number | Price of the lowest purchase in the last 24 hours.
+vol              | number | Trading volume in the last 24 hours.
+vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies).
+buy              | number | Price of the most recent buy order.
+sell             | number | Price of the most recent sell order.
 
 
 ## Orderbook
@@ -130,7 +134,7 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
 Name       | Type          | Description
 -----------|---------------|------------
-pair       | string        | [\<SYMBOL\>](#symbols), currency pair being used.
+pair       | string        | [\<SYMBOL\>](#symbols).
 bids       | array(array)  | Array of bids from buyers.
 asks       | array(array)  | Array of asks from sellers.
 
@@ -206,7 +210,7 @@ An `HTTP POST` request method should be used to send a message.
 
 ### Creating an API Key
 
-1. Go to some exchange powered by BlinkTrade or `https://tesnet.blinktrade.com` for `testnet` environment
+1. Go to some exchange powered by BlinkTrade or `https://testnet.blinktrade.com` for `testnet` environment
 2. Signup
 3. Go to API page
 4. Click "New API Key"
@@ -345,15 +349,17 @@ def send(message):
 
 The following parameters are used in the code snippets:
 
-Name         | Description
--------------|------------
-API_URL      | Either production `https://api.blinktrade.com/tapi/v1/message` or testing `https://api.testnet.blinktrade.com/tapi/v1/message`
-API_KEY      | Your API Key generated when you created the API.
-API_SECRET   | Your API Secret generated when you created the API.
-JSON_MESSAGE | The message you want to send.
+Name             | Description
+-----------------|------------
+\<API_URL\>      | Either production `https://api.blinktrade.com/tapi/v1/message` or testing `https://api.testnet.blinktrade.com/tapi/v1/message`
+\<API_KEY\>      | Your API Key generated when you created the API.
+\<API_SECRET\>   | Your API Secret generated when you created the API.
+\<JSON_MESSAGE\> | The message you want to send.
 
 
 ## Request Balance
+
+Request your balances for each broker you use.
 
 > __MESSAGE EXAMPLE__
 
@@ -395,12 +401,12 @@ BalanceReqID | number | An ID assigned by you. It can be any number. The respons
 
 ### Response
 
-Returns your balance for each [BrokerID](#brokers).
+Returns your balance for each broker.
 
 Name         | Type    | Description/Value
 -------------|---------|------------------
 MsgType      | string  | "U3" UserBalanceResponse message.
-[\<BROKER_ID\>](#brokers)| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
@@ -414,6 +420,8 @@ BTC_locked   | number | Amount in satoshis of BTC you have locked (open orders, 
 USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (open orders, margin positions, etc).
 
 ## Request Open Orders
+
+Request a list of your open orders.
 
 > __MESSAGE EXAMPLE__
 
@@ -510,7 +518,7 @@ Index Array (Name) | Type   | Description/Value
 4  ("LeavesQty")   | number | Quantity open for further execution.
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | [\<SYMBOL\>](#symbols), currency pair being used.
+7  ("Symbol")      | string | [\<SYMBOL\>](#symbols).
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
 9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
@@ -548,7 +556,7 @@ Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 Price    | number | Price in satoshis.
 OrderQty | number | Quantity in satoshis.
-BrokerID | number | Your [broker ID](#brokers).
+BrokerID | number | [\<BROKER_ID\>](#brokers).
 
 > __RESPONSE EXAMPLE__
 
@@ -596,7 +604,7 @@ __NOTE__: In this example, the request returned 2 messages.
 
 field        | Type    | Description/Value
 -------------|---------|------------------
-[\<BROKER_ID\>](#brokers)| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
 MsgType      | string  | "U3" Balance response. Problably because the request also change your account balance.
 ClientID     | number  | Your account ID.
 
@@ -736,7 +744,7 @@ Name         | Type   | Description/Value
 MsgType      | string | "U18" Deposit Request.
 DepositReqID | number | An ID chosen by you.
 Currency     | string | Currency Code.
-BrokerID     | number | Your [broker ID](#brokers)
+BrokerID     | number | [\<BROKER_ID\>](#brokers)
 
 > __RESPONSE EXAMPLE__
 
@@ -830,7 +838,7 @@ DepositReqID    | number | Deposit Request ID.
 DepositMethodID | number | Deposit Method ID - Check with your exchange. 
 Value           | number | Amount in satoshis
 Currency        | string | [\<CURRENCY\>](#currencies).
-BrokerID        | number | Your [broker ID](#brokers).
+BrokerID        | number | [\<BROKER_ID\>](#brokers).
 
 > __RESPONSE EXAMPLE__
 
@@ -971,7 +979,7 @@ Data          | object | Data object containing your wallet address e.g.: {"Data
 
 Name         | Type   | Description/Value
 -------------|--------|------------------
-[\<BROKER_ID\>](#brokers)| object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
 MsgType      | string | "U3" Balance response. Problably because the request also change your account balance.
 ClientID     | number | Your account ID.
 BalanceReqID | number | This should match the BalanceReqID sent on the message "U2".
