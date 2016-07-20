@@ -25,12 +25,19 @@ BlinkTrade's API is based on the [FIX protocol](http://www.onixs.biz/fix-diction
 
 ## BlinkTrade Endpoints
 
-There are two working environments: `prod` for production purporses and `testnet` for testing purporses:
+There are two working environments: `prod` for production purporses and `testnet` for testing purporses.
+
+Some features are accessed publicly and others require an API Key based authentication. All data messages and responses are in JSON format.
+
+### REST
 
 * `testnet` base URL endpoint is `https://api.testnet.blinktrade.com`
 * `prod` base URL endpoint is `https://api.blinktrade.com`
 
-Some features are accessed publicly and others require an API Key based authentication. All data messages and responses are in JSON format.
+### WebSocket
+
+* `testnet` URL endpoint is `wss://api.testnet.blinktrade.com/trade/`
+* `prod` URL endpoint is `wss://api.blinktrade.com/trade/`
 
 
 ## Brokers
