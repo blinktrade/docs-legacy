@@ -39,7 +39,7 @@ response = requests.get(api_url)
 print response.text
 ```
 
-The Public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>`.
+The Public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>`
 
 An `HTTP GET` request method should be used to fetch data.
 
@@ -82,12 +82,12 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
 Name             | Type   | Description
 -----------------|--------|------------
-pair             | string | [\<SYMBOL\>](#symbols).
+pair             | string | [\<SYMBOL\>](#symbols)
 last             | number | Value of the last purchase in the last 24 hours.
 high             | number | Price of the highest purchase in the last 24 hours.
 low              | number | Price of the lowest purchase in the last 24 hours.
 vol              | number | Trading volume in the last 24 hours.
-vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies).
+vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies) (lowercase).
 buy              | number | Price of the most recent buy order.
 sell             | number | Price of the most recent sell order.
 
@@ -134,7 +134,7 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 
 Name       | Type          | Description
 -----------|---------------|------------
-pair       | string        | [\<SYMBOL\>](#symbols).
+pair       | string        | [\<SYMBOL\>](#symbols)
 bids       | array(array)  | Array of bids from buyers.
 asks       | array(array)  | Array of asks from sellers.
 
@@ -152,12 +152,12 @@ A list of the last trades executed on an exchange since a chosen date.
 
 ### HTTP Request
 
-`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>&limit=1000`
+`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>&limit=<NUMBER>`
 
 > __EXAMPLE URL__
 
 ```
-https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302
+https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2
 ```
 
 ### Parameters
@@ -166,7 +166,7 @@ Name            | Description
 ----------------|------------
 crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade.
-limit           | Limit of trades that will be returned, defaults to 100 trades
+limit           | Limit of trades that will be returned. `<NUMBER>` should be a positive integer. **Optional**; defaults to 100 trades.
 
 ### Response
 
@@ -519,7 +519,7 @@ Index Array (Name) | Type   | Description/Value
 4  ("LeavesQty")   | number | Quantity open for further execution.
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | [\<SYMBOL\>](#symbols).
+7  ("Symbol")      | string | [\<SYMBOL\>](#symbols)
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
 9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
@@ -551,13 +551,13 @@ Index Array (Name) | Type   | Description/Value
 Name     | Type   | Description/Value
 ---------|--------|------------------
 MsgType  | string | "D" New Order Single message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html)
-ClOrdID  | number | Unique identifier for Order as assigned by you
+ClOrdID  | number | Unique identifier for Order as assigned by you.
 Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 Price    | number | Price in satoshis.
 OrderQty | number | Quantity in satoshis.
-BrokerID | number | [\<BROKER_ID\>](#brokers).
+BrokerID | number | [\<BROKER_ID\>](#brokers)
 
 > __RESPONSE EXAMPLE__
 
@@ -838,8 +838,8 @@ MsgType         | string | "U18" Deposit request.
 DepositReqID    | number | Deposit Request ID. 
 DepositMethodID | number | Deposit Method ID - Check with your exchange. 
 Value           | number | Amount in satoshis
-Currency        | string | [\<CURRENCY\>](#currencies).
-BrokerID        | number | [\<BROKER_ID\>](#brokers).
+Currency        | string | [\<CURRENCY\>](#currencies)
+BrokerID        | number | [\<BROKER_ID\>](#brokers)
 
 > __RESPONSE EXAMPLE__
 

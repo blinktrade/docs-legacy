@@ -543,7 +543,7 @@ Index Array (Name) | Type   | Description/Value
 4  ("LeavesQty")   | number | Quantity open for further execution.
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | [\<SYMBOL\>](#symbols), currency pair being used.
+7  ("Symbol")      | string | [\<SYMBOL\>](#symbols)
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
 9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
