@@ -68,7 +68,7 @@ CLP          | Chilean Pesos (ChileBit.NET)
 
 ## Symbols
 
-Currency pair symbols:
+Currency pair symbols and related brokers:
 
 `<SYMBOL>` | Description
 -----------|------------

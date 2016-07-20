@@ -74,8 +74,8 @@ Each request requires that you pass a fingerprint from your browser, there's a f
 
 ### Parameters
 
-Name                    | Type | Description
-------------------------|------|------------
+Name                    | Type   | Description
+------------------------|--------|------------
 MsgType                 | string | [BE](http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html)
 UserReqID               | number | Request Id
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
@@ -94,18 +94,17 @@ FingerPrint             | string | Browser [fingerprint](#fingerprint).
 
 ```json
 {
-    "UserID": 90800127,
-    "TwoFactorEnabled": false,
-    "EmailLang": "en",
-    "Username": "cesaraugusto",
-    "IsMSB": true,
-    "WithdrawFixedFee": null,
+    "MsgType": "BF",
     "Broker": {
       // Broker Model
     },
+    "BrokerID": 5,
+    "DepositFixedFee": null,
+    "DepositPercentFee": null,
+    "EmailLang": "en",
     "HasLineOfCredit": false,
-    "UserStatus": 1,
     "IsBroker": false,
+    "IsMSB": true,
     "Profile": {
         "VerificationData": [{
             "177.97.245.78:1513288343": ["cesaraugusto"]
@@ -136,19 +135,20 @@ FingerPrint             | string | Browser [fingerprint](#fingerprint).
         "TransactionFeeSell": 500,
         "NeedWithdrawEmail": false
     },
-    "TakerTransactionFeeSell": 500,
-    "ConfirmationOrder": false,
     "TakerTransactionFeeBuy": 500,
-    "UserReqID": 1123107,
-    "MsgType": "BF",
-    "IsMarketMaker": false,
-    "DepositPercentFee": null,
-    "DepositFixedFee": null,
-    "WithdrawPercentFee": null,
+    "TakerTransactionFeeSell": 500,
     "TransactionFeeBuy": 500,
     "TransactionFeeSell": 500,
+    "TwoFactorEnabled": false,
+    "UserID": 90800127,
+    "UserStatus": 1,
+    "Username": "cesaraugusto",
+    "WithdrawFixedFee": null,
+    "WithdrawPercentFee": null,
+    "ConfirmationOrder": false,
+    "UserReqID": 1123107,
+    "IsMarketMaker": false,
     "EmailTwoFactorEnabled": false,
-    "BrokerID": 5,
     "PermissionList": {
         "*": []
     }
@@ -163,7 +163,7 @@ BrokerID                | number | [\<BROKER_ID\>](#brokers)
 DepositFixedFee         | number |
 DepositPercentFee       | number |
 EmailLang               | string | Email Language.
-HasLineOfC3redit        | bool   | `bool` indicating whether user has line of credit.
+HasLineOfCredit         | bool   | `bool` indicating whether user has line of credit.
 IsBroker                | bool   | `bool` whether user is a broker.
 IsMSB                   | bool   |
 Profile                 | object | Profile model object.
@@ -226,8 +226,8 @@ BrokerID                | number | [\<BROKER_ID\>](#brokers)
 
 ### Response
 
-Name                    | Type   | Description 
-------------------------|--------|-------------
+Name                    | Type   | Description
+------------------------|--------|------------
 MsgType                 | string | "BF"
 UserReqID               | number | 123
 Username                | string | 
@@ -238,6 +238,34 @@ SecondFactorType        | string |
 
 
 ## Two factor Authentication
+
+### Enable
+
+> __EXAMPLE MESSAGE__
+
+```json
+{
+    "MsgType": "U16",
+    "EnableTwoFactorReqID": 123,
+    "Enable": true
+}
+```
+
+### Parameters
+
+Name                    | Type   | Description 
+------------------------|--------|-------------
+MsgType                 | string |  
+EnableTwoFactorReqID    | string |  
+Enable                  | bool   |  
+Secret                  |        |  
+Code                    |        |  
+ClientID                |        |  
+
+### Response
+
+
+
 
 ## Change password
 
@@ -263,6 +291,16 @@ Returns should be the same as [Login](#login).
 
 ### Request Broker List
 
+> __EXAMPLE MESSAGE__
+
+```json
+{
+    "MsgType": "U28",
+    "BrokerListReqID": 123,
+    "StatusList": ["1"]
+}
+```
+
 ### Parameters
 
 Name            | Type   | Description
@@ -272,6 +310,10 @@ BrokerListReqID | number | Request ID
 Page            | number | Page Index. 
 PageSize        | number | Page Size. 
 StatusList      |        | 
+
+### Response
+
+
 
 ## Update Profile
 
@@ -425,7 +467,7 @@ Returns your balance for each [BrokerID](#brokers).
 Name         | Type    | Description/Value
 -------------|---------|------------------
 MsgType      | string  | "U3" UserBalanceResponse message.
-[\<BROKER_ID\>](#brokers)| object  | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
+[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
 ClientID     | number  | Your account ID.
 BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
 
@@ -655,11 +697,147 @@ Index Array (Name) | Type   | Description/Value
 
 ## Ledger
 
-## Deposits
+> __EXAMPLE MESSAGE__
+
+```json
+{
+    "MsgType": "U34",
+    "LedgerListReqID": 123
+}
+```
+
+### Parameters
+
+Name        | Type          | Description/Value
+------------|---------------|------------------
+            |               |
+
+
+> __EXAMPLE RESPONSE__
+
+```json
+{
+  "MsgType": "U35",
+  "Page": 0,
+  "PageSize": 100,
+  "LedgerListReqID": 123,
+  "Columns": [
+    "LedgerID",
+    "Currency",
+    "Operation",
+    "AccountID",
+    "BrokerID",
+    "PayeeID",
+    "PayeeBrokerID",
+    "Amount",
+    "Balance",
+    "Reference",
+    "Created",
+    "Description",
+    "AccountName"
+  ],
+  "LedgerListGrp": [
+    [
+      128197,
+      "BTC",
+      "D",
+      90000002,
+      5,
+      90000001,
+      5,
+      994273,
+      29128175022,
+      "1459028474211.1459028474155",
+      "2016-07-20 11:23:07",
+      "TF",
+      "user"
+    ]
+  ]
+}
+```
+
+
+### Response
+
+Name        | Type          | Description/Value
+------------|---------------|------------------
+            |               |
+
+
+## Deposit
+
+### Deposit List
+
+> __EXAMPLE MESSAGE__
+
+```json
+{
+    "MsgType": "U30",
+    "DepositListReqID": 123,
+    "StatusList": ["1"]
+}
+```
+
+### Parameters
+
+Name             | Type      | Description/Value
+-----------------|-----------|------------------
+MsgType          |           | 
+DepositListReqID |           | 
+Page             |           | 
+PageSize         |           | 
+StatusList       |           | 
+Filter           |           | 
+ClientID         |           | 
+
+### Response
+
+> __EXAMPLE RESPONSE__
+
+```json
+{
+  "PageSize": 20,
+  "DepositListReqID": 123,
+  "MsgType": "U31",
+  "DepositListGrp": [
+    
+  ],
+  "Page": 0,
+  "Columns": [
+    "DepositID",
+    "DepositMethodID",
+    "DepositMethodName",
+    "Type",
+    "Currency",
+    "Value",
+    "PaidValue",
+    "Data",
+    "Created",
+    "ControlNumber",
+    "PercentFee",
+    "FixedFee",
+    "Status",
+    "ReasonID",
+    "Reason",
+    "Username",
+    "UserID",
+    "BrokerID",
+    "ClOrdID",
+    "CreditProvided",
+    "State"
+  ]
+}
+```
+
+Name             | Type      | Description/Value
+-----------------|-----------|------------------
+                 |           | 
+
 
 ### Instant Deposits
 
 ## Withdraws
+
 
 ## API Key
 
@@ -673,7 +851,7 @@ You can setup a permission that is only allowed to send a buy order as follows:
 
 `{ "D": [["Side", "eq", "1"]]}`
 
-> List of Permissions
+> __LIST OF PERMISSIONS__
 
 ```json
 {
