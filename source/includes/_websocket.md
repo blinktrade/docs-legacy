@@ -6,6 +6,8 @@ With the WebSocket API, you have full access to the exchange, you can also check
 
 ### Heartbeat
 
+You must send this message each 30 seconds, in order to keep your connection alive.
+
 > __EXAMPLE MESSAGE__
 
 ```json
