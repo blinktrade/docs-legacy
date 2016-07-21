@@ -23,8 +23,8 @@ You must send this message each 30 seconds, in order to keep your connection ali
 Name      | Type   | Description
 ----------|--------|------------
 MsgType   | string | [1](http://www.onixs.biz/fix-dictionary/4.4/msgType_1_1.html)
-[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
-SendTime  | number | Unix Time Stamp.
+[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
+SendTime  | number | Unix Time Stamp
 
 
 > __EXAMPLE RESPONSE__
@@ -43,9 +43,9 @@ SendTime  | number | Unix Time Stamp.
 Name            | Type   | Description
 ----------------|--------|------------
 MsgType         | string | [0](http://www.onixs.biz/fix-dictionary/4.4/msgType_0_0.html)
-[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | This should match the TestReqID sent on the message.
-SendTime        | number | This should match your SendTime.
-ServerTimestamp | number | Server Unix Time Stamp.
+[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | This should match the TestReqID sent on the message
+SendTime        | number | This should match your SendTime
+ServerTimestamp | number | Server Unix Time Stamp
 
 ## Authentication
 
@@ -81,14 +81,13 @@ Name                    | Type   | Description
 MsgType                 | string | [BE](http://www.onixs.biz/fix-dictionary/4.4/msgType_BE_6669.html)
 UserReqID               | number | Request Id
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
-Username                | string | The email address, username or API Key of the user.
-Password                | string | The password of the user.
+Username                | string | The email address, username or API Key of the user
+Password                | string | The password of the user
 UserReqTyp              | string | "1"
-UserAgent               | string | Browser user agent navigator. **Optional**.
-UserAgentLanguage       | string | User agent language. **Optional**.
-UserAgentTimezoneOffset | number | User agent timezone offset. **Optional**.
-UserAgentPlatform       | string | User agent platform. **Optional**.
-FingerPrint             | string | Browser [fingerprint](#fingerprint).
+UserAgent               | string | **Optional**; Browser user agent navigator
+UserAgentLanguage       | string | **Optional**; User agent language
+UserAgentTimezoneOffset | number | **Optional**; User agent timezone offset
+UserAgentPlatform       | string | **Optional**; User agent platform
 
 ### Response
 
@@ -157,27 +156,28 @@ FingerPrint             | string | Browser [fingerprint](#fingerprint).
 }
 ```
 
-Parameter               | Type   | Description 
+Parameter               | Type   | Description
 ------------------------|--------|-------------
-MsgType                 | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html) 
+MsgType                 | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html)
 Broker                  | object | Broker model object, see [broker response](#Brokers) for more informations
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
-DepositFixedFee         | number |
-DepositPercentFee       | number |
-EmailLang               | string | Email Language.
-HasLineOfCredit         | bool   | `bool` indicating whether user has line of credit.
-IsBroker                | bool   | `bool` whether user is a broker.
-IsMSB                   | bool   |
-Profile                 | object | Profile model object.
-TakerTransactionFeeBuy  | number |
-TakerTransactionFeeSell | number |
-TransactionFeeBuy       | number |
-TransactionFeeSell      | number |
-TwoFactorEnabled        | bool   | `bool` indicating whether user has two factor enabled .
-UserID                  | number | Integer with the user ID 
-UserStatus              | number | "1" = Logged In, "2" = Not Logged In 
-Username                | string | String with the username of the user 
-WithdrawFixedFee        | number |
+DepositFixedFee         | number | Fixed deposit fee
+DepositPercentFee       | number | Deposit fixed fee
+EmailLang               | string | Email Language
+HasLineOfCredit         | boolean| `boolean` indicating whether user has line of credit
+IsBroker                | boolean| `boolean` whether user is a broker
+IsMSB                   | boolean|
+Profile                 | object | Profile model object, see [profile model]() for more informations
+TakerTransactionFeeBuy  | number | Taker fee for buy orders
+TakerTransactionFeeSell | number | Taker fee for sell orders
+TransactionFeeBuy       | number | Maker fee for buy orders
+TransactionFeeSell      | number | Maker fee for sell orders
+TwoFactorEnabled        | boolean| `boolean` indicating whether user has two factor enabled
+UserID                  | number | Integer with the user ID
+UserReqTyp              | number | Returns only if it is equal to 3 when password has been changed
+UserStatus              | number | "1" = Logged In, "2" = Not Logged In, "3" = User Not Recognised
+Username                | string | String with the username of the user
+WithdrawFixedFee        | number | Fixed fee for withdraws
 WithdrawPercentFee      | number |
 
 
@@ -200,16 +200,20 @@ WithdrawPercentFee      | number |
 
 ### Parameters
 
-Name                    | Type   | Description 
+Name                    | Type   | Description
 ------------------------|--------|-------------
-MsgType                 | string | "U0",
-UserReqID               | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
+MsgType                 | string | U0
+UserReqID               | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
 Username                | string | Username you want to use
 Password                | string | Password you want use
-Email                   | string | User email.
+Email                   | string | User email
 State                   | string | State
 CountryCode             | string | ContryCode, e.g. "BR"
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
+UserAgent               | string | **Optional**; Browser user agent navigator
+UserAgentLanguage       | string | **Optional**; User agent language
+UserAgentTimezoneOffset | number | **Optional**; User agent timezone offset
+UserAgentPlatform       | string | **Optional**; User agent platform
 
 
 > __EXAMPLE RESPONSE__
@@ -283,7 +287,7 @@ UserReqTyp   | number | Should be 3
 BrokerID     | number | Current Logged [\<BROKER_ID\>](#brokers)
 Username     | string | Username
 Password     | string | New password
-SecondFactor | number | Optional Second Factor Authentication
+SecondFactor | number | **Optional**; Second Factor Authentication
 
 ### Response
 
@@ -533,8 +537,8 @@ StatusList      |        |
 | BrokerListReqID | number | Request ID                                      |
 | BrokerListGrp   | Array  | Array of Arrays with all brokers informations   |
 | Columns         | Array  | Array describing each column from BrokerListGrp |
-| Page            | number | Optional; defaults to 0                         |
-| PageSize        | number | Optional; defaults to 20                        |
+| Page            | number | **Optional**; defaults to 0                     |
+| PageSize        | number | **Optional**; defaults to 20                    |
 
 ### BrokerListGrp Model
 
@@ -581,7 +585,7 @@ Users can only change a few fields, such as `TwoFactorEnabled`, `EmailLang` and 
 | MsgType     | string | "U38"                          |
 | UpdateReqID | string | Request ID                     |
 | Fields      | object | Fields that you want to update |
-| UserID      | number | Optional UserID                |
+| UserID      | number | **Optional**; UserID           |
 
 > EXAMPLE RESPONSE
 
@@ -697,7 +701,7 @@ Users can only change a few fields, such as `TwoFactorEnabled`, `EmailLang` and 
 |--------------|--------|-------------------|
 | MsgType      | string | U2                |
 | BalanceReqID | string | Request ID        |
-| ClientID     | object | Optional ClientID |
+| ClientID     | object | **Optional**; ClientID
 
 ### Response
 
@@ -860,8 +864,8 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 |--------------|--------|-------------------------------|
 | MsgType      | string | U4                            |
 | BalanceReqID | string | Request ID                    |
-| Page         | number | **Optional**; defaults to 0.  |
-| PageSize     | number | **Optional**; defaults to 20. |
+| Page         | number | **Optional**; defaults to 0   |
+| PageSize     | number | **Optional**; defaults to 20  |
 
 
 > __EXAMPLE RESPONSE__
