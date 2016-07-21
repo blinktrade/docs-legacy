@@ -84,6 +84,7 @@ BrokerID                | number | [\<BROKER_ID\>](#brokers)
 Username                | string | The email address, username or API Key of the user
 Password                | string | The password of the user
 UserReqTyp              | string | "1"
+FingerPrint             | string | Browser [fingerprint](#fingerprint)
 UserAgent               | string | **Optional**; Browser user agent navigator
 UserAgentLanguage       | string | **Optional**; User agent language
 UserAgentTimezoneOffset | number | **Optional**; User agent timezone offset
@@ -159,7 +160,7 @@ UserAgentPlatform       | string | **Optional**; User agent platform
 Parameter               | Type   | Description
 ------------------------|--------|-------------
 MsgType                 | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html)
-Broker                  | object | Broker model object, see [broker response](#Brokers) for more informations
+Broker                  | object | Broker model object, see [broker response](#brokers) for more informations
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
 DepositFixedFee         | number | Fixed deposit fee
 DepositPercentFee       | number | Deposit fixed fee
