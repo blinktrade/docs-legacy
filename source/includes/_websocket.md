@@ -950,6 +950,8 @@ Index Array (Name) | Type   | Description/Value
 
 ## Ledger
 
+List all your trades activity, each row on the ledger represents either a trade occurred or trade fees.
+
 > __EXAMPLE MESSAGE__
 
 ```json
@@ -961,9 +963,12 @@ Index Array (Name) | Type   | Description/Value
 
 ### Parameters
 
-Name        | Type          | Description/Value
-------------|---------------|------------------
-            |               |
+Name            | Type          | Description/Value
+----------------|---------------|------------------
+MsgType         | string        | U34
+LedgerListReqID | number        | Request ID
+Page            | number        | **Optional**; defaults to 0
+PageSize        | number        | **Optional**; defaults to 20
 
 
 > __EXAMPLE RESPONSE__
@@ -1009,12 +1014,23 @@ Name        | Type          | Description/Value
 }
 ```
 
-
 ### Response
 
-Name        | Type          | Description/Value
-------------|---------------|------------------
-            |               |
+| Name               | Type   | Description
+|--------------------|--------|------------
+| 0  (LedgerID)      | number | Ledger row ID
+| 1  (Currency)      | string | Currency of the trade, either crypto or fiat
+| 2  (Operation)     | string | MsgType of the trade occurred e.g.: "D"
+| 3  (AccountID)     | number | Your account id
+| 4  (BrokerID)      | number | BrokerID
+| 5  (PayeeID)       | number | Payee's account id
+| 6  (PayeeBrokerID) | number | Payee's BrokerID
+| 7  (Amount)        | number | Amount of the trade depending of the currency occurred
+| 8  (Balance)       | number | Balance after trade occurred
+| 9  (Reference)     | string | Reference data
+| 10 (Created)       | string | Creating date
+| 11 (Description)   | string | "TF" = Trade Fees, "T" = Trade
+| 12 (AccountName)   | string | Your profile usernam
 
 
 ## Deposit
