@@ -838,6 +838,12 @@ Name             | Type      | Description/Value
 
 ## Withdraws
 
+### Requesting a withdraw
+
+### Withdraw methods
+
+There are different methods of withdraws for each currency, they are created dynamically by each broker, you can take a look logging as a broker on
+[testnet.blinktrade.com](https://testnet.blinktrade.com), and go to `admin` tab and `Withdraw methods`
 
 ## API Key
 
@@ -885,7 +891,7 @@ You can setup a permission that is only allowed to send a buy order as follows:
 
 ### List APIKeys
 
-Returns all your APIKeys, **note** that your APISecret and APIPassword are only shown when you created the APIKey
+Returns all your APIKeys, **note** that your APISecret and APIPassword are only shown when were created
 
 > __EXAMPLE RESPONSE__
 
