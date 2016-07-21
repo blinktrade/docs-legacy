@@ -158,7 +158,7 @@ FingerPrint             | string | Browser [fingerprint](#fingerprint).
 Parameter               | Type   | Description 
 ------------------------|--------|-------------
 MsgType                 | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html) 
-Broker                  | object | Broker model object.
+Broker                  | object | Broker model object, see [broker response](#Brokers) for more informations
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
 DepositFixedFee         | number |
 DepositPercentFee       | number |
@@ -296,7 +296,7 @@ Returns should be the same as [Login](#login).
 ```json
 {
     "MsgType": "U28",
-    "BrokerListReqID": 123,
+    "BrokerListReqID": 876687,
     "StatusList": ["1"]
 }
 ```
@@ -307,12 +307,265 @@ Name            | Type   | Description
 ----------------|--------|------------
 MsgType         | string | "U28"
 BrokerListReqID | number | Request ID
-Page            | number | Page Index. 
-PageSize        | number | Page Size. 
+Page            | number | Page Index
+PageSize        | number | Page Size
 StatusList      |        | 
 
 ### Response
 
+> __EXAMPLE RESPONSE__
+
+```json
+
+{
+    "PageSize": 20,
+    "BrokerListGrp": [
+        [5, "exchange", "BlinkTrade Demo Exchange", "21 Bitcoin Ave", "New York", "NY", "10000", "United States", null, null, "blinktrade", "USD", "https://docs.google.com/a/blinktrade.com/document/d/1HyFRs_2Seh4LGZYjPk8bmbxueUjF7RMz-koAM3rG2Pc/pub?embedded=true", [{
+            "Operation": "Wire transfer",
+            "Fee": "1%",
+            "Terms": "Exchange operator decides its fees"
+        }], 60, 60, "1", 5, "demo@blinktrade.com", "US", [{
+            "Wallets": [{
+                "managed_by": "TESTNET",
+                "signatures": [],
+                "type": "hot",
+                "multisig": false,
+                "address": "n19ZAH1WGoUkQhubQw71fH11BenifxpBxf"
+            }],
+            "CurrencyCode": "BTC",
+            "Confirmations": [
+                [0, 25000000000, 1],
+                [25000000000, 20000000000, 3],
+                [20000000000, 2100000000000000, 6]
+            ],
+            "CurrencyDescription": "Bitcoin"
+        }], {
+            "USD": [{
+                "percent_cost": 0,
+                "limits": {
+                    "1": {
+                        "enabled": false
+                    },
+                    "0": {
+                        "enabled": false
+                    },
+                    "3": {
+                        "enabled": true
+                    },
+                    "2": {
+                        "enabled": false
+                    },
+                    "5": {
+                        "enabled": true
+                    },
+                    "4": {
+                        "enabled": true
+                    }
+                },
+                "fixed_cost": 0,
+                "fields": [{
+                    "name": "email",
+                    "type": "text",
+                    "required": "text",
+                    "value": "",
+                    "label": "email",
+                    "validator": "required",
+                    "placeholder": "email",
+                    "side": "client"
+                }],
+                "percent_fee": 0,
+                "formatted_percent_fee": "0,00\u00a0%",
+                "formatted_fixed_fee": "$ 0,00",
+                "disclaimer": "",
+                "method": "PayPal",
+                "fixed_fee": 0,
+                "description": "PayPal"
+            }, {
+                "percent_cost": 0,
+                "limits": {
+                    "1": {
+                        "enabled": false
+                    },
+                    "0": {
+                        "enabled": false
+                    },
+                    "3": {
+                        "enabled": true
+                    },
+                    "2": {
+                        "enabled": false
+                    },
+                    "5": {
+                        "enabled": true
+                    },
+                    "4": {
+                        "enabled": true
+                    }
+                },
+                "fixed_cost": 0,
+                "fields": [{
+                    "name": "email",
+                    "placeholder": "email",
+                    "required": "text",
+                    "value": "",
+                    "label": "email",
+                    "validator": "required",
+                    "type": "text",
+                    "side": "client"
+                }],
+                "description": "Test2",
+                "method": "Test2",
+                "fixed_fee": 0,
+                "percent_fee": 2,
+                "disclaimer": ""
+            }, {
+                "percent_cost": 0,
+                "limits": {
+                    "1": {
+                        "enabled": true
+                    },
+                    "0": {
+                        "enabled": false
+                    },
+                    "3": {
+                        "enabled": true
+                    },
+                    "2": {
+                        "enabled": false
+                    },
+                    "5": {
+                        "enabled": true
+                    },
+                    "4": {
+                        "enabled": true
+                    }
+                },
+                "fixed_cost": 0,
+                "fields": [{
+                    "name": "email",
+                    "placeholder": "Email",
+                    "required": "text",
+                    "value": "",
+                    "label": "email",
+                    "validator": "required",
+                    "type": "text",
+                    "side": "client"
+                }],
+                "description": "Test 3",
+                "method": "Test3",
+                "formatted_percent_fee": "0,00\u00a0%",
+                "formatted_fixed_fee": "$ 0,00",
+                "percent_fee": 0,
+                "fixed_fee": 0,
+                "disclaimer": "Test"
+            }],
+            "BTC": [{
+                "percent_cost": 1,
+                "limits": {
+                    "1": {
+                        "max": 1000000000,
+                        "enabled": true
+                    },
+                    "0": {
+                        "max": 1000000000,
+                        "enabled": true
+                    },
+                    "3": {
+                        "max": 5000000000,
+                        "enabled": true
+                    },
+                    "2": {
+                        "max": 1000000000,
+                        "enabled": true
+                    },
+                    "5": {
+                        "max": 50000000000,
+                        "enabled": true
+                    },
+                    "4": {
+                        "max": 50000000000,
+                        "enabled": true
+                    }
+                },
+                "fixed_cost": 10000,
+                "fields": [{
+                    "name": "Wallet",
+                    "placeholder": "",
+                    "required": "text",
+                    "value": "",
+                    "label": "Wallet",
+                    "validator": "validateAddress",
+                    "type": "text",
+                    "side": "client"
+                }, {
+                    "name": "TransactionID",
+                    "placeholder": "",
+                    "required": "text",
+                    "value": "",
+                    "label": "Transaction ID",
+                    "validator": "validateAlphaNum",
+                    "type": "text",
+                    "side": "broker"
+                }],
+                "description": "Bitcoin withdrawal",
+                "method": "bitcoin",
+                "fixed_fee": 10000,
+                "percent_fee": 1,
+                "disclaimer": ""
+            }]
+        }, "mailto:rodrigo@blinktrade.com", "BlinkTrade Demo Exchange", [
+            ["*"],
+            ["CU", "SO", "SD", "NG", "IR", "KP"]
+        ], false, 100, 100],
+    ],
+    "Page": 0,
+    "MsgType": "U29",
+    "BrokerListReqID": 7073382,
+    "Columns": ["BrokerID", "ShortName", "BusinessName", "Address", "City", "State", "ZipCode", "Country", "PhoneNumber1", "PhoneNumber2", "Skype", "Currencies", "TosUrl", "FeeStructure", "TransactionFeeBuy", "TransactionFeeSell", "Status", "ranking", "Email", "CountryCode", "CryptoCurrencies", "WithdrawStructure", "SupportURL", "SignupLabel", "AcceptCustomersFrom", "IsBrokerHub", "TakerTransactionFeeBuy", "TakerTransactionFeeSell"]
+}
+```
+
+| Name            | Type   | Description
+|-----------------|--------|-------------------------------------------------|
+| MsgType         | string | U29                                             |
+| BrokerListReqID | number | Request ID                                      |
+| BrokerListGrp   | Array  | Array of Arrays with all brokers informations   |
+| Columns         | Array  | Array describing each column from BrokerListGrp |
+| Page            | number | Optional; defaults to 0                         |
+| PageSize        | number | Optional; defaults to 20                        |
+
+### BrokerListGrp Model
+
+| Name                         | Type   | Description
+|------------------------------|--------|------------
+| 0  (BrokerID)                | number | BrokerID
+| 1  (ShortName)               | string | Short Name of the broker
+| 2  (BusinessName)            | string | Broker's Business Name
+| 3  (Address)                 | string | Broker's Address
+| 4  (City)                    | string | Broker's City
+| 5  (State)                   | string | Broker's State Code
+| 6  (ZipCode)                 | string | Broker's ZipCode
+| 7  (Country)                 | string | Broker's Country
+| 8  (PhoneNumber1)            | string | Broker's first phone number
+| 9  (PhoneNumber2)            | string | Broker's second phone number
+| 10 (Skype)                   | string | Broker's skype address
+| 11 (Currencies)              | string | Default currency of the broker, e.g.: "BRL"
+| 12 (TosUrl)                  | string | Terms of Service url
+| 13 (FeeStructure)            | array  | Array of objects describing the broker's fees
+| 14 (TransactionFeeBuy)       | number | Maker Fee for buy orders
+| 15 (TransactionFeeSell)      | number | Maker Fee for sell order
+| 16 (Status)                  | string | Broker's status
+| 17 (ranking)                 | number | Broker's ranking
+| 18 (Email)                   | string | Broker's email
+| 19 (CountryCode)             | string | Broker's Country Code
+| 20 (CryptoCurrencies)        | array  | Wallet objects describing the broker's wallets
+| 21 (WithdrawStructure)       | object | Withdraw methods of the broker, see [Withdraw methods](#Withdraw methods) for more information
+| 22 (SupportURL)              | string | Customer support URL
+| 23 (SignupLabel)             | string | Signup Label
+| 24 (AcceptCustomersFrom)     | array  | Array containing from which country customers can signup
+| 25 (IsBrokerHub)             | boolean| Is Broker Hub
+| 26 (TakerTransactionFeeBuy)  | number | Taker fee for buy orders
+| 27 (TakerTransactionFeeSell) | number | Taker fee for sell orders
 
 
 ## Update Profile
