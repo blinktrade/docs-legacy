@@ -160,7 +160,7 @@ UserAgentPlatform       | string | **Optional**; User agent platform
 Parameter               | Type   | Description
 ------------------------|--------|-------------
 MsgType                 | string | [BF](http://www.onixs.biz/fix-dictionary/4.4/msgType_BF_6670.html)
-Broker                  | object | Broker model object, see [broker response](#brokers) for more informations
+Broker                  | object | Broker model object, see [broker response](#brokerlistgrp-model) for more informations
 BrokerID                | number | [\<BROKER_ID\>](#brokers)
 DepositFixedFee         | number | Fixed deposit fee
 DepositPercentFee       | number | Deposit fixed fee
