@@ -2953,6 +2953,8 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 
 <h3 id="heartbeat">Heartbeat</h3>
 
+<p>You must send this message each 30 seconds, in order to keep your connection alive.</p>
+
 <blockquote>
 <p><strong>EXAMPLE MESSAGE</strong></p>
 </blockquote>
@@ -2980,12 +2982,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td><a href="http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html">TestReqID</a></td>
 <td>string</td>
-<td>An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.</td>
+<td>An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID</td>
 </tr>
 <tr>
 <td>SendTime</td>
 <td>number</td>
-<td>Unix Time Stamp.</td>
+<td>Unix Time Stamp</td>
 </tr>
 </tbody></table>
 
@@ -3017,17 +3019,17 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td><a href="http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html">TestReqID</a></td>
 <td>string</td>
-<td>This should match the TestReqID sent on the message.</td>
+<td>This should match the TestReqID sent on the message</td>
 </tr>
 <tr>
 <td>SendTime</td>
 <td>number</td>
-<td>This should match your SendTime.</td>
+<td>This should match your SendTime</td>
 </tr>
 <tr>
 <td>ServerTimestamp</td>
 <td>number</td>
-<td>Server Unix Time Stamp.</td>
+<td>Server Unix Time Stamp</td>
 </tr>
 </tbody></table>
 
@@ -3087,12 +3089,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>Username</td>
 <td>string</td>
-<td>The email address, username or API Key of the user.</td>
+<td>The email address, username or API Key of the user</td>
 </tr>
 <tr>
 <td>Password</td>
 <td>string</td>
-<td>The password of the user.</td>
+<td>The password of the user</td>
 </tr>
 <tr>
 <td>UserReqTyp</td>
@@ -3102,27 +3104,22 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>UserAgent</td>
 <td>string</td>
-<td>Browser user agent navigator. <strong>Optional</strong>.</td>
+<td><strong>Optional</strong>; Browser user agent navigator</td>
 </tr>
 <tr>
 <td>UserAgentLanguage</td>
 <td>string</td>
-<td>User agent language. <strong>Optional</strong>.</td>
+<td><strong>Optional</strong>; User agent language</td>
 </tr>
 <tr>
 <td>UserAgentTimezoneOffset</td>
 <td>number</td>
-<td>User agent timezone offset. <strong>Optional</strong>.</td>
+<td><strong>Optional</strong>; User agent timezone offset</td>
 </tr>
 <tr>
 <td>UserAgentPlatform</td>
 <td>string</td>
-<td>User agent platform. <strong>Optional</strong>.</td>
-</tr>
-<tr>
-<td>FingerPrint</td>
-<td>string</td>
-<td>Browser <a href="#fingerprint">fingerprint</a>.</td>
+<td><strong>Optional</strong>; User agent platform</td>
 </tr>
 </tbody></table>
 
@@ -3218,62 +3215,62 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>DepositFixedFee</td>
 <td>number</td>
-<td></td>
+<td>Fixed deposit fee</td>
 </tr>
 <tr>
 <td>DepositPercentFee</td>
 <td>number</td>
-<td></td>
+<td>Deposit fixed fee</td>
 </tr>
 <tr>
 <td>EmailLang</td>
 <td>string</td>
-<td>Email Language.</td>
+<td>Email Language</td>
 </tr>
 <tr>
 <td>HasLineOfCredit</td>
-<td>bool</td>
-<td><code class="prettyprint">bool</code> indicating whether user has line of credit.</td>
+<td>boolean</td>
+<td><code class="prettyprint">boolean</code> indicating whether user has line of credit</td>
 </tr>
 <tr>
 <td>IsBroker</td>
-<td>bool</td>
-<td><code class="prettyprint">bool</code> whether user is a broker.</td>
+<td>boolean</td>
+<td><code class="prettyprint">boolean</code> whether user is a broker</td>
 </tr>
 <tr>
 <td>IsMSB</td>
-<td>bool</td>
+<td>boolean</td>
 <td></td>
 </tr>
 <tr>
 <td>Profile</td>
 <td>object</td>
-<td>Profile model object.</td>
+<td>Profile model object, see <a href="#">profile model</a> for more informations</td>
 </tr>
 <tr>
 <td>TakerTransactionFeeBuy</td>
 <td>number</td>
-<td></td>
+<td>Taker fee for buy orders</td>
 </tr>
 <tr>
 <td>TakerTransactionFeeSell</td>
 <td>number</td>
-<td></td>
+<td>Taker fee for sell orders</td>
 </tr>
 <tr>
 <td>TransactionFeeBuy</td>
 <td>number</td>
-<td></td>
+<td>Maker fee for buy orders</td>
 </tr>
 <tr>
 <td>TransactionFeeSell</td>
 <td>number</td>
-<td></td>
+<td>Maker fee for sell orders</td>
 </tr>
 <tr>
 <td>TwoFactorEnabled</td>
-<td>bool</td>
-<td><code class="prettyprint">bool</code> indicating whether user has two factor enabled .</td>
+<td>boolean</td>
+<td><code class="prettyprint">boolean</code> indicating whether user has two factor enabled</td>
 </tr>
 <tr>
 <td>UserID</td>
@@ -3281,9 +3278,14 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <td>Integer with the user ID</td>
 </tr>
 <tr>
+<td>UserReqTyp</td>
+<td>number</td>
+<td>Returns only if it is equal to 3 when password has been changed</td>
+</tr>
+<tr>
 <td>UserStatus</td>
 <td>number</td>
-<td>&ldquo;1&rdquo; = Logged In, &ldquo;2&rdquo; = Not Logged In</td>
+<td>&ldquo;1&rdquo; = Logged In, &ldquo;2&rdquo; = Not Logged In, &ldquo;3&rdquo; = User Not Recognised</td>
 </tr>
 <tr>
 <td>Username</td>
@@ -3293,7 +3295,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>WithdrawFixedFee</td>
 <td>number</td>
-<td></td>
+<td>Fixed fee for withdraws</td>
 </tr>
 <tr>
 <td>WithdrawPercentFee</td>
@@ -3331,12 +3333,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>MsgType</td>
 <td>string</td>
-<td>&ldquo;U0&rdquo;,</td>
+<td>U0</td>
 </tr>
 <tr>
 <td>UserReqID</td>
 <td>number</td>
-<td>An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.</td>
+<td>An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID</td>
 </tr>
 <tr>
 <td>Username</td>
@@ -3351,7 +3353,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>Email</td>
 <td>string</td>
-<td>User email.</td>
+<td>User email</td>
 </tr>
 <tr>
 <td>State</td>
@@ -3367,6 +3369,26 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <td>BrokerID</td>
 <td>number</td>
 <td><a href="#brokers">&lt;BROKER_ID&gt;</a></td>
+</tr>
+<tr>
+<td>UserAgent</td>
+<td>string</td>
+<td><strong>Optional</strong>; Browser user agent navigator</td>
+</tr>
+<tr>
+<td>UserAgentLanguage</td>
+<td>string</td>
+<td><strong>Optional</strong>; User agent language</td>
+</tr>
+<tr>
+<td>UserAgentTimezoneOffset</td>
+<td>number</td>
+<td><strong>Optional</strong>; User agent timezone offset</td>
+</tr>
+<tr>
+<td>UserAgentPlatform</td>
+<td>string</td>
+<td><strong>Optional</strong>; User agent platform</td>
 </tr>
 </tbody></table>
 
@@ -3533,7 +3555,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>SecondFactor</td>
 <td>number</td>
-<td>Optional Second Factor Authentication</td>
+<td><strong>Optional</strong>; Second Factor Authentication</td>
 </tr>
 </tbody></table>
 
@@ -3835,12 +3857,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>Page</td>
 <td>number</td>
-<td>Optional; defaults to 0</td>
+<td><strong>Optional</strong>; defaults to 0</td>
 </tr>
 <tr>
 <td>PageSize</td>
 <td>number</td>
-<td>Optional; defaults to 20</td>
+<td><strong>Optional</strong>; defaults to 20</td>
 </tr>
 </tbody></table>
 
@@ -4026,7 +4048,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>UserID</td>
 <td>number</td>
-<td>Optional UserID</td>
+<td><strong>Optional</strong>; UserID</td>
 </tr>
 </tbody></table>
 
@@ -4332,7 +4354,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>ClientID</td>
 <td>object</td>
-<td>Optional ClientID</td>
+<td><strong>Optional</strong>; ClientID</td>
 </tr>
 </tbody></table>
 
@@ -4691,12 +4713,12 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 <tr>
 <td>Page</td>
 <td>number</td>
-<td><strong>Optional</strong>; defaults to 0.</td>
+<td><strong>Optional</strong>; defaults to 0</td>
 </tr>
 <tr>
 <td>PageSize</td>
 <td>number</td>
-<td><strong>Optional</strong>; defaults to 20.</td>
+<td><strong>Optional</strong>; defaults to 20</td>
 </tr>
 </tbody></table>
 
@@ -4877,6 +4899,8 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 
 <h2 id="ledger">Ledger</h2>
 
+<p>List all your trades activity, each row on the ledger represents either a trade occurred or trade fees.</p>
+
 <blockquote>
 <p><strong>EXAMPLE MESSAGE</strong></p>
 </blockquote>
@@ -4896,9 +4920,24 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>MsgType</td>
+<td>string</td>
+<td>U34</td>
+</tr>
+<tr>
+<td>LedgerListReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>number</td>
+<td><strong>Optional</strong>; defaults to 0</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>number</td>
+<td><strong>Optional</strong>; defaults to 20</td>
 </tr>
 </tbody></table>
 
@@ -4951,13 +4990,73 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 <tr>
 <th>Name</th>
 <th>Type</th>
-<th>Description/Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>0  (LedgerID)</td>
+<td>number</td>
+<td>Ledger row ID</td>
+</tr>
+<tr>
+<td>1  (Currency)</td>
+<td>string</td>
+<td>Currency of the trade, either crypto or fiat</td>
+</tr>
+<tr>
+<td>2  (Operation)</td>
+<td>string</td>
+<td>MsgType of the trade occurred e.g.: &ldquo;D&rdquo;</td>
+</tr>
+<tr>
+<td>3  (AccountID)</td>
+<td>number</td>
+<td>Your account id</td>
+</tr>
+<tr>
+<td>4  (BrokerID)</td>
+<td>number</td>
+<td>BrokerID</td>
+</tr>
+<tr>
+<td>5  (PayeeID)</td>
+<td>number</td>
+<td>Payee&rsquo;s account id</td>
+</tr>
+<tr>
+<td>6  (PayeeBrokerID)</td>
+<td>number</td>
+<td>Payee&rsquo;s BrokerID</td>
+</tr>
+<tr>
+<td>7  (Amount)</td>
+<td>number</td>
+<td>Amount of the trade depending of the currency occurred</td>
+</tr>
+<tr>
+<td>8  (Balance)</td>
+<td>number</td>
+<td>Balance after trade occurred</td>
+</tr>
+<tr>
+<td>9  (Reference)</td>
+<td>string</td>
+<td>Reference data</td>
+</tr>
+<tr>
+<td>10 (Created)</td>
+<td>string</td>
+<td>Creating date</td>
+</tr>
+<tr>
+<td>11 (Description)</td>
+<td>string</td>
+<td>&ldquo;TF&rdquo; = Trade Fees, &ldquo;T&rdquo; = Trade</td>
+</tr>
+<tr>
+<td>12 (AccountName)</td>
+<td>string</td>
+<td>Your profile usernam</td>
 </tr>
 </tbody></table>
 
