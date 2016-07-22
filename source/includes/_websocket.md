@@ -250,6 +250,8 @@ SecondFactorType        | string |
 ### Enable / Disable
 
 In order to enable or disable Two Factor Authentication, you send the same message, just changing the parameters.
+If two factor is enabled, you should pass the authentication code directly on the `SecondFactor` [login](#login) message to authenticate,
+otherwise you will receive an `NeedSecondFactor` error
 
 > __EXAMPLE MESSAGE__
 
@@ -289,11 +291,6 @@ ClientID                | number | **Optional**; Client ID
 | EnableTwoFactorReqID | number  | Request ID                       |
 | TwoFactorEnabled     | boolean | Boolean if two factor is enabled |
 | TwoFactorSecret      | string  | Two factor secret code           |
-
-### Two Factor Authentication
-
-You should pass the two factor authentication code directly on the `SecondFactor` [login](#login) message,
-otherwise you will receive an error with `NeedSecondFactor` true
 
 ## Change password
 
