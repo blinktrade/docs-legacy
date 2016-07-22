@@ -39,6 +39,14 @@ Some features are accessed publicly and others require an API Key based authenti
 * `testnet` URL endpoint is `wss://api.testnet.blinktrade.com/trade/`
 * `prod` URL endpoint is `wss://api.blinktrade.com/trade/`
 
+## Create API Key
+
+1. Go to some exchange powered by BlinkTrade or `https://testnet.blinktrade.com` for `testnet` environment
+2. Signup
+3. Go to API page
+4. Click "New API Key"
+4. Enter a label and select the permissions for that API Key
+5. Get the API Key and API Secret. The API Secret will only be shown once. (The API Password is only used for the WebSocket API.)
 
 ## Brokers
 
