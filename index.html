@@ -3418,6 +3418,8 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 
 <h3 id="response">Response</h3>
 
+<p>Response will be the same as the login, with second factor on email by default.</p>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3428,45 +3430,50 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>MsgType</td>
 <td>string</td>
-<td>&ldquo;BF&rdquo;</td>
+<td>BF</td>
 </tr>
 <tr>
 <td>UserReqID</td>
 <td>number</td>
-<td>123</td>
+<td>Request ID</td>
 </tr>
 <tr>
 <td>Username</td>
 <td>string</td>
-<td></td>
+<td>Username created</td>
 </tr>
 <tr>
 <td>UserStatus</td>
 <td>number</td>
-<td>3,</td>
+<td>User status code</td>
 </tr>
 <tr>
 <td>NeedSecondFactor</td>
 <td>bool</td>
-<td>true</td>
+<td>Would be true on signup, in order to confirm the email</td>
 </tr>
 <tr>
 <td>UserStatusText</td>
 <td>string</td>
-<td></td>
+<td>User Status Text</td>
 </tr>
 <tr>
 <td>SecondFactorType</td>
 <td>string</td>
-<td></td>
+<td><code class="prettyprint">OTP</code> = one-time-password (<a href="https://www.authy.com/">Authy</a>), <code class="prettyprint">EMAIL</code> = token confirmation on email</td>
 </tr>
 </tbody></table>
 
 <h2 id="two-factor-authentication">Two factor Authentication</h2>
 
+<p>There&rsquo;s two different types of two factor authentication, one-time-password <code class="prettyprint">OTP</code> which we recommend <a href="https://www.authy.com/">Authy</a> app
+and by <code class="prettyprint">EMAIL</code>, by default, two factor on email is enabled on login, signup and requesting withdraws.</p>
+
 <h3 id="enable-disable">Enable / Disable</h3>
 
-<p>In order to enable or disable Two Factor Authentication, you send the same message, just changing the parameters.</p>
+<p>In order to enable or disable Two Factor Authentication, you send the same message, just changing the parameters.
+If two factor is enabled, you should pass the authentication code directly on the <code class="prettyprint">SecondFactor</code> <a href="#login">login</a> message to authenticate,
+otherwise you will receive an <code class="prettyprint">NeedSecondFactor</code> error.</p>
 
 <blockquote>
 <p><strong>EXAMPLE MESSAGE</strong></p>
@@ -3556,11 +3563,6 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <td>Two factor secret code</td>
 </tr>
 </tbody></table>
-
-<h3 id="two-factor-authentication">Two Factor Authentication</h3>
-
-<p>You should pass the two factor authentication code directly on the <code class="prettyprint">SecondFactor</code> <a href="#login">login</a> message,
-otherwise you will receive an error with <code class="prettyprint">NeedSecondFactor</code> true</p>
 
 <h2 id="change-password">Change password</h2>
 
