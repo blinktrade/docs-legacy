@@ -234,24 +234,29 @@ UserAgentPlatform       | string | **Optional**; User agent platform
 
 ### Response
 
+Response will be the same as the login, with second factor on email by default.
+
 Name                    | Type   | Description
 ------------------------|--------|------------
-MsgType                 | string | "BF"
-UserReqID               | number | 123
-Username                | string | 
-UserStatus              | number | 3,
-NeedSecondFactor        | bool   | true
-UserStatusText          | string | 
-SecondFactorType        | string | 
+MsgType                 | string | BF
+UserReqID               | number | Request ID
+Username                | string | Username created
+UserStatus              | number | User status code
+NeedSecondFactor        | bool   | Would be true on signup, in order to confirm the email
+UserStatusText          | string | User Status Text
+SecondFactorType        | string | `OTP` = one-time-password ([Authy](https://www.authy.com/)), `EMAIL` = token confirmation on email
 
 
 ## Two factor Authentication
+
+There's two different types of two factor authentication, one-time-password `OTP` which we recommend [Authy](https://www.authy.com/) app
+and by `EMAIL`, by default, two factor on email is enabled on login, signup and requesting withdraws.
 
 ### Enable / Disable
 
 In order to enable or disable Two Factor Authentication, you send the same message, just changing the parameters.
 If two factor is enabled, you should pass the authentication code directly on the `SecondFactor` [login](#login) message to authenticate,
-otherwise you will receive an `NeedSecondFactor` error
+otherwise you will receive an `NeedSecondFactor` error.
 
 > __EXAMPLE MESSAGE__
 
