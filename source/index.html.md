@@ -52,14 +52,14 @@ Some features are accessed publicly and others require an API Key based authenti
 
 A broker ID is assigned for each exchange powered by BlinkTrade:
 
-Broker                                         | ID
------------------------------------------------|------
-[SurBitcoin](https://surbitcoin.com)           | 1
-[VBTC](https://vbtc.vn)                        | 3
-[FoxBit](https://foxbit.com.br)                | 4
-[**Testnet**](https://testnet.blinktrade.com/) | **5**
-[UrduBit](https://urdubit.com/)                | 8
-[ChileBit](https://chilebit.net)               | 9
+| `<BROKER_ID>` |  Description
+|:-------------:|-----------------------------------------------
+|       1       | [SurBitcoin](https://surbitcoin.com)
+|       3       | [VBTC](https://vbtc.vn)
+|       4       | [FoxBit](https://foxbit.com.br)
+|     **5**     | [**Testnet**](https://testnet.blinktrade.com/)
+|       8       | [UrduBit](https://urdubit.com/)
+|       9       | [ChileBit](https://chilebit.net)
 
 
 ## Currencies
