@@ -147,39 +147,50 @@
 <li><code class="prettyprint">prod</code> URL endpoint is <code class="prettyprint">wss://api.blinktrade.com/trade/</code></li>
 </ul>
 
+<h2 id="create-api-key">Create API Key</h2>
+
+<ol>
+<li>Go to some exchange powered by BlinkTrade or <code class="prettyprint">https://testnet.blinktrade.com</code> for <code class="prettyprint">testnet</code> environment</li>
+<li>Signup</li>
+<li>Go to API page</li>
+<li>Click &ldquo;New API Key&rdquo;</li>
+<li>Enter a label and select the permissions for that API Key</li>
+<li>Get the API Key and API Secret. The API Secret will only be shown once. (The API Password is only used for the WebSocket API.)</li>
+</ol>
+
 <h2 id="brokers">Brokers</h2>
 
 <p>A broker ID is assigned for each exchange powered by BlinkTrade:</p>
 
 <table><thead>
 <tr>
-<th>Broker</th>
-<th>ID</th>
+<th style="text-align: center"><code class="prettyprint">&lt;BROKER_ID&gt;</code></th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: center">1</td>
 <td><a href="https://surbitcoin.com">SurBitcoin</a></td>
-<td>1</td>
 </tr>
 <tr>
+<td style="text-align: center">3</td>
 <td><a href="https://vbtc.vn">VBTC</a></td>
-<td>3</td>
 </tr>
 <tr>
+<td style="text-align: center">4</td>
 <td><a href="https://foxbit.com.br">FoxBit</a></td>
-<td>4</td>
 </tr>
 <tr>
+<td style="text-align: center"><strong>5</strong></td>
 <td><a href="https://testnet.blinktrade.com/"><strong>Testnet</strong></a></td>
-<td><strong>5</strong></td>
 </tr>
 <tr>
+<td style="text-align: center">8</td>
 <td><a href="https://urdubit.com/">UrduBit</a></td>
-<td>8</td>
 </tr>
 <tr>
+<td style="text-align: center">9</td>
 <td><a href="https://chilebit.net">ChileBit</a></td>
-<td>9</td>
 </tr>
 </tbody></table>
 
@@ -1004,17 +1015,6 @@
 <p>The Trade API can be accessed under <code class="prettyprint">/tapi/v1/message</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code>. An API Key is needed in order to authenticate your access.</p>
 
 <p>An <code class="prettyprint">HTTP POST</code> request method should be used to send a message.</p>
-
-<h3 id="creating-an-api-key">Creating an API Key</h3>
-
-<ol>
-<li>Go to some exchange powered by BlinkTrade or <code class="prettyprint">https://testnet.blinktrade.com</code> for <code class="prettyprint">testnet</code> environment</li>
-<li>Signup</li>
-<li>Go to API page</li>
-<li>Click &ldquo;New API Key&rdquo;</li>
-<li>Enter a label and select the permissions for that API Key</li>
-<li>Get the API Key and API Secret. The API Secret will only be shown once. (The API Password is only used for the WebSocket API.)</li>
-</ol>
 
 <h3 id="headers">Headers</h3>
 
