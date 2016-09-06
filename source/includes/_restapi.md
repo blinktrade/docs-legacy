@@ -12,6 +12,16 @@ This documentation provides information on available requests and how to interac
 
 > `<API_URL>` is a complete Public API URL pointing to a resource.
 
+```javascript
+
+var BlinkTradeRest = require("blinktrade").BlinkTradeRest;
+var BlinkTrade = new BlinkTradeRest({
+  prod: false,
+  currency: "BRL",
+});
+
+```
+
 ```shell
 curl '<API_URL>'
 ```
@@ -50,6 +60,14 @@ Ticker is a summary information about the current status of an exchange.
 ### HTTP Request
 
 `GET /api/v1/<CURRENCY>/ticker?crypto_currency=BTC`
+
+```javascript
+
+BlinkTrade.ticker().then(function(ticker) {
+  console.log(ticker);
+});
+
+```
 
 ```shell
 
@@ -99,6 +117,14 @@ Order book is a list of orders that shows the interest of buyers (bids) and sell
 ### HTTP Request
 
 `GET /api/v1/<CURRENCY>/orderbook?crypto_currency=BTC`
+
+```javascript
+
+BlinkTrade.orderbook().then(function(orderbook) {
+  console.log(orderbook);
+});
+
+```
 
 ```shell
 
@@ -153,6 +179,14 @@ A list of the last trades executed on an exchange since a chosen date.
 ### HTTP Request
 
 `GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>&limit=<NUMBER>`
+
+```javascript
+
+BlinkTrade.trades({ limit: 2, since: 1467990302}).then(function(trades) {
+  console.log(trades);
+});
+
+```
 
 ```shell
 
@@ -218,6 +252,18 @@ APIKey       | Your API Key generated from your exchange or testnet environment.
 Nonce        | Must be an integer, always greater than the previous one.
 Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key.
 Content-Type | `application/json`
+
+```javascript
+
+var BlinkTradeRest = require("blinktrade").BlinkTradeRest;
+var BlinkTrade = new BlinkTradeRest({
+  prod: false,
+  key: "YOUR_API_KEY_GENERATED_IN_API_MODULE",
+  secret: "YOUR_SECRET_KEY_GENERATED_IN_API_MODULE",
+  currency: "BRL",
+});
+
+```
 
 ```shell
 #!/bin/bash
@@ -357,6 +403,21 @@ Request your balances for each broker you use.
 }
 ```
 
+```javascript
+
+var BlinkTradeRest = require("blinktrade").BlinkTradeRest;
+var BlinkTrade = new BlinkTradeRest({
+  prod: false,
+  key: "YOUR_API_KEY_GENERATED_IN_API_MODULE",
+  secret: "YOUR_SECRET_KEY_GENERATED_IN_API_MODULE",
+});
+
+BlinkTrade.balance().then(function(balance) {
+  console.log(balance);
+});
+
+```
+
 ```shell
 
 api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
@@ -440,6 +501,13 @@ Request a list of your open orders.
 }
 ```
 
+```javascript
+
+BlinkTrade.myOrders().then(function(myOrders) {
+  console.log(myOrders);
+});
+
+```
 
 ```shell
 
@@ -548,7 +616,7 @@ Index Array (Name) | Type   | Description/Value
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
 11 ("Price")       | number | Price per unit in "satoshis" of your local currency.
 12 ("OrderDate")   | string | Order date in UTC.
-13 ("Volume")      | number | Quantity * Price 
+13 ("Volume")      | number | Quantity * Price
 14 ("TimeInForce") | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 
 
@@ -567,6 +635,19 @@ Index Array (Name) | Type   | Description/Value
 	"OrderQty": 2723810,
 	"BrokerID": 5
 }
+```
+
+```javascript
+
+BlinkTrade.sendOrder({
+  "side": "1", // Buy
+  "price": parseInt((550 * 1e8).toFixed(0)),
+  "amount": parseInt((0.05 * 1e8).toFixed(0)),
+  "symbol": "BTCUSD",
+}).then(function(order) {
+  console.log(order);
+});
+
 ```
 
 
@@ -686,6 +767,14 @@ AvgPx       | number | Calculated average price of all fills on this order.
 }
 ```
 
+```javascript
+
+BlinkTrade.cancelOrder({ orderID: order.OrderID, clientId: order.ClOrdID }).then(function(order) {
+  console.log("Order Cancelled");
+});
+
+```
+
 ```shell
 
 api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
@@ -797,6 +886,14 @@ AvgPx       | number | Calculated average price of all fills on this order.
 }
 ```
 
+```javascript
+
+blinktrade.requestDeposit().then(function(deposit) {
+  console.log(deposit);
+});
+
+```
+
 ```shell
 
 api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
@@ -827,8 +924,8 @@ BrokerID     | number | [\<BROKER_ID\>](#brokers)
 
 ```json
 {
-	"Status": 200, 
-	"Description": "OK", 
+	"Status": 200,
+	"Description": "OK",
 	"Responses": [
 		{
 			"MsgType": "U19",
@@ -904,6 +1001,18 @@ FixedFee          | number  | Fixed fee in satoshis
 	"Currency": "BRL",
 	"BrokerID": 5
 }
+```
+
+```javascript
+
+blinktrade.requestDeposit({
+  value: parseInt(200 * 1e8),
+  currency: "BRL",
+  depositMethodId: 403,
+}).then(function(deposit) {
+  console.log(deposit);
+});
+
 ```
 
 ```shell
@@ -1016,6 +1125,21 @@ FixedFee          | number |
 		"Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"
 	}
 }
+```
+
+```javascript
+
+  BlinkTrade.requestWithdraw({
+    "amount": parseInt(1 * 1e8),
+    "currency": "BTC",
+    "method": "bitcoin",
+    "data": {
+      "Wallet": "1KdEQfoxxgfgV1GkGb9JBX1F9fiaCqZdgV",
+    }
+  }).then(function(withdraw) {
+    console.log(withdraw);
+  });
+
 ```
 
 ```shell
@@ -1137,6 +1261,24 @@ Status        | string | "0" = Unconfirmed (in this case, you must confirm withd
 }
 ```
 
+```javascript
+
+BlinkTrade.requestWithdraw({
+  "amount": parseInt(400 * 1e8),
+  "currency": "BRL",
+  "method": "bradesco",
+  "data": {
+    "AccountBranch": "111",
+    "AccountNumber": "4444-5",
+    "AccountType": "corrente",
+    "CPF_CNPJ": "00000000000"
+  }
+}).then(function(withdraw) {
+  console.log(withdraw);
+});
+
+```
+
 ```shell
 
 api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
@@ -1181,6 +1323,14 @@ Exchange    | Methods              | Required Data fields
 }
 ```
 
+```javascript
+
+blinktrade.listWithdraws().then(function(withdraws) {
+  console.log(withdraws);
+});
+
+```
+
 ```shell
 
 api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
@@ -1206,11 +1356,45 @@ MsgType           | string        | "U26"
 WithdrawListReqID | number        | An ID chosen by you.
 Page              | number        | **Optional**; defaults to 0.
 PageSize          | number        | **Optional**; defaults to 20.
-StatusList        | array(string) | Array of strings where: "1" is Pending, "2" is In Progress, "4" is Completed, "8" is Cancelled. **Optional**; defaults to ["1"]. 
+StatusList        | array(string) | Array of strings where: "1" is Pending, "2" is In Progress, "4" is Completed, "8" is Cancelled. **Optional**; defaults to ["1"].
 
 > __RESPONSE EXAMPLE__
 
-```json
+```javascript
+
+{
+    WithdrawListReqID: 4191029,
+    PageSize: 20,
+    WithdrawListGrp: [{
+        WithdrawID: 542,
+        Method: 'PayPal',
+        Currency: 'USD',
+        Amount: 3000000,
+        Data: [{
+            Wallet: '2Mx3TZycg4XL5sQFfERBgNmg9Ma7uxowK9y',
+            Instant: 'NO',
+            Comments: [Object],
+            Fees: '฿ 0.00010000'
+        }],
+        Created: '2016-09-06 01:27:58',
+        Status: '1',
+        ReasonID: null,
+        Reason: null,
+        PercentFee: 0,
+        FixedFee: 0,
+        PaidAmount: 3000000,
+        UserID: 90800003,
+        Username: 'rodrigo',
+        BrokerID: 5,
+        ClOrdID: null
+    }],
+    MsgType: 'U27',
+    Page: 0
+}
+
+```
+
+```shell
 {
 	"Status": 200,
 	"Description": "OK",
