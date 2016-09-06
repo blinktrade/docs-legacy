@@ -543,8 +543,8 @@ Index Array (Name) | Type   | Description/Value
 5  ("CxlQty")      | number | Total quantity canceled for this order.
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
 7  ("Symbol")      | string | [\<SYMBOL\>](#symbols)
-8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
-9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
+8  ("Side")        | string | "1" = Buy, "2" = Sell
+9  ("OrdType")     | string | "2" = Limited
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
 11 ("Price")       | number | Price per unit in "satoshis" of your local currency.
 12 ("OrderDate")   | string | Order date in UTC.
@@ -595,7 +595,7 @@ MsgType  | string | "D" New Order Single message. Check for a full doc here: [ht
 ClOrdID  | number | Unique identifier for Order as assigned by you.
 Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
-OrdType  | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
+OrdType  | string | "2" = Limited
 Price    | number | Price in satoshis.
 OrderQty | number | Quantity in satoshis.
 BrokerID | number | [\<BROKER_ID\>](#brokers)
@@ -668,8 +668,8 @@ CxlQty      | number | Total quantity canceled for this order.
 TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 CumQty      | number | Total quantity filled.
 ClOrdID     | string | Unique identifier for Order as assigned by you
-OrdType     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
-Side        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
+OrdType     | string | "2" = Limited
+Side        | string | "1" = Buy, "2" = Sell
 Price       | number | Price per unit of quantity in satoshis.
 ExecSide    | string | Side of this fill.
 AvgPx       | number | Calculated average price of all fills on this order.
@@ -766,8 +766,8 @@ Name        | Type   | Description/Value
 MsgType     | string | Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
 OrderID     | number | Unique identifier for Order as assigned by broker.
 ExecID      | number | Unique identifier of execution message as assigned by broker.
-ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New 
-OrdStatus   | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New 
+ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New
+OrdStatus   | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New
 LeavesQty   | number | Quantity open for further execution.
 Symbol      | string | Currency pair being used.
 OrderQty    | number | Quantity ordered in satoshis.
@@ -777,8 +777,8 @@ CxlQty      | number | Total quantity canceled for this order.
 TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 CumQty      | number | Total quantity filled.
 ClOrdID     | string | Unique identifier for Order as assigned by you
-OrdType     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
-Side        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow 
+OrdType     | string | "2" = Limited
+Side        | string | "1" = Buy, "2" = Sell
 Price       | number | Price per unit of quantity in satoshis.
 ExecSide    | string | Side of this fill.
 AvgPx       | number | Calculated average price of all fills on this order.

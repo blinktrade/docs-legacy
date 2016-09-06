@@ -819,7 +819,7 @@ each Market Data Entry is composed by a bid, offer or a trade occured.
 
 While you are subscribed to incremental updates, you will receive bids, asks and trades occured in realtime.
 
-### Incremental Response
+### Incremental Refresh Response
 
 | Name     | Type   | Description                         |
 |----------|--------|-------------------------------------|
@@ -832,7 +832,7 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 
 > __EXAMPLE RESPONSE__
 
-```json
+```shell
 {
     "MDReqID": 3140401,
     "MDBkTyp": "3",
@@ -961,7 +961,7 @@ Index Array (Name) | Type   | Description/Value
 6  ("AvgPx")       | number | Calculated average price of all fills on this order.
 7  ("Symbol")      | string | [\<SYMBOL\>](#symbols)
 8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
-9  ("OrdType")     | string | "1" = Market, "2" = Limited, "3" = Stop, "4" = Stop Limit, "G" = Swap, "P" = Pegged
+9  ("OrdType")     | string | "2" = Limited
 10 ("OrderQty")    | number | Quantity ordered in satoshis.
 11 ("Price")       | number | Price per unit in "satoshis" of your local currency. Example: $ 2,125.89 = 212589000000
 12 ("OrderDate")   | string | Order date in UTC.
