@@ -2,7 +2,7 @@
 
 ### Overview
 
-This documentation provides information on available requests and how to interact via [Public](#public-api) and [Trade](#trade-api) APIs. 
+This documentation provides information on available requests and how to interact via [Public](#public-api) and [Trade](#trade-api) APIs.
 
 ### Usage Example
 
@@ -51,10 +51,10 @@ Ticker is a summary information about the current status of an exchange.
 
 `GET /api/v1/<CURRENCY>/ticker?crypto_currency=BTC`
 
-> __EXAMPLE URL__
+```shell
 
-```
-https://api.blinktrade.com/api/v1/BRL/ticker
+$ curl -XGET https://api.blinktrade.com/api/v1/BRL/ticker
+
 ```
 
 ### Parameters
@@ -100,10 +100,10 @@ Order book is a list of orders that shows the interest of buyers (bids) and sell
 
 `GET /api/v1/<CURRENCY>/orderbook?crypto_currency=BTC`
 
-> __EXAMPLE URL__
+```shell
 
-```
-https://api.blinktrade.com/api/v1/BRL/orderbook
+$ curl -XGET https://api.blinktrade.com/api/v1/BRL/orderbook
+
 ```
 
 ### Parameters
@@ -154,10 +154,10 @@ A list of the last trades executed on an exchange since a chosen date.
 
 `GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>&limit=<NUMBER>`
 
-> __EXAMPLE URL__
+```shell
 
-```
-https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2
+$ curl -XGET https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2
+
 ```
 
 ### Parameters
@@ -239,14 +239,10 @@ api_key='<API_KEY>'
 api_secret='<API_SECRET>'
 
 # Generate a nonce
-nonce=$(date +%s)
+nonce=`date +%s`
 
 # Sign the nonce with secret using HMAC-SHA256
-signature=$( \
-	echo -n $nonce | \
-	openssl dgst -sha256 -hex -hmac $api_secret | \
-	cut -d ' ' -f 2 \
-)
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
 
 # Send a POST message to API URL
 curl -X POST "$api_url" \
@@ -361,6 +357,24 @@ Request your balances for each broker you use.
 }
 ```
 
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U2","BalanceReqID":1}'
+
+```
+
+
 ### Parameters
 
 Name         | Type   | Description/Value
@@ -425,6 +439,25 @@ Request a list of your open orders.
 	"Filter": ["has_leaves_qty eq 1"]
 }
 ```
+
+
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U4","OrdersReqID":1,"Page":0,"PageSize":20}'
+
+```
+
 
 ### Parameters
 
@@ -536,6 +569,24 @@ Index Array (Name) | Type   | Description/Value
 }
 ```
 
+
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"D","ClOrdID":123,"Side":"1","Symbol":"BTCUSD","OrdType":"2","Price":48000000000,"OrderQty":50000000,"BrokerID":5}'
+
+```
+
 ### Parameters
 
 Name     | Type   | Description/Value
@@ -629,9 +680,27 @@ AvgPx       | number | Calculated average price of all fills on this order.
 
 ```json
 {
-	"MsgType": "F",
-	"ClOrdID": 123
+    "MsgType": "F",
+    "OrderID": 1459028830899,
+    "ClOrdID": 123
 }
+```
+
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"D","OrderID":1459028830899,"ClOrdID":123}'
+
 ```
 
 ### Parameters
@@ -728,6 +797,23 @@ AvgPx       | number | Calculated average price of all fills on this order.
 }
 ```
 
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U18","DepositReqID":1,"Currency":"BTC","BrokerID":5}'
+
+```
+
 ### Paramenters
 
 Name         | Type   | Description/Value
@@ -818,6 +904,23 @@ FixedFee          | number  | Fixed fee in satoshis
 	"Currency": "BRL",
 	"BrokerID": 5
 }
+```
+
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U18","DepositReqID":1,"DepositMethodID":403,"Value":150000000000,"Currency":"BRL","BrokerID":5}'
+
 ```
 
 ### Parameters
@@ -913,6 +1016,23 @@ FixedFee          | number |
 		"Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"
 	}
 }
+```
+
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U6","DepositReqID":1,"WithdrawReqID":617625,"Method":"bitcoin","Amount":3000000,"Currency":"BTC","BrokerID":5,"Data":{"Wallet":"mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"}}'
+
 ```
 
 ### Paramenters
@@ -1017,6 +1137,23 @@ Status        | string | "0" = Unconfirmed (in this case, you must confirm withd
 }
 ```
 
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U6","DepositReqID":1,"WithdrawReqID":617625,"Method":"PayPal","Amount":3000000,"Currency":"USD","BrokerID":5,"Data":{"Email":"user@blinktrade.com"}}'
+
+```
+
 See the [response for Bitcoin Withdrawal](#request-bitcoin-withdrawal). Check with the exchange all the methods and required fields in the Data field.
 
 Exchange    | Methods              | Required Data fields
@@ -1038,10 +1175,27 @@ Exchange    | Methods              | Required Data fields
 {
 	"MsgType": "U26",
 	"WithdrawListReqID": 1,
-	"Page": 0,  
+	"Page": 0,
 	"PageSize": 100,
 	"StatusList": ["1", "2"]
 }
+```
+
+```shell
+
+api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
+api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+nonce=`date +%s`
+signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+    -H "Nonce:$nonce" \
+    -H "APIKey:$api_key" \
+    -H "Content-Type:application/json" \
+    -H "Signature:$signature" \
+    -d '{"MsgType":"U26","WithdrawListReqID":1,"Page":0,"PageSize":100}'
+
 ```
 
 ### Parameters
