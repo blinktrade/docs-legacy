@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;,&quot;php&quot;]">
+  <body class="index" data-languages="[&quot;javascript&quot;,&quot;shell&quot;,&quot;python&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -103,6 +103,7 @@
         <img src="images/logo.png" />
       </div>
         <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="php">php</a>
@@ -684,7 +685,7 @@
 
 <h3 id="overview">Overview</h3>
 
-<p>This documentation provides information on available requests and how to interact via <a href="#public-api">Public</a> and <a href="#trade-api">Trade</a> APIs. </p>
+<p>This documentation provides information on available requests and how to interact via <a href="#public-api">Public</a> and <a href="#trade-api">Trade</a> APIs.</p>
 
 <h3 id="usage-example">Usage Example</h3>
 
@@ -730,11 +731,9 @@
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/ticker?crypto_currency=BTC</code></p>
+<pre class="highlight shell"><code>
+<span class="gp">$ </span>curl -XGET https://api.blinktrade.com/api/v1/BRL/ticker
 
-<blockquote>
-<p><strong>EXAMPLE URL</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>https://api.blinktrade.com/api/v1/BRL/ticker
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
@@ -824,11 +823,9 @@
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/orderbook?crypto_currency=BTC</code></p>
+<pre class="highlight shell"><code>
+<span class="gp">$ </span>curl -XGET https://api.blinktrade.com/api/v1/BRL/orderbook
 
-<blockquote>
-<p><strong>EXAMPLE URL</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>https://api.blinktrade.com/api/v1/BRL/orderbook
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
@@ -922,11 +919,9 @@
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/trades?crypto_currency=BTC&amp;since=&lt;TIMESTAMP&gt;&amp;limit=&lt;NUMBER&gt;</code></p>
+<pre class="highlight shell"><code>
+<span class="gp">$ </span>curl -XGET https://api.blinktrade.com/api/v1/BRL/trades?since<span class="o">=</span>1467990302&amp;limit<span class="o">=</span>2
 
-<blockquote>
-<p><strong>EXAMPLE URL</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&amp;limit=2
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
@@ -1062,14 +1057,10 @@
 <span class="nv">api_secret</span><span class="o">=</span><span class="s1">'&lt;API_SECRET&gt;'</span>
 
 <span class="c"># Generate a nonce</span>
-<span class="nv">nonce</span><span class="o">=</span><span class="k">$(</span>date +%s<span class="k">)</span>
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
 
 <span class="c"># Sign the nonce with secret using HMAC-SHA256</span>
-<span class="nv">signature</span><span class="o">=</span><span class="k">$(</span> <span class="se">\</span>
-    <span class="nb">echo</span> -n <span class="nv">$nonce</span> | <span class="se">\</span>
-    openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span> | <span class="se">\</span>
-    cut -d <span class="s1">' '</span> -f 2 <span class="se">\</span>
-<span class="k">)</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
 
 <span class="c"># Send a POST message to API URL</span>
 curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span class="s2">"</span> <span class="se">\</span>
@@ -1195,6 +1186,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="nt">"BalanceReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U2","BalanceReqID":1}'</span>
+
+</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -1318,6 +1324,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="nt">"Filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"has_leaves_qty eq 1"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U4","OrdersReqID":1,"Page":0,"PageSize":20}'</span>
+
+</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -1494,12 +1515,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>8  (&ldquo;Side&rdquo;)</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Buy, &ldquo;2&rdquo; = Sell, &ldquo;E&rdquo; = Redem, &ldquo;F&rdquo; = Lend, &ldquo;G&rdquo; = Borrow</td>
+<td>&ldquo;1&rdquo; = Buy, &ldquo;2&rdquo; = Sell</td>
 </tr>
 <tr>
 <td>9  (&ldquo;OrdType&rdquo;)</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit, &ldquo;G&rdquo; = Swap, &ldquo;P&rdquo; = Pegged</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>10 (&ldquo;OrderQty&rdquo;)</td>
@@ -1544,6 +1565,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"D","ClOrdID":123,"Side":"1","Symbol":"BTCUSD","OrdType":"2","Price":48000000000,"OrderQty":50000000,"BrokerID":5}'</span>
+
+</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -1577,7 +1613,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>OrdType</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit, &ldquo;G&rdquo; = Swap, &ldquo;P&rdquo; = Pegged</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>Price</td>
@@ -1745,12 +1781,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>OrdType</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit, &ldquo;G&rdquo; = Swap, &ldquo;P&rdquo; = Pegged</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>Side</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Buy, &ldquo;2&rdquo; = Sell, &ldquo;E&rdquo; = Redem, &ldquo;F&rdquo; = Lend, &ldquo;G&rdquo; = Borrow</td>
+<td>&ldquo;1&rdquo; = Buy, &ldquo;2&rdquo; = Sell</td>
 </tr>
 <tr>
 <td>Price</td>
@@ -1776,9 +1812,25 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1459028830899</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ClOrdID"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"D","OrderID":1459028830899,"ClOrdID":123}'</span>
+
+</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -1950,12 +2002,12 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>OrdType</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit, &ldquo;G&rdquo; = Swap, &ldquo;P&rdquo; = Pegged</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>Side</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Buy, &ldquo;2&rdquo; = Sell, &ldquo;E&rdquo; = Redem, &ldquo;F&rdquo; = Lend, &ldquo;G&rdquo; = Borrow</td>
+<td>&ldquo;1&rdquo; = Buy, &ldquo;2&rdquo; = Sell</td>
 </tr>
 <tr>
 <td>Price</td>
@@ -1986,6 +2038,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U18","DepositReqID":1,"Currency":"BTC","BrokerID":5}'</span>
+
+</code></pre>
 
 <h3 id="paramenters">Paramenters</h3>
 
@@ -2201,6 +2268,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U18","DepositReqID":1,"DepositMethodID":403,"Value":150000000000,"Currency":"BRL","BrokerID":5}'</span>
+
+</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -2427,6 +2509,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U6","DepositReqID":1,"WithdrawReqID":617625,"Method":"bitcoin","Amount":3000000,"Currency":"BTC","BrokerID":5,"Data":{"Wallet":"mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"}}'</span>
+
+</code></pre>
 
 <h3 id="paramenters">Paramenters</h3>
 
@@ -2658,6 +2755,21 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U6","DepositReqID":1,"WithdrawReqID":617625,"Method":"PayPal","Amount":3000000,"Currency":"USD","BrokerID":5,"Data":{"Email":"user@blinktrade.com"}}'</span>
+
+</code></pre>
 
 <p>See the <a href="#request-bitcoin-withdrawal">response for Bitcoin Withdrawal</a>. Check with the exchange all the methods and required fields in the Data field.</p>
 
@@ -2713,11 +2825,26 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U26"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"WithdrawListReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"Page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  
+    </span><span class="nt">"Page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"PageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
     </span><span class="nt">"StatusList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<pre class="highlight shell"><code>
+<span class="nv">api_key</span><span class="o">=</span>YOUR_API_KEY_GENERATED_IN_API_MODULE
+<span class="nv">api_secret</span><span class="o">=</span>YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+
+<span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+<span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
+
+curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+    -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
+    -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
+    -H <span class="s2">"Signature:</span><span class="nv">$signature</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s1">'{"MsgType":"U26","WithdrawListReqID":1,"Page":0,"PageSize":100}'</span>
+
+</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -4607,7 +4734,7 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 
 <p>While you are subscribed to incremental updates, you will receive bids, asks and trades occured in realtime.</p>
 
-<h3 id="incremental-response">Incremental Response</h3>
+<h3 id="incremental-refresh-response">Incremental Refresh Response</h3>
 
 <table><thead>
 <tr>
@@ -4643,26 +4770,26 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 <blockquote>
 <p><strong>EXAMPLE RESPONSE</strong></p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"MDReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">3140401</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"MDBkTyp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"X"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"MDIncGrp"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-        </span><span class="nt">"OrderID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1459028463562</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntryPx"</span><span class="p">:</span><span class="w"> </span><span class="mi">61795000000</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDUpdateAction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntryTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18:09:09"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"UserID"</span><span class="p">:</span><span class="w"> </span><span class="mi">90800127</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Broker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exchange"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntryPositionNo"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntrySize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntryID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1459028463562</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"MDEntryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-13"</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight shell"><code><span class="o">{</span>
+    <span class="s2">"MDReqID"</span>: 3140401,
+    <span class="s2">"MDBkTyp"</span>: <span class="s2">"3"</span>,
+    <span class="s2">"MsgType"</span>: <span class="s2">"X"</span>,
+    <span class="s2">"MDIncGrp"</span>: <span class="o">[{</span>
+        <span class="s2">"OrderID"</span>: 1459028463562,
+        <span class="s2">"MDEntryPx"</span>: 61795000000,
+        <span class="s2">"MDUpdateAction"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"MDEntryTime"</span>: <span class="s2">"18:09:09"</span>,
+        <span class="s2">"Symbol"</span>: <span class="s2">"BTCUSD"</span>,
+        <span class="s2">"UserID"</span>: 90800127,
+        <span class="s2">"Broker"</span>: <span class="s2">"exchange"</span>,
+        <span class="s2">"MDEntryType"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"MDEntryPositionNo"</span>: 10,
+        <span class="s2">"MDEntrySize"</span>: 1000000,
+        <span class="s2">"MDEntryID"</span>: 1459028463562,
+        <span class="s2">"MDEntryDate"</span>: <span class="s2">"2016-07-13"</span>
+    <span class="o">}]</span>
+<span class="o">}</span>
+</code></pre>
 
 <table><thead>
 <tr>
@@ -4915,7 +5042,7 @@ each Market Data Entry is composed by a bid, offer or a trade occured.</p>
 <tr>
 <td>9  (&ldquo;OrdType&rdquo;)</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit, &ldquo;G&rdquo; = Swap, &ldquo;P&rdquo; = Pegged</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>10 (&ldquo;OrderQty&rdquo;)</td>
@@ -5623,6 +5750,7 @@ You can setup a permission that is only allowed to send a buy order as follows:<
       </div>
       <div class="dark-box">
           <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="php">php</a>
