@@ -4,6 +4,17 @@ With the WebSocket API, you have full access to the exchange, you can also check
 
 ## Connectivity
 
+```javascript
+
+var BlinkTradeWS = require("blinktrade").BlinkTradeWS;
+var BlinkTrade = new BlinkTradeWS({ prod: true });
+
+BlinkTrade.connect().then(function() {
+  // Connected
+});
+
+```
+
 ### Heartbeat
 
 You must send this message each 30 seconds, in order to keep your connection alive.
@@ -16,6 +27,17 @@ You must send this message each 30 seconds, in order to keep your connection ali
     "TestReqID": "123",
     "SendTime": 1469031953
 }
+```
+
+
+```javascript
+
+BlinkTrade.connect().then(function() {
+  return BlinkTrade.heartbeat();
+}).then(function(heartbeat) {
+  console.log(heartbeat.Latency);
+});
+
 ```
 
 ### Paratemers
@@ -72,6 +94,16 @@ Each request requires that you pass a fingerprint from your browser, there's a f
     "UserReqTyp": "1",
     "FingerPrint": "b959a35c7f3f5e9315c99b5a25c2bbda"
 }
+```
+
+```javascript
+
+BlinkTrade.connect().then(function() {
+  return BlinkTrade.login({ username: "", password: "" });
+}).then(function(logged) {
+  console.log(logged);
+});
+
 ```
 
 ### Parameters
@@ -719,6 +751,29 @@ Users can only change a few fields, such as `TwoFactorEnabled`, `EmailLang` and 
 
 ## Balances
 
+> __EXAMPLE MESSAGE__
+
+```json
+
+{
+    "MsgType": 'U2',
+    "BalanceReqID": reqId
+};
+
+```
+
+```javascript
+
+BlinkTrade.connect().then(function() {
+  return BlinkTrade.login({ username: "", password: "" });
+}).then(function() {
+  return BlinkTrade.balance()
+}).then(function(balance) {
+  console.log(balance);
+});
+
+```
+
 ### Parameters
 
 | Name         | Type   | Description       |
@@ -770,6 +825,35 @@ USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (o
 
 You can subscribe to one or more Market Data and receive one or more Market Data Entries in realtime,
 each Market Data Entry is composed by a bid, offer or a trade occured.
+
+
+> __EXAMPLE MESSAGE__
+
+```json
+
+
+{
+    "MsgType": "V",
+    "MDReqID": requestId,
+    "SubscriptionRequestType": "1",
+    "MarketDepth": "0",
+    "MDUpdateType": "1",
+    "MDEntryTypes": ["0", "1", "2"],
+    "Instruments": ["BTCBRL"]
+};
+
+
+```
+
+```javascript
+
+BlinkTrade.connect().then(function() {
+  return BlinkTrade.subscribeOrderbook(["BTCUSD"]);
+}).then(function(orderbook) {
+  console.log(orderbook);
+});
+
+```
 
 ### Parameters
 
@@ -879,9 +963,22 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 
 ```json
 {
-  "MsgType": "U4",
-  "OrdersReqID": 123
+    "MsgType": "U4",
+    "OrdersReqID": 123
 }
+```
+
+```javascript
+
+BlinkTrade.connect().then(function() {
+  return BlinkTrade.login({ username: "", password: "" });
+}).then(function() {
+  return BlinkTrade.myOrders();
+}).then(function(myOrders) {
+  console.log(myOrders);
+});
+
+
 ```
 
 | Name         | Type   | Description                   |
@@ -971,12 +1068,109 @@ Index Array (Name) | Type   | Description/Value
 
 ### Send Order
 
-  To Send a Order
+[Floats are Evil!](http://floating-point-gui.de/basic/)
+
+Converting Floats to Integers can be dangerous, different programming languages can get weird rounding errors and
+imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format, we also expect Integers
+as input, make sure that you're formatting the values properly to avoid precision issues.
+
+> __EXAMPLE MESSAGE__
+
+```json
+
+{
+    "MsgType": "D",
+    "ClOrdID": 123,
+    "Symbol": "BTCBRL",
+    "Side": "1",
+    "OrdType": "2",
+    "Price": 190000000000,
+    "OrderQty": 50000000,
+    "BrokerID": 5,
+}
+
+```
+
+```javascript
+
+BlinkTrade.connect().then(function() {
+  return BlinkTrade.login({ username: "", password: "" });
+}).then(function() {
+  BlinkTrade.sendOrder({
+    "side": "1", // Buy
+    "price": parseInt((550 * 1e8).toFixed(0)),
+    "amount": parseInt((0.05 * 1e8).toFixed(0)),
+    "symbol": "BTCUSD",
+  });
+}).then(function(order) {
+  console.log(order);
+});
+
+```
+
+Name     | Type   | Description/Value
+---------|--------|------------------
+MsgType  | string | "D"
+ClOrdID  | number | Unique identifier for Order as assigned by you.
+Symbol   | string | [\<SYMBOL\>](#symbols)
+Side     | string | "1" = Buy, "2" = Sell
+OrdType  | string | "2" = Limited
+Price    | number | Price in satoshis.
+OrderQty | number | Quantity in satoshis.
+BrokerID | number | [\<BROKER_ID\>](#brokers)
 
 ### Cancel Order
 
-  Cancel a Order
+> __MESSAGE EXAMPLE__
 
+```json
+{
+    "MsgType": "F",
+    "OrderID": 1459028830899,
+    "ClOrdID": 123
+}
+```
+
+```javascript
+
+BlinkTrade.cancelOrder({ orderID: order.OrderID, clientId: order.ClOrdID }).then(function(order) {
+  console.log("Order Cancelled");
+});
+
+```
+
+### Parameters
+
+Name    | Type   | Description/Value
+--------|--------|------------------
+MsgType | string | "F" Order Cancel Request message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html).
+ClOrdID | number | ID for an Order as assigned by you.
+
+> __MESSAGE RESPONSE__
+
+```json
+{
+    "OrderID": 1459028830811,
+    "ExecID": 740972,
+    "ExecType": "0",
+    "OrdStatus": "0",
+    "CumQty": 0,
+    "Symbol": "BTCUSD",
+    "OrderQty": 5000000,
+    "LastShares": 0,
+    "LastPx": 0,
+    "Price": 55000000000,
+    "TimeInForce": "1",
+    "LeavesQty": 5000000,
+    "MsgType": "8",
+    "ExecSide": "1",
+    "OrdType": "2",
+    "CxlQty": 0,
+    "Side": "1",
+    "ClOrdID": 3251968,
+    "AvgPx": 0
+}
+```
 
 ## Ledger
 
@@ -1077,17 +1271,25 @@ PageSize        | number        | **Optional**; defaults to 20
 }
 ```
 
+```javascript
+
+blinktrade.requestDepositList().then(function(deposit) {
+  console.log(deposit);
+});
+
+```
+
 ### Parameters
 
-Name             | Type      | Description/Value
------------------|-----------|------------------
-MsgType          |           | 
-DepositListReqID |           | 
-Page             |           | 
-PageSize         |           | 
-StatusList       |           | 
-Filter           |           | 
-ClientID         |           | 
+Name             | Type          | Description/Value
+-----------------|---------------|------------------
+MsgType          | string        | U30
+DepositListReqID | number        | Request ID
+Page             | number        | **Optional**; defaults to 0
+PageSize         | number        | **Optional**; defaults to 20
+StatusList       | array(string) | Array of strings where: "1" is Pending, "2" is In Progress, "4" is Completed, "8" is Cancelled. **Optional**; defaults to ["1"]
+Filter           | array(string) | **Optional** filters
+ClientID         | number        | **Optional** Client ID
 
 ### Response
 
@@ -1099,7 +1301,6 @@ ClientID         |           |
   "DepositListReqID": 123,
   "MsgType": "U31",
   "DepositListGrp": [
-    
   ],
   "Page": 0,
   "Columns": [
@@ -1128,16 +1329,23 @@ ClientID         |           |
 }
 ```
 
-Name             | Type      | Description/Value
------------------|-----------|------------------
-                 |           | 
-
-
-### Instant Deposits
-
 ## Withdraws
 
 ### Requesting a withdraw
+
+
+### Paramenters
+
+Params        | Type   | Description/Value
+--------------|--------|------------------
+MsgType       | string | "U6"
+WithdrawReqID | number | Request ID
+Method        | string | bitcoin for BTC. Check with the exchange all available withdrawal methods
+Amount        | number | Amount in satoshis
+Currency      | string | Currency code
+Data          | object | Data object containing your wallet address e.g.: {"Data": { "Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP" }}
+
+
 
 ### Withdraw methods
 
