@@ -650,7 +650,6 @@ BlinkTrade.sendOrder({
 
 ```
 
-
 ```shell
 
 api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
@@ -672,7 +671,7 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 
 Name     | Type   | Description/Value
 ---------|--------|------------------
-MsgType  | string | "D" New Order Single message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_D_68.html)
+MsgType  | string | "D"
 ClOrdID  | number | Unique identifier for Order as assigned by you.
 Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
@@ -686,8 +685,8 @@ BrokerID | number | [\<BROKER_ID\>](#brokers)
 
 ```json
 {
-	"Status": 200, 
-	"Description": "OK", 
+	"Status": 200,
+	"Description": "OK",
 	"Responses": [
 		{
 			"MsgType": "U3",
@@ -805,8 +804,8 @@ ClOrdID | number | ID for an Order as assigned by you.
 
 ```json
 {
-	"Status": 200, 
-	"Description": "OK", 
+	"Status": 200,
+	"Description": "OK",
 	"Responses": [
 		{
 			"MsgType": "U3",
@@ -814,7 +813,7 @@ ClOrdID | number | ID for an Order as assigned by you.
 				"USD_locked": 0
 			},
 			"ClientID": 90800003
-		}, 
+		},
 		{
 			"MsgType": "8",
 			"OrderID": 5669865,
@@ -840,155 +839,9 @@ ClOrdID | number | ID for an Order as assigned by you.
  }
 ```
 
-The response of Cancel Order Request is almost identical to the New Order Single, but with different paramenters:
+The response is the same as the send order, together with the balance response.
 
-Name          | Type   | Description/Value
---------------|--------|------------------
-MsgType       | string | "U3" Balance response. Problably because the request also change your account balance.
-[\<BROKER_ID\>](#currencies) | object | The [BrokerID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [BrokerID](#brokers) number 5.
-ClientID      | number | Your account ID.
-
-### Execution Report Response
-
-Name        | Type   | Description/Value
-------------|--------|------------------
-MsgType     | string | Execution Report. Check for a full fix doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_8_8.html).
-OrderID     | number | Unique identifier for Order as assigned by broker.
-ExecID      | number | Unique identifier of execution message as assigned by broker.
-ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New
-OrdStatus   | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, A=Pending New
-LeavesQty   | number | Quantity open for further execution.
-Symbol      | string | Currency pair being used.
-OrderQty    | number | Quantity ordered in satoshis.
-LastShares  | number | Quantity of shares bought/sold on this fill.
-LastPx      | number | Price of the last fill.
-CxlQty      | number | Total quantity canceled for this order.
-TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
-CumQty      | number | Total quantity filled.
-ClOrdID     | string | Unique identifier for Order as assigned by you
-OrdType     | string | "2" = Limited
-Side        | string | "1" = Buy, "2" = Sell
-Price       | number | Price per unit of quantity in satoshis.
-ExecSide    | string | Side of this fill.
-AvgPx       | number | Calculated average price of all fills on this order.
-
-
-## Generate Bitcoin Deposit Address
-
-> __MESSAGE EXAMPLE__
-
-```json
-{
-	"MsgType": "U18",
-	"DepositReqID": 1,
-	"Currency": "BTC",
-	"BrokerID": 5
-}
-```
-
-```javascript
-
-blinktrade.requestDeposit().then(function(deposit) {
-  console.log(deposit);
-});
-
-```
-
-```shell
-
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
-
-nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
-
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U18","DepositReqID":1,"Currency":"BTC","BrokerID":5}'
-
-```
-
-### Paramenters
-
-Name         | Type   | Description/Value
--------------|--------|------------------
-MsgType      | string | "U18" Deposit Request.
-DepositReqID | number | An ID chosen by you.
-Currency     | string | Currency Code.
-BrokerID     | number | [\<BROKER_ID\>](#brokers)
-
-> __RESPONSE EXAMPLE__
-
-```json
-{
-	"Status": 200,
-	"Description": "OK",
-	"Responses": [
-		{
-			"MsgType": "U19",
-			"DepositReqID": 1,
-			"Currency": "BTC",
-			"BrokerID": 5,
-			"DepositMethodID": null,
-			"DepositMethodName": "deposit_btc",
-			"DepositID": "12db13d5c36c436993f8e8156467d2b6",
-			"UserID": 90800003,
-			"ControlNumber": null,
-			"Type": "CRY",
-			"Username": "user",
-			"AccountID": 90800003,
-			"Data": {
-				"InputAddress": "mzUfpURjD1hDPNk7QBWQkXN5NbKjpf6e56",
-				"Destination": "mtzsTx923NqnFeHugUBsgQKqr8YkEtzQzU"
-			}, 
-			"ClOrdID": null,
-			"Status": "0",
-			"Created": "2015-08-31 05:39:31",
-			"Value": 0,
-			"PaidValue": 0,
-			"ReasonID": null,
-			"Reason": null,
-			"PercentFee": 0.0,
-			"FixedFee": 0
-		}
-	]
-}
-```
-
-### Response
-
-Name              | Type    | Description/Value
-------------------|---------|------------------
-MsgType           | string  | "U19" Deposit response 
-DepositReqID      | number  | Deposit Request ID
-Currency          | string  | Currency
-BrokerID          | number  | Exchange ID
-DepositMethodID   | number  | Deposit Method ID
-DepositMethodName | string  | Deposit method name
-DepositID         | string  | Deposit ID
-UserID            | number  | Your account ID
-ControlNumber     | number  | Control number. Only used for FIAT deposits 
-Type              | string  | "CRY" = Crypto Currency 
-Username          | string  | Your username 
-AccountID         | number  | Account ID
-Data              | object  |               
-Data.InputAddress | string  | The address that you have to deposit.
-Data.Destination  | string  | This is the exchange wallet. DO NOT DEPOSIT IN THIS ADDRESS.
-ClOrdID           | string  | Unique identifier for Order as assigned by you
-Status            | string  | "0" = New 
-Created           | string  | Creation date GMT
-Value             | number  | Amount
-PaidValue         | number  | Paid amount 
-ReasonID          | string  | Reason for the rejection - ID
-Reason            | string  | Reason for the rejection - Description
-PercentFee        | number  | Percent fee to process this deposit 
-FixedFee          | number  | Fixed fee in satoshis 
-
-
-## Request FIAT deposit
+## Request Deposit
 
 > __MESSAGE EXAMPLE__
 
@@ -1004,6 +857,14 @@ FixedFee          | number  | Fixed fee in satoshis
 ```
 
 ```javascript
+
+
+// Bitcoin Deposit
+blinktrade.requestDeposit().then(function(deposit) {
+  console.log(deposit);
+});
+
+// Fiat Deposit
 
 blinktrade.requestDeposit({
   value: parseInt(200 * 1e8),
@@ -1036,109 +897,80 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 
 Name            | Type   | Description/Value
 ----------------|--------|------------------
-MsgType         | string | "U18" Deposit request.
-DepositReqID    | number | Deposit Request ID. 
-DepositMethodID | number | Deposit Method ID - Check with your exchange. 
+MsgType         | string | "U18"
+DepositReqID    | number | Deposit Request ID.
+DepositMethodID | number | Deposit Method ID - Check with your exchange.
 Value           | number | Amount in satoshis
 Currency        | string | [\<CURRENCY\>](#currencies)
 BrokerID        | number | [\<BROKER_ID\>](#brokers)
 
-> __RESPONSE EXAMPLE__
+> __FIAT RESPONSE EXAMPLE__
 
 ```json
 {
-	"Status": 200, 
-	"Description": "OK", 
-	"Responses": [
-		{
-			"MsgType": "U19", 
-			"DepositReqID": 6000745, 
-			"DepositMethodID": 403, 
-			"DepositMethodName": "bb", 
-			"Value": 150000000000, 
-			"Currency": "BRL", 
-			"BrokerID": 4, 
-			"DepositID": "a637e243382f4b768b5faccb97878ab3", 
-			"UserID": 90800025, 
-			"ControlNumber": 402000057, 
-			"Type": "DTP", 
-			"AccountID": 90800025, 
-			"Username": "user", 
-			"CreditProvided": 0, 
-			"PercentFee": 0.0, 
-			"Data": {},
-			"ClOrdID": None, 
-			"Status": "0", 
-			"Created": "2016-03-28 20:28:02", 
-			"Reason": None, 
-			"PaidValue": 0, 
-			"ReasonID": None, 
-			"State": "UNCONFIRMED", 
-			"FixedFee": 0
-		}
-	]
+    "Status": 200,
+    "Description": "OK",
+    "Responses": [
+        {
+            "DepositMethodName": "deposit_btc",
+            "UserID": 90800003,
+            "ControlNumber": null,
+            "State": "UNCONFIRMED",
+            "Type": "CRY",
+            "PercentFee": 0,
+            "Username": "user",
+            "CreditProvided": 0,
+            "DepositReqID": 7302188,
+            "DepositID": "2a6b5e322fd24574a4d9f988681a542f",
+            "Reason": null,
+            "AccountID": 90800003,
+            "Data": {
+                "InputAddress": "mjjVMr8WcYQwVGzYc8HpaRyAZc89ngTdKV",
+                "Destination": "n19ZAH1WGoUkQhubQw71fH11BenifxpBxf"
+            },
+            "ClOrdID": "7302188",
+            "Status": "0",
+            "Created": "2016-09-03 23:08:26",
+            "DepositMethodID": null,
+            "Value": 0,
+            "BrokerID": 5,
+            "PaidValue": 0,
+            "Currency": "BTC",
+            "ReasonID": null,
+            "MsgType": "U23",
+            "FixedFee": 0
+        }
+    ]
 }
 ```
 
 ### Response
 
-Name              | Type   | Description/Value
-------------------|--------|------------------
-MsgType           | string | "U19"
-DepositReqID      | number | 
-DepositMethodID   | number | 
-DepositMethodName | string | 
-Value             | number | 
-Currency          | string | 
-BrokerID          | number | 
-DepositID         | string | 
-UserID            | number | 
-ControlNumber     | number | 
-State             | string | 
-Type              | string | 
-AccountID         | number | 
-Username          | string | 
-CreditProvided    | number | 
-Reason            |        | 
-PercentFee        | number | 
-Data              | object | 
-ClOrdID           |        | 
-Status            | string | 
-Created           | string | 
-PaidValue         | number | 
-ReasonID          |        | 
-FixedFee          | number | 
+Returns a Deposit Model Object.
 
+**NOTE** The `Data.InputAddress` is the address that you have to deposit, **DO NOT DEPOSIT** on `Data.Destination` address.
 
-## Request Bitcoin Withdrawal
+## Request List of Deposits
 
 > __MESSAGE EXAMPLE__
 
 ```json
+
 {
-	"MsgType": "U6",
-	"WithdrawReqID": 617625,
-	"Method": "bitcoin",
-	"Amount": 3000000,
-	"Currency": "BTC",
-	"Data": {
-		"Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"
-	}
+    "MsgType": "U30",
+    "DepositListReqID": 123,
+    "Page": 0,
+    "PageSize": 20,
+    "StatusList": ["1", "2", "4", "8"]
 }
+
 ```
 
 ```javascript
 
-  BlinkTrade.requestWithdraw({
-    "amount": parseInt(1 * 1e8),
-    "currency": "BTC",
-    "method": "bitcoin",
-    "data": {
-      "Wallet": "1KdEQfoxxgfgV1GkGb9JBX1F9fiaCqZdgV",
-    }
-  }).then(function(withdraw) {
-    console.log(withdraw);
-  });
+blinktrade.requestDepositList().then(function(deposits) {
+  console.log(deposits);
+});
 
 ```
 
@@ -1155,93 +987,46 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
     -H "APIKey:$api_key" \
     -H "Content-Type:application/json" \
     -H "Signature:$signature" \
-    -d '{"MsgType":"U6","DepositReqID":1,"WithdrawReqID":617625,"Method":"bitcoin","Amount":3000000,"Currency":"BTC","BrokerID":5,"Data":{"Wallet":"mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"}}'
+    -d '{"MsgType":"U30","DepositListReqID":1,"Page":0,"PageSize":100}'
 
 ```
 
-### Paramenters
 
-Params        | Type   | Description/Value
---------------|--------|------------------
-MsgType       | string | "U6" Request ID
-WithdrawReqID | number |
-Method        | string | bitcoin for BTC. Check with the exchange all available withdrawal methods
-Amount        | number | Amount in satoshis
-Currency      | string | Currency code
-Data          | object | Data object containing your wallet address e.g.: {"Data": { "Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP" }}
+Name              | Type          | Description/Value
+------------------|---------------|------------------
+MsgType           | string        | "U26"
+DepositListReqID  | number        | Request ID
+Page              | number        | **Optional**; defaults to 0.
+PageSize          | number        | **Optional**; defaults to 20.
+StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled
 
-> __RESPONSE EXAMPLE__
+> EXAMPLE RESPONSE
 
 ```json
+
 {
-	"Status": 200,
-	"Description": "OK",
-	"Responses": [
-		{
-			"MsgType": "U3",
-			"4": {
-				"BTC": 2087629545
-			},
-			"ClientID": 90800025
-		},
-		{
-			"MsgType": "U7",
-			"WithdrawReqID": 617625,
-			"WithdrawID": 339,
-			"UserID": 90800025,
-			"Username": "user",
-			"Method": "bitcoin",
-			"Amount": 3000000,
-			"BrokerID": 4,
-			"ClOrdID": None,
-			"Created": "2016-03-21 08:27:45",
-			"Currency": "BTC",
-			"Data": {
-				"Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"
-			},
-			"FixedFee": 10000,    
-			"PercentFee": 0.0,    
-			"PaidAmount": 3010000,
-			"Reason": null,       
-			"ReasonID": null,     
-			"Status": "1"
-		}
-	]
+    "Status": 200,
+    "Description": "OK",
+    "Responses": [{
+        "PageSize": 1,
+        "DepositListReqID": 1,
+        "MsgType": "U31",
+        "DepositListGrp": [
+            ["6f0e1819a30b485591145c7c0d045012", 502, "wire_transfer_usa", "DTP", "USD", 20000000000, 0, {}, "2016-09-06 23:44:05", 502000172, 1.0, 0, "0", null, null, "rodrigo", 90800003, 5, "166399", 0, "UNCONFIRMED"]
+        ],
+        "Page": 0,
+        "Columns": ["DepositID", "DepositMethodID", "DepositMethodName", "Type", "Currency", "Value", "PaidValue", "Data", "Created", "ControlNumber", "PercentFee", "FixedFee", "Status", "ReasonID", "Reason", "Username", "UserID", "BrokerID", "ClOrdID", "CreditProvided", "State"]
+    }]
 }
+
 ```
+
 
 ### Response
 
-Name         | Type   | Description/Value
--------------|--------|------------------
-[\<BROKER_ID\>](#brokers)| object | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
-MsgType      | string | "U3" Balance response. Problably because the request also change your account balance.
-ClientID     | number | Your account ID.
-BalanceReqID | number | This should match the BalanceReqID sent on the message "U2".
+Returns a Withdraw Model Object.
 
-
-Name          | Type   | Description/Value
---------------|--------|------------------
-MsgType       | string | "U7" Withdrawal Response
-WithdrawReqID | number | Withdraw Request ID
-WithdrawID    | number | Withdraw ID. You should keep this number in case you want to cancel the Withdraw request.
-UserID        | number | Your account ID.
-Username      | string | Your username.
-Method        | string | Bitcoin method.
-Amount        | number | Requested Amount.
-BrokerID      | number | Exchange ID.
-ClOrdID       |        | Unique identifier for Order as assigned by you.
-Created       | string | Creation date GMT.
-Currency      | string | Currency code.
-Data          | object | Data object containing your wallet address e.g.: {"Data": { "Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP" }}
-FixedFee      | number | Fixed portion of the Fee in satoshis.
-PercentFee    | number | Percent portion of the fee.
-PaidAmount    | number | The amount + fees that was deducted from the account.
-Reason        | string | Reason for the rejection - Description.
-ReasonID      | string | Reason for the rejection - ID.
-Status        | string | "0" = Unconfirmed (in this case, you must confirm withdrawal using a second factor of authentication), "1" = Pending, "2" = In Progress, "4" = Completed, "8" - Cancelled
-
-## Request FIAT Withdrawal
+## Request Withdrawal
 
 > __MESSAGE EXAMPLE__
 
@@ -1296,18 +1081,78 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 
 ```
 
-See the [response for Bitcoin Withdrawal](#request-bitcoin-withdrawal). Check with the exchange all the methods and required fields in the Data field.
+### Paramenters
 
-Exchange    | Methods              | Required Data fields
-------------|----------------------|---------------------
-4-FOXBIT    |bradesco              | AccountBranch, AccountNumber, AccountType, CPF_CNPJ
-4-FOXBIT    |bb                    | AccountBranch, AccountNumber, AccountType, CPF_CNPJ
-4-FOXBIT    |Caixa                 | AccountBranch, AccountNumber, AccountType, CPF_CNPJ
-4-FOXBIT    |ted                   | BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ
-3-VBTC      |banktransfer          | BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift
-3-VBTC      |VPBankinternaltransfer| VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift
-3-VBTC      |cashtoID              | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient
+Params        | Type   | Description/Value
+--------------|--------|------------------
+MsgType       | string | "U6"
+WithdrawReqID | number | Request ID
+Method        | string | bitcoin for BTC. Check with the exchange all available withdrawal methods
+Amount        | number | Amount in satoshis
+Currency      | string | Currency code
+Data          | object | Data object containing the withdraws required fields.
 
+**FOXBIT**
+
+| Methods               | Required Data fields                                                      |
+|-----------------------|---------------------------------------------------------------------------|
+| bradesco              | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                       |
+| bb                    | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                       |
+| Caixa                 | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                       |
+| ted                   | BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ |
+
+**VBTC**
+
+| Methods                | Required Data fields                                                                                             |
+|------------------------|------------------------------------------------------------------------------------------------------------------|
+| banktransfer           | BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift                                         |
+| VPBankinternaltransfer | VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift                                                    |
+| cashtoID               | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient |
+
+> __RESPONSE EXAMPLE__
+
+```json
+{
+	"Status": 200,
+	"Description": "OK",
+	"Responses": [
+		{
+			"MsgType": "U3",
+			"4": {
+				"BTC": 2087629545
+			},
+			"ClientID": 90800025
+		},
+		{
+			"MsgType": "U7",
+			"WithdrawReqID": 617625,
+			"WithdrawID": 339,
+			"UserID": 90800025,
+			"Username": "user",
+			"Method": "bitcoin",
+			"Amount": 3000000,
+			"BrokerID": 4,
+			"ClOrdID": null,
+			"Created": "2016-03-21 08:27:45",
+			"Currency": "BTC",
+			"Data": {
+				"Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP"
+			},
+			"FixedFee": 10000,
+			"PercentFee": 0.0,
+			"PaidAmount": 3010000,
+			"Reason": null,
+			"ReasonID": null,
+			"Status": "1"
+		}
+	]
+}
+
+```
+
+### Response
+
+Returns a Balance and Withdraw Model Object.
 
 ## Request List of Withdrawals
 
@@ -1325,7 +1170,7 @@ Exchange    | Methods              | Required Data fields
 
 ```javascript
 
-blinktrade.listWithdraws().then(function(withdraws) {
+blinktrade.requestWithdrawList().then(function(withdraws) {
   console.log(withdraws);
 });
 
@@ -1344,7 +1189,7 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
     -H "APIKey:$api_key" \
     -H "Content-Type:application/json" \
     -H "Signature:$signature" \
-    -d '{"MsgType":"U26","WithdrawListReqID":1,"Page":0,"PageSize":100}'
+    -d '{"MsgType":"U26","WithdrawListReqID":1,"Page":0,"PageSize":1}'
 
 ```
 
@@ -1356,127 +1201,30 @@ MsgType           | string        | "U26"
 WithdrawListReqID | number        | An ID chosen by you.
 Page              | number        | **Optional**; defaults to 0.
 PageSize          | number        | **Optional**; defaults to 20.
-StatusList        | array(string) | Array of strings where: "1" is Pending, "2" is In Progress, "4" is Completed, "8" is Cancelled. **Optional**; defaults to ["1"].
+StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled
 
 > __RESPONSE EXAMPLE__
 
-```javascript
-
+```json
 {
-    WithdrawListReqID: 4191029,
-    PageSize: 20,
-    WithdrawListGrp: [{
-        WithdrawID: 542,
-        Method: 'PayPal',
-        Currency: 'USD',
-        Amount: 3000000,
-        Data: [{
-            Wallet: '2Mx3TZycg4XL5sQFfERBgNmg9Ma7uxowK9y',
-            Instant: 'NO',
-            Comments: [Object],
-            Fees: '฿ 0.00010000'
-        }],
-        Created: '2016-09-06 01:27:58',
-        Status: '1',
-        ReasonID: null,
-        Reason: null,
-        PercentFee: 0,
-        FixedFee: 0,
-        PaidAmount: 3000000,
-        UserID: 90800003,
-        Username: 'rodrigo',
-        BrokerID: 5,
-        ClOrdID: null
-    }],
-    MsgType: 'U27',
-    Page: 0
+    "Status": 200,
+    "Description": "OK",
+    "Responses": [{
+        "WithdrawListReqID": 1,
+        "PageSize": 1,
+        "WithdrawListGrp": [
+            [543, "PayPal", "USD", 20000000000, {
+                "Instant": "NO",
+                "Email": "user@blinktrade.com"
+            }, "2016-09-07 00:30:49", "1", null, null, 0.0, 0, 20000000000, 90800003, "rodrigo", 5, "4660612"]
+        ],
+        "MsgType": "U27",
+        "Page": 0,
+        "Columns": ["WithdrawID", "Method", "Currency", "Amount", "Data", "Created", "Status", "ReasonID", "Reason", "PercentFee", "FixedFee", "PaidAmount", "UserID", "Username", "BrokerID", "ClOrdID"]
+    }]
 }
 
-```
-
-```shell
-{
-	"Status": 200,
-	"Description": "OK",
-	"Responses": [
-		{
-			"MsgType": "U27",
-			"WithdrawListReqID": 1,
-			"Page": 0,
-			"PageSize": 100,
-			"Columns": [
-				"WithdrawID",
-				"Method",
-				"Currency",
-				"Amount",
-				"Data",
-				"Created",
-				"Status",
-				"ReasonID",
-				"Reason",
-				"PercentFee",
-				"FixedFee",
-				"PaidAmount",
-				"UserID",
-				"Username",
-				"BrokerID",
-				"ClOrdID"
-			],
-			"WithdrawListGrp": [
-				[
-					434,
-					"bitcoin",
-					"BTC",
-					4800000000,
-					{
-						"Wallet": "mnbsvx4L1ZnvKehUB1mt4tmSHFJg2KUDU9",
-						"Fees": "\u0e3f 0.00010000",
-						"Instant": "NO",
-						"Currency": "BTC"
-					},
-					"2016-06-08 17:03:02",
-					"8",
-					-1,
-					null,
-					0.0,
-					10000,
-					4800010000,
-					90000002,
-					"user",
-					5,
-					null
-				]
-			]
-		}
-	]
-}
 ```
 ### Response
 
-Name               | Type          | Description/Value
--------------------|---------------|------------------
-MsgType            | string        | "U27" Withdrawal List Response Type.
-WithdrawListReqID  | number        | WithdrawList Request ID.
-Page               | number        | Page number.
-PageSize           | number        | Page size - Max of 100.
-Columns            | array(string) | Description of all columns for all withdrawals in `WithdrawListGrp`.
-WithdrawListGrp    | array(array)  | Response array containing all withdrawals.
-
-Index Array (Name) | Type   | Description/Value
--------------------|--------|------------------
-0  ("WithdrawID")  | number | Withdrawal ID 
-1  ("Method")      | string | Withdrawal Method 
-2  ("Currency")    | string | Currency 
-3  ("Amount")      | number | Amount requested
-4  ("Data")        | object | Data associated with the withdrawal 
-5  ("Created")     | string | Creation date
-6  ("Status")      | string | "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled 
-7  ("ReasonID")    | number | Cancellation Reason ID.
-8  ("Reason")      | string | Cancellation Reason description.
-9  ("PercentFee")  | number | Fee in % charged for this operation.
-10 ("FixedFee")    | number | Fixe Fee charged for this operation.
-11 ("PaidAmount")  | number | Amount paid.
-12 ("UserID")      | number | Account ID.
-13 ("Username")    | string | Account Username.
-14 ("BrokerID")    | number | Exchange ID.
-15 ("ClOrdID")     | number | Unique identifier for Order as assigned by you.
+Returns an array of Withdraws Model Objects.
