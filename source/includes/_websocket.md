@@ -7,17 +7,13 @@ With the WebSocket API, you have full access to the exchange, you can also check
 ```javascript
 
 var BlinkTradeWS = require("blinktrade").BlinkTradeWS;
-var BlinkTrade = new BlinkTradeWS({ prod: true });
-
-BlinkTrade.connect().then(function() {
-  // Connected
-});
+var blinktrade = new BlinkTradeWS({ prod: true });
 
 ```
 
 ### Heartbeat
 
-You must send this message each 30 seconds, in order to keep your connection alive.
+You must send this message each 30 seconds, to keep your connection alive.
 
 > __EXAMPLE MESSAGE__
 
@@ -32,8 +28,8 @@ You must send this message each 30 seconds, in order to keep your connection ali
 
 ```javascript
 
-BlinkTrade.connect().then(function() {
-  return BlinkTrade.heartbeat();
+blinktrade.connect().then(function() {
+  return blinktrade.heartbeat();
 }).then(function(heartbeat) {
   console.log(heartbeat.Latency);
 });
@@ -52,13 +48,17 @@ SendTime  | number | Unix Time Stamp
 > __EXAMPLE RESPONSE__
 
 ```json
+
 {
+    "ServerTimestamp": 1473241957,
+    "TestReqID": 1473241552307,
     "MsgType": "0",
-    "TestReqID": "123",
-    "SendTime": 1469031953,
-    "ServerTimestamp": 1469032804
+    "SendTime": 1473241552307,
+    "Latency": 167
 }
+
 ```
+
 
 ### Response
 
@@ -75,7 +75,7 @@ Most of WebSocket calls requires authentication, once you login with your userna
 
 ### FingerPrint
 
-Each request requires that you pass a fingerprint from your browser, there's a few finger prints implementations that you can use.
+If you're not using the JavaScript SDK, You will need to pass a fingerprint from your browser, there's some finger prints implementations that you can use.
 
 * [Our google closure implementation](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/util/util.js#L96-L157)
 * [fingerprintjs2](https://github.com/Valve/fingerprintjs2)
@@ -98,8 +98,8 @@ Each request requires that you pass a fingerprint from your browser, there's a f
 
 ```javascript
 
-BlinkTrade.connect().then(function() {
-  return BlinkTrade.login({ username: "", password: "" });
+blinktrade.connect().then(function() {
+  return blinktrade.login({ username: "", password: "" });
 }).then(function(logged) {
   console.log(logged);
 });
@@ -131,61 +131,35 @@ Returns a Login Model Object together with Profile and Broker information.
 
 ```json
 {
-    "MsgType": "BF",
-    "Broker": {
-    },
-    "BrokerID": 5,
-    "DepositFixedFee": null,
-    "DepositPercentFee": null,
-    "EmailLang": "en",
-    "HasLineOfCredit": false,
-    "IsBroker": false,
-    "IsMSB": true,
-    "Profile": {
-        "Verified": 3,
-        "UserID": 90800127,
-        "TwoFactorEnabled": false,
-        "EmailLang": "en",
-        "EmailTwoFactorEnabled": false,
-        "Type": "USER",
-        "Email": "cesardeazevedo@outlook.com",
-        "Username": "cesaraugusto",
-        "IsMSB": true,
-        "CountryCode": "US",
-        "WithdrawFixedFee": null,
-        "HasLineOfCredit": false,
-        "TakerTransactionFeeSell": 500,
-        "ConfirmationOrder": false,
-        "Country": "US",
-        "TakerTransactionFeeBuy": 500,
-        "IsMarketMaker": false,
-        "ID": 90800127,
-        "DepositPercentFee": null,
-        "DepositFixedFee": null,
-        "WithdrawPercentFee": null,
-        "TransactionFeeBuy": 500,
-        "State": "NY",
-        "TransactionFeeSell": 500,
-        "NeedWithdrawEmail": false
-    },
-    "TakerTransactionFeeBuy": 500,
-    "TakerTransactionFeeSell": 500,
-    "TransactionFeeBuy": 500,
-    "TransactionFeeSell": 500,
+    "UserID": 90800003,
     "TwoFactorEnabled": false,
-    "UserID": 90800127,
-    "UserStatus": 1,
-    "Username": "cesaraugusto",
+    "EmailLang": "pt_BR",
+    "Username": "rodrigo",
+    "IsMSB": false,
     "WithdrawFixedFee": null,
-    "WithdrawPercentFee": null,
+    "Broker": {},
+    "Profile": {},
+    "HasLineOfCredit": false,
+    "UserStatus": 1,
+    "IsBroker": false,
+    "TakerTransactionFeeSell": null,
     "ConfirmationOrder": false,
-    "UserReqID": 1123107,
+    "TakerTransactionFeeBuy": null,
+    "UserReqID": 9696784,
+    "MsgType": "BF",
     "IsMarketMaker": false,
+    "DepositPercentFee": null,
+    "DepositFixedFee": null,
+    "WithdrawPercentFee": null,
+    "TransactionFeeBuy": null,
+    "TransactionFeeSell": null,
     "EmailTwoFactorEnabled": false,
+    "BrokerID": 5,
     "PermissionList": {
         "*": []
     }
 }
+
 ```
 
 Parameter               | Type   | Description
@@ -206,94 +180,21 @@ TransactionFeeBuy       | number | Maker fee for buy orders
 TransactionFeeSell      | number | Maker fee for sell orders
 TwoFactorEnabled        | boolean| `boolean` indicating whether user has two factor enabled
 UserID                  | number | Integer with the user ID
-UserReqTyp              | number | Returns only if it is equal to 3 when password has been changed
+UserReqTyp              | number | Returns only if it's equal to 3 when password has been changed
 UserStatus              | number | "1" = Logged In, "2" = Not Logged In, "3" = User Not Recognised
 Username                | string | String with the username of the user
 WithdrawFixedFee        | number | Fixed fee for withdraws
 WithdrawPercentFee      | number |
 
-## Balances
+## Subscribe to OrderBook
 
-> __EXAMPLE MESSAGE__
-
-```json
-
-{
-    "MsgType": "U2",
-    "BalanceReqID": reqId
-}
-
-```
-
-```javascript
-
-BlinkTrade.connect().then(function() {
-  return BlinkTrade.login({ username: "", password: "" });
-}).then(function() {
-  return BlinkTrade.balance()
-}).then(function(balance) {
-  console.log(balance);
-});
-
-```
-
-### Parameters
-
-| Name         | Type   | Description       |
-|--------------|--------|-------------------|
-| MsgType      | string | U2                |
-| BalanceReqID | string | Request ID        |
-| ClientID     | object | **Optional**; ClientID
-
-### Response
-
-> EXAMPLE RESPONSE
-
-``` json
-{
-    "MsgType": "U3",
-    "5": {
-        "BTC_locked": 505000000,
-        "USD": 560047769123,
-        "BTC": 2430523267,
-        "USD_locked": 2472100000
-    },
-    "ClientID": 90800127,
-    "BalanceReqID": 5821551
-}
-```
-
-Returns your balance for each [BrokerID](#brokers).
-
-Name         | Type    | Description/Value
--------------|---------|------------------
-MsgType      | string  | "U3" UserBalanceResponse message.
-[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
-ClientID     | number  | Your account ID.
-BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
-
-Balance model example for BTC and USD
-
-Name         | Type   | Description
--------------|--------|------------
-BTC          | number | Amount in satoshis of BTC you have available in your account.
-USD          | number | Amount in USD (or your FIAT currency) you have available in your account.
-BTC_locked   | number | Amount in satoshis of BTC you have locked (open orders, margin positions, etc).
-USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (open orders, margin positions, etc).
-
-
-## Market Data
-
-### Subscribe Market Data
-
-You can subscribe to one or more Market Data and receive one or more Market Data Entries in realtime,
-each Market Data Entry is composed by a bid, offer or a trade occured.
+You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime,
+each Market Data Entry is composed by a bid, offer or a trade occurred.
 
 
 > __EXAMPLE MESSAGE__
 
 ```json
-
 
 {
     "MsgType": "V",
@@ -305,13 +206,12 @@ each Market Data Entry is composed by a bid, offer or a trade occured.
     "Instruments": ["BTCBRL"]
 }
 
-
 ```
 
 ```javascript
 
-BlinkTrade.connect().then(function() {
-  return BlinkTrade.subscribeOrderbook(["BTCUSD"]);
+blinktrade.connect().then(function() {
+  return blinktrade.subscribeOrderbook(["BTCUSD"]);
 }).then(function(orderbook) {
   console.log(orderbook);
 });
@@ -344,27 +244,35 @@ BlinkTrade.connect().then(function() {
 > __EXAMPLE RESPONSE FULL ORDER BOOK__
 
 ```json
+
 {
-    "MDReqID": 3140401,
-    "Symbol": "BTCUSD",
-    "MsgType": "W",
-    "MDFullGrp": [{
-        "MDEntryPositionNo": 1,
-        "MDEntrySize": 113810,
-        "MDEntryPx": 62181000000,
-        "MDEntryID": 1459028463557,
-        "MDEntryTime": "02:21:06",
-        "MDEntryDate": "2016-07-13",
-        "UserID": 90000002,
-        "OrderID": 1459028463557,
-        "MDEntryType": "0",
-        "Broker": "exchange"
-    }],
-    "MarketDepth": 0
+  "MDReqID": 9894272,
+  "Symbol": "BTCUSD",
+  "MsgType": "W",
+  "MarketDepth": 0,
+  "MDFullGrp": {
+    "BTCUSD": {
+      "bids": [[ 578, 1.59231429, 90800535 ], [ 577.79, 5.68, 90800535 ]],
+      "asks": [[ 578.72, 8.32039144, 90800535 ], [ 579.67, 2, 90800535 ]]
+    }
+  }
 }
+
 ```
 
-While you are subscribed to incremental updates, you will receive bids, asks and trades occured in realtime.
+While you are subscribed to incremental updates, you will receive bids, asks and trades occurred in realtime.
+
+```javascript
+
+blinktrade.subscribeOrderbook(["BTCUSD"])
+  .on("OB:NEW_ORDER", function(order) {
+}).on("OB:UPDATE_ORDER", function(order) {
+}).on("OB:DELETE_ORDER", function(order) {
+}).on("OB:DELETE_ORDERS_THRU", function(order) {
+}).on("OB:TRADE_NEW", function(order) {
+});
+
+```
 
 ### Incremental Refresh Response
 
@@ -379,26 +287,20 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 
 > __EXAMPLE RESPONSE__
 
-```shell
+```json
+
 {
-    "MDReqID": 3140401,
-    "MDBkTyp": "3",
-    "MsgType": "X",
-    "MDIncGrp": [{
-        "OrderID": 1459028463562,
-        "MDEntryPx": 61795000000,
-        "MDUpdateAction": "0",
-        "MDEntryTime": "18:09:09",
-        "Symbol": "BTCUSD",
-        "UserID": 90800127,
-        "Broker": "exchange",
-        "MDEntryType": "0",
-        "MDEntryPositionNo": 10,
-        "MDEntrySize": 1000000,
-        "MDEntryID": 1459028463562,
-        "MDEntryDate": "2016-07-13"
-    }]
+    "index": 19,
+    "price": 550,
+    "size": 0.05,
+    "side": "buy",
+    "userId": 90800003,
+    "orderId": 1459028830971,
+    "symbol": "BTCUSD",
+    "time": "Wed Sep 07 2016 14:18:44 GMT-0300 (BRT)",
+    "type": "OB:NEW_ORDER"
 }
+
 ```
 
 | Name              | Type   | Description                                                        |
@@ -416,401 +318,136 @@ While you are subscribed to incremental updates, you will receive bids, asks and
 | MDEntryID         | number | Market data entry ID                                               |
 | MDEntryDate       | string | Date when market data was received                                 |
 
-## Security Status
+## Subscribe To Ticker
 
-## Orders
-
-### Order List Request
+You can subscribe on one or more market symbols
 
 > __EXAMPLE MESSAGE__
 
 ```json
+
 {
-    "MsgType": "U4",
-    "OrdersReqID": 123
+    "MsgType": "e",
+    "SecurityStatusReqID": 123,
+    "SubscriptionRequestType": "1",
+    "Instruments": ["BTCBRL"]
 }
+
 ```
 
-```javascript
+```js
 
-BlinkTrade.connect().then(function() {
-  return BlinkTrade.login({ username: "", password: "" });
-}).then(function() {
-  return BlinkTrade.myOrders();
-}).then(function(myOrders) {
-  console.log(myOrders);
+blinktrade.subscribeTicker(["BLINK:BTCUSD"]).then(function(ticker) {
+  console.log(ticker);
 });
 
-
 ```
 
-| Name         | Type   | Description                   |
-|--------------|--------|-------------------------------|
-| MsgType      | string | U4                            |
-| BalanceReqID | string | Request ID                    |
-| Page         | number | **Optional**; defaults to 0   |
-| PageSize     | number | **Optional**; defaults to 20  |
+| Name                    | Type   | Description
+|-------------------------|--------|------------
+| MsgType                 | string | "e"
+| SecurityStatusReqID     | number | Request ID
+| SubscriptionRequestType | string | 1 = Snapshot + Updates (Subscribe)
+| Instruments             | array  | Array containing the symbols that you want to subscribe
 
 
 > __EXAMPLE RESPONSE__
 
-```json
-{
-  "MsgType": "U5",
-  "OrdersReqID": 123,
-  "Page": 0,
-  "PageSize": 20,
-  "Columns": [
-    "ClOrdID",
-    "OrderID",
-    "CumQty",
-    "OrdStatus",
-    "LeavesQty",
-    "CxlQty",
-    "AvgPx",
-    "Symbol",
-    "Side",
-    "OrdType",
-    "OrderQty",
-    "Price",
-    "OrderDate",
-    "Volume",
-    "TimeInForce"
-  ],
-  "OrdListGrp": [
-    [
-      "7891067",
-      1459028474127,
-      100000000,
-      "2",
-      0,
-      0,
-      66563000000,
-      "BTCUSD",
-      "1",
-      "2",
-      100000000,
-      66563000000,
-      "2016-07-17 18:32:21",
-      66563000000.0,
-      "1"
-    ]
-  ]
-}
-```
-
-### Order List Response
-
-Name        | Type          | Description/Value
-------------|---------------|------------------
-MsgType     | string        | "U5" OrdersListResponse message.
-OrdersReqID | number        | Match the request OrdersReqID field
-Page        | number        | Starts at 0.
-PageSize    | number        | The page size. If the length of the array `OrdListGrp` is greather or equal to the `PageSize`, you should issue a new request incrementing the `Page`.
-Columns     | array(string) | Description of all columns of all orders in `OrdListGrp`.
-
-
-Index Array (Name) | Type   | Description/Value
--------------------|--------|------------------
-0  ("ClOrdID")     | string | Client order ID set by you.
-1  ("OrderID")     | number | Order ID set by BlinkTrade.
-2  ("CumQty")      | number | The executed quantity of this order.
-3  ("OrdStatus")   | string | "0" = New, "1" = Partially filled, "2" = Filled, "4" = Cancelled, "8" = Rejected, "A" = Pending New
-4  ("LeavesQty")   | number | Quantity open for further execution.
-5  ("CxlQty")      | number | Total quantity canceled for this order.
-6  ("AvgPx")       | number | Calculated average price of all fills on this order.
-7  ("Symbol")      | string | [\<SYMBOL\>](#symbols)
-8  ("Side")        | string | "1" = Buy, "2" = Sell, "E" = Redem, "F" = Lend, "G" = Borrow
-9  ("OrdType")     | string | "2" = Limited
-10 ("OrderQty")    | number | Quantity ordered in satoshis.
-11 ("Price")       | number | Price per unit in "satoshis" of your local currency. Example: $ 2,125.89 = 212589000000
-12 ("OrderDate")   | string | Order date in UTC.
-13 ("Volume")      | number | Quantity * Price
-14 ("TimeInForce") | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
-
-
-### Send Order
-
-[Floats are Evil!](http://floating-point-gui.de/basic/)
-
-Converting Floats to Integers can be dangerous, different programming languages can get weird rounding errors and
-imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format, we also expect Integers
-as input, make sure that you're formatting the values properly to avoid precision issues.
-
-> __EXAMPLE MESSAGE__
 
 ```json
 
 {
-    "MsgType": "D",
-    "ClOrdID": 123,
-    "Symbol": "BTCBRL",
-    "Side": "1",
-    "OrdType": "2",
-    "Price": 190000000000,
-    "OrderQty": 50000000,
-    "BrokerID": 5,
-}
-
-```
-
-```javascript
-
-BlinkTrade.connect().then(function() {
-  return BlinkTrade.login({ username: "", password: "" });
-}).then(function() {
-  BlinkTrade.sendOrder({
-    "side": "1", // Buy
-    "price": parseInt((550 * 1e8).toFixed(0)),
-    "amount": parseInt((0.05 * 1e8).toFixed(0)),
-    "symbol": "BTCUSD",
-  });
-}).then(function(order) {
-  console.log(order);
-});
-
-```
-
-Name     | Type   | Description/Value
----------|--------|------------------
-MsgType  | string | "D"
-ClOrdID  | number | Unique identifier for Order as assigned by you.
-Symbol   | string | [\<SYMBOL\>](#symbols)
-Side     | string | "1" = Buy, "2" = Sell
-OrdType  | string | "2" = Limited
-Price    | number | Price in satoshis.
-OrderQty | number | Quantity in satoshis.
-BrokerID | number | [\<BROKER_ID\>](#brokers)
-
-### Cancel Order
-
-> __MESSAGE EXAMPLE__
-
-```json
-{
-    "MsgType": "F",
-    "OrderID": 1459028830899,
-    "ClOrdID": 123
-}
-```
-
-```javascript
-
-BlinkTrade.cancelOrder({ orderID: order.OrderID, clientId: order.ClOrdID }).then(function(order) {
-  console.log("Order Cancelled");
-});
-
-```
-
-### Parameters
-
-Name    | Type   | Description/Value
---------|--------|------------------
-MsgType | string | "F" Order Cancel Request message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html).
-ClOrdID | number | ID for an Order as assigned by you.
-
-> __MESSAGE RESPONSE__
-
-```json
-{
-    "OrderID": 1459028830811,
-    "ExecID": 740972,
-    "ExecType": "0",
-    "OrdStatus": "0",
-    "CumQty": 0,
+    "SellVolume": 0.71399999,
+    "LowPx": 578,
+    "LastPx": 578,
+    "MsgType": "f",
+    "BestAsk": 578.47,
+    "HighPx": 578.71,
+    "BuyVolume": 412.71463421,
+    "BestBid": 578,
     "Symbol": "BTCUSD",
-    "OrderQty": 5000000,
-    "LastShares": 0,
-    "LastPx": 0,
-    "Price": 55000000000,
-    "TimeInForce": "1",
-    "LeavesQty": 5000000,
-    "MsgType": "8",
-    "ExecSide": "1",
-    "OrdType": "2",
-    "CxlQty": 0,
-    "Side": "1",
-    "ClOrdID": 3251968,
-    "AvgPx": 0
+    "SecurityStatusReqID": 960751,
+    "Market": "BLINK"
 }
+
 ```
 
-## Ledger
+### Unsubscribe from ticker
 
-List all your trades activity, each row on the ledger represents either a trade occurred or trade fees.
+To unsubscribe from ticker, you do the same as `unSubscribeOrderbook`, but passing `SecurityStatusReqID` to `unSubscribeTicker()`.
 
 > __EXAMPLE MESSAGE__
 
 ```json
+
 {
-    "MsgType": "U34",
-    "LedgerListReqID": 123
+    "MsgType": "e",
+    "SecurityStatusReqID": 960751,
+    "SubscriptionRequestType": "2"
 }
-```
 
-### Parameters
-
-Name            | Type          | Description/Value
-----------------|---------------|------------------
-MsgType         | string        | U34
-LedgerListReqID | number        | Request ID
-Page            | number        | **Optional**; defaults to 0
-PageSize        | number        | **Optional**; defaults to 20
-
-
-> __EXAMPLE RESPONSE__
-
-```json
-{
-  "MsgType": "U35",
-  "Page": 0,
-  "PageSize": 100,
-  "LedgerListReqID": 123,
-  "Columns": [
-    "LedgerID",
-    "Currency",
-    "Operation",
-    "AccountID",
-    "BrokerID",
-    "PayeeID",
-    "PayeeBrokerID",
-    "Amount",
-    "Balance",
-    "Reference",
-    "Created",
-    "Description",
-    "AccountName"
-  ],
-  "LedgerListGrp": [
-    [
-      128197,
-      "BTC",
-      "D",
-      90000002,
-      5,
-      90000001,
-      5,
-      994273,
-      29128175022,
-      "1459028474211.1459028474155",
-      "2016-07-20 11:23:07",
-      "TF",
-      "user"
-    ]
-  ]
-}
-```
-
-### Response
-
-| Name               | Type   | Description
-|--------------------|--------|------------
-| 0  (LedgerID)      | number | Ledger row ID
-| 1  (Currency)      | string | Currency of the trade, either crypto or fiat
-| 2  (Operation)     | string | MsgType of the trade occurred e.g.: "D"
-| 3  (AccountID)     | number | Your account id
-| 4  (BrokerID)      | number | BrokerID
-| 5  (PayeeID)       | number | Payee's account id
-| 6  (PayeeBrokerID) | number | Payee's BrokerID
-| 7  (Amount)        | number | Amount of the trade depending of the currency occurred
-| 8  (Balance)       | number | Balance after trade occurred
-| 9  (Reference)     | string | Reference data
-| 10 (Created)       | string | Creating date
-| 11 (Description)   | string | "TF" = Trade Fees, "T" = Trade
-| 12 (AccountName)   | string | Your profile usernam
-
-
-## Deposit
-
-### Deposit List
-
-> __EXAMPLE MESSAGE__
-
-```json
-{
-    "MsgType": "U30",
-    "DepositListReqID": 123,
-    "StatusList": ["1"]
-}
 ```
 
 ```javascript
 
-blinktrade.requestDepositList().then(function(deposit) {
-  console.log(deposit);
+blinktrade.subscribeTicker(["BLINK:BTCUSD"]).then(function(ticker) {
+  // Note that there's no return when unsubscribe from ticker.
+  blinktrade.unSubscribeTicker(ticker.SecurityStatusReqID);
 });
 
 ```
 
-### Parameters
+### Response
 
-Name             | Type          | Description/Value
------------------|---------------|------------------
-MsgType          | string        | U30
-DepositListReqID | number        | Request ID
-Page             | number        | **Optional**; defaults to 0
-PageSize         | number        | **Optional**; defaults to 20
-StatusList       | array(string) | Array of strings where: "1" is Pending, "2" is In Progress, "4" is Completed, "8" is Cancelled. **Optional**; defaults to ["1"]
-Filter           | array(string) | **Optional** filters
-ClientID         | number        | **Optional** Client ID
+Returns the given SecurityStatusReqID.
+
+## Execution Report
+
+You can listen to execution reports to get when your order has been updated.
+
+```javascript
+
+blinktrade.executionReport()
+  .on("EXECUTION_REPORT:NEW", function(data) {
+}).on("EXECUTION_REPORT:PARTIAL", function(data) {
+}).on("EXECUTION_REPORT:EXECUTION", function(data) {
+}).on("EXECUTION_REPORT:CANCELED", function(data) {
+}).on("EXECUTION_REPORT:REJECTED", function(data) {
+});
+
+
+```
 
 ### Response
 
-> __EXAMPLE RESPONSE__
+field       | Type   | Description/Value
+------------|--------|------------------
+MsgType     | string | "8"
+OrderID     | number | Unique identifier for Order as assigned by broker.
+ExecID      | number | Unique identifier of execution message as assigned by broker.
+ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
+OrdStatus   | string | "0" = New, "1" = Partially fill, "2 "= Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
+LeavesQty   | number | Quantity open for further execution.
+Symbol      | string | Currency pair being used.
+OrderQty    | number | Quantity ordered in satoshis.
+LastShares  | number | Quantity of shares bought/sold on this fill.
+LastPx      | number | Price of the last fill.
+CxlQty      | number | Total quantity canceled for this order.
+TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
+CumQty      | number | Total quantity filled.
+ClOrdID     | string | Unique identifier for Order as assigned by you
+OrdType     | string | "2" = Limited
+Side        | string | "1" = Buy, "2" = Sell
+Price       | number | Price per unit of quantity in satoshis.
+ExecSide    | string | Side of this fill.
+AvgPx       | number | Calculated average price of all fills on this order.
 
-```json
-{
-  "PageSize": 20,
-  "DepositListReqID": 123,
-  "MsgType": "U31",
-  "DepositListGrp": [
-  ],
-  "Page": 0,
-  "Columns": [
-    "DepositID",
-    "DepositMethodID",
-    "DepositMethodName",
-    "Type",
-    "Currency",
-    "Value",
-    "PaidValue",
-    "Data",
-    "Created",
-    "ControlNumber",
-    "PercentFee",
-    "FixedFee",
-    "Status",
-    "ReasonID",
-    "Reason",
-    "Username",
-    "UserID",
-    "BrokerID",
-    "ClOrdID",
-    "CreditProvided",
-    "State"
-  ]
-}
-```
+### Events
 
-## Withdraws
-
-### Requesting a withdraw
-
-
-### Paramenters
-
-Params        | Type   | Description/Value
---------------|--------|------------------
-MsgType       | string | "U6"
-WithdrawReqID | number | Request ID
-Method        | string | bitcoin for BTC. Check with the exchange all available withdrawal methods
-Amount        | number | Amount in satoshis
-Currency      | string | Currency code
-Data          | object | Data object containing your wallet address e.g.: {"Data": { "Wallet": "mwmabpJVisvti3WEP5vhFRtn3yqHRD9KNP" }}
-
-
-
-### Withdraw methods
-
-There are different methods of withdraws for each currency, they are created dynamically by each broker, you can take a look logging as a broker on
-[testnet.blinktrade.com](https://testnet.blinktrade.com), and go to `admin` tab and `Withdraw methods`
+| Event                      |  Description                                         |
+|----------------------------|------------------------------------------------------|
+| EXECUTION_REPORT:NEW       | Callback when you send a new order                   |
+| EXECUTION_REPORT:PARTIAL   | Callback when your order has been partialy executed |
+| EXECUTION_REPORT:EXECUTION | Callback when an order has been sussefully executed |
+| EXECUTION_REPORT:CANCELED  | Callback when your order has been canceled          |
+| EXECUTION_REPORT:REJECTED  | Callback when order has been rejected          |
