@@ -2,6 +2,7 @@
 title: BlinkTrade API
 
 language_tabs:
+  - javascript: JavaScript
   - shell
   - python
   - php
@@ -17,11 +18,47 @@ search: true
 
 ### Overview
 
+Welcome to [BlinkTrade](https://blinktrade.com) API documentation!
+
 BlinkTrade provides a simple and robust [WebSocket API](#websocket-api) to integrate our platform, we strongly recommend you to use it over the [Rest API](#rest-api).
 
-### FIX
+## BlinkTrade SDK
 
-BlinkTrade's API is based on the [FIX protocol](http://www.onixs.biz/fix-dictionary/4.4/index.html).
+We provide a simple WebSocket and Rest JavaScript SDK, that enables you use our API either for node.js and browser,
+You can easily send and cancel orders, request deposit and withdraws, get real time market data through our WebSocket API.
+
+All SDK supports either promises and callbacks, if a callback is provided as the last argument, it will be called as `callback(error, result)`,
+otherwise it will just return the original promise, we also provide event emitters that you can use to get realtime updates through our websocket api
+
+### Install
+
+`$ npm install blinktrade`
+
+```javascript
+
+var BlinkTrade = require('blinktrade');
+
+var BlinkTradeRest = BlinkTrade.BlinkTradeRest;
+var BlinkTradeWS = BlinkTrade.BlinkTradeWS;
+
+// Rest Transport
+var blinktrade = new BlinkTradeRest();
+
+// WebSocket Transport
+var blinktrade = new BlinkTradeWS();
+
+```
+
+[Check our JavaScript SDK documentation]()
+
+<aside class="notice">
+  <b>NOTE</b>
+  <p>
+    We aimed to design a concise API, we are returning a JSON format that can be slightly different from the original websocket call,
+    these returns aims to increase readability and avoid complexity of the json,
+    some returns such arrays of arrays and a `Column` field that describes each array position, are already formatted for you.
+  </p>
+</aside>
 
 ## BlinkTrade Endpoints
 
@@ -197,7 +234,3 @@ B7    |  [ProcessWithdrawResponse]()
 B8    |  [VerifyCustomerRequest]()
 B9    |  [VerifyCustomerResponse]()
 B1    |  [VerifyCustomerRefresh]()
-
-### Reference
-
-* [FIX 4.4 - FIX Dictionary - Onix Solutions](http://www.onixs.biz/fix-dictionary/4.4/index.html)
