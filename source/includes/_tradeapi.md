@@ -1,35 +1,31 @@
 # Trade API
 
-On our Rest-ful API, we provide a trade endpoint that you're allowed to send and cancel orders,
-request deposits and withdraws, you need to generate a API Key through our platform and set their respective permission that gives you access to it.
+On our RESTful API, we provide a trade endpoint that you're allowed to send and cancel orders,
+request deposits and withdrawals. You need to [create an API Key](#create-api-key) through our platform and set their respective permission that gives you access to it.
 
-The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `Rest` and `WebSocket API`,
-on `Rest` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`,
-and API Key is needed in order to authenticate your access.
+The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `REST` and `WebSocket API`. On `REST` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`, and API Key is needed in order to authenticate your access.
 
 <aside class="notice">
-
-<b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket api
-
+  <b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket API
 </aside>
 
-An `HTTP POST` request method should be used to send a rest-ful HTTP message.
+An `HTTP POST` request method should be used to send a RESTful HTTP message.
 
-### Rest HTTP Headers
+### REST HTTP Headers
 
 The following headers must be present in your `POST` message:
 
 Header       | Description
 -------------|------------
-APIKey       | Your API Key generated from your exchange or testnet environment.
-Nonce        | Must be an integer, always greater than the previous one.
-Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key.
+APIKey       | Your API Key generated from your exchange or testnet environment
+Nonce        | Must be an integer, always greater than the previous one
+Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key
 Content-Type | `application/json`
 
 
 ```javascript
 
-// Rest Transport
+// REST Transport
 var BlinkTradeRest = require("blinktrade").BlinkTradeRest;
 var blinktrade = new BlinkTradeRest({
   prod: false,
@@ -38,11 +34,6 @@ var blinktrade = new BlinkTradeRest({
   currency: "BRL",
 });
 
-```
-
-
-```javascript
-
 // WebSocket Transport
 var BlinkTradeWS = require("blinktrade").BlinkTradeWS;
 var blinktrade = new BlinkTradeWS({ prod: false });
@@ -50,26 +41,29 @@ var blinktrade = new BlinkTradeWS({ prod: false });
 ```
 
 ```shell
-# Trade API URL
-api_url='<API_URL>'
+# Message to be sent
+message='JSON_MESSAGE_TO_BE_SENT'
+
+# REST Trade API URL
+api_url='API_URL_REST_ENDPOINT'
 
 # Set API Key and Secret
-api_key='<API_KEY>'
-api_secret='<API_SECRET>'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 # Generate a nonce
 nonce=`date +%s`
 
 # Sign the nonce with secret using HMAC-SHA256
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
 # Send a POST message to API URL
-curl -X POST "$api_url" \
-    -H "APIKey:$api_key" \
-    -H "Nonce:$nonce" \
-    -H "Signature:$signature" \
-    -H "Content-Type:application/json" \
-    -d "$message"
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ## Balance
