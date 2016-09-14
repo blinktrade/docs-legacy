@@ -168,7 +168,7 @@ Request a list of your open orders.
 ```json
 {
   "MsgType": "U4",
-  "OrdersReqID": 1,
+  "OrdersReqID": 930019,
   "Page": 0,
   "PageSize": 1
 }
@@ -183,7 +183,7 @@ blinktrade.myOrders().then(function(myOrders) {
 ```
 
 ```shell
-message='{ "MsgType": "U4", "OrdersReqID": 1, "Page": 0, "PageSize": 1 }'
+message='{ "MsgType": "U4", "OrdersReqID": 930019, "Page": 0, "PageSize": 1 }'
 
 api_url='API_URL_REST_ENDPOINT'
 api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
@@ -232,7 +232,7 @@ PageSize    | number        | **Optional**; defaults to 20
         "TimeInForce": "1"
     }],
     "PageSize": 1,
-    "OrdersReqID": 1,
+    "OrdersReqID": 930019,
     "MsgType": "U5",
     "Page": 0
 }
@@ -276,12 +276,12 @@ TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 ```json
 {
 	"MsgType": "D",
-	"ClOrdID": 123,
+	"ClOrdID": 8426208,
 	"Symbol": "BTCUSD",
 	"Side": "1",
 	"OrdType": "2",
-	"Price": 26381000000,
-	"OrderQty": 2723810,
+	"Price": 55000000000,
+	"OrderQty": 5000000,
 	"BrokerID": 5
 }
 ```
@@ -300,20 +300,21 @@ blinktrade.sendOrder({
 ```
 
 ```shell
+message='{ "MsgType": "D", "ClOrdID": 8426208, "Symbol": "BTCUSD", "Side": "1", "OrdType": "2", "Price": 55000000000, "OrderQty": 5000000, "BrokerID": 5 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"D","ClOrdID":123,"Side":"1","Symbol":"BTCUSD","OrdType":"2","Price":48000000000,"OrderQty":50000000,"BrokerID":5}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -321,17 +322,17 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name     | Type   | Description/Value
 ---------|--------|------------------
 MsgType  | string | "D"
-ClOrdID  | number | Unique identifier for Order as assigned by you.
+ClOrdID  | number | Unique identifier for Order as assigned by you
 Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "2" = Limited
-Price    | number | Price in satoshis.
-OrderQty | number | Quantity in satoshis.
+Price    | number | Price in satoshis
+OrderQty | number | Quantity in satoshis
 BrokerID | number | [\<BROKER_ID\>](#brokers)
 
 ### Response
 
-Returns an Execution Report Model Object, if you're using with `Rest Transport`,
+Returns an Execution Report Model Object, if you're using with `REST Transport`,
 it will response as an array together with the balance response.
 
 > __RESPONSE EXAMPLE__
@@ -368,24 +369,24 @@ it will response as an array together with the balance response.
 field       | Type   | Description/Value
 ------------|--------|------------------
 MsgType     | string | "8"
-OrderID     | number | Unique identifier for Order as assigned by broker.
-ExecID      | number | Unique identifier of execution message as assigned by broker.
+OrderID     | number | Unique identifier for Order as assigned by broker
+ExecID      | number | Unique identifier of execution message as assigned by broker
 ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
 OrdStatus   | string | "0" = New, "1" = Partially fill, "2 "= Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
-LeavesQty   | number | Quantity open for further execution.
-Symbol      | string | Currency pair being used.
-OrderQty    | number | Quantity ordered in satoshis.
-LastShares  | number | Quantity of shares bought/sold on this fill.
-LastPx      | number | Price of the last fill.
-CxlQty      | number | Total quantity canceled for this order.
+LeavesQty   | number | Quantity open for further execution
+Symbol      | string | Currency pair being used
+OrderQty    | number | Quantity ordered in satoshis
+LastShares  | number | Quantity of shares bought/sold on this fill
+LastPx      | number | Price of the last fill
+CxlQty      | number | Total quantity canceled for this order
 TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
-CumQty      | number | Total quantity filled.
+CumQty      | number | Total quantity filled
 ClOrdID     | string | Unique identifier for Order as assigned by you
 OrdType     | string | "2" = Limited
 Side        | string | "1" = Buy, "2" = Sell
-Price       | number | Price per unit of quantity in satoshis.
-ExecSide    | string | Side of this fill.
-AvgPx       | number | Calculated average price of all fills on this order.
+Price       | number | Price per unit of quantity in satoshis
+ExecSide    | string | Side of this fill
+AvgPx       | number | Calculated average price of all fills on this order
 
 ## Cancel Order
 
@@ -395,7 +396,7 @@ AvgPx       | number | Calculated average price of all fills on this order.
 {
     "MsgType": "F",
     "OrderID": 1459028830899,
-    "ClOrdID": 123
+    "ClOrdID": 8426208
 }
 ```
 
@@ -408,20 +409,21 @@ blinktrade.cancelOrder({ orderID: order.OrderID, clientId: order.ClOrdID }).then
 ```
 
 ```shell
+message='{ "MsgType": "F", "OrderID": 1459028830899, "ClOrdID": 8426208 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"D","OrderID":1459028830899,"ClOrdID":123}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -447,7 +449,7 @@ The response will be the same as the `sendOrder` with `ExecType`: "4"
     "MsgType": "U30",
     "DepositListReqID": 123,
     "Page": 0,
-    "PageSize": 20,
+    "PageSize": 1,
     "StatusList": ["1", "2", "4", "8"]
 }
 
@@ -462,20 +464,21 @@ blinktrade.requestDepositList().then(function(deposits) {
 ```
 
 ```shell
+message='{ "MsgType": "U30", "DepositListReqID": 7739992, "Page": 0, "PageSize": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U30","DepositListReqID":1,"Page":0,"PageSize":100}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 
@@ -536,7 +539,7 @@ Returns an array of Deposits Model Object.
 ```json
 {
   "MsgType": "U18",
-  "DepositReqID": 1,
+  "DepositReqID": 3115044,
   "DepositMethodID": 403,
   "Value": 150000000000,
   "Currency": "BRL",
@@ -553,7 +556,6 @@ blinktrade.requestDeposit().then(function(deposit) {
 });
 
 // Fiat Deposit
-
 blinktrade.requestDeposit({
   value: parseInt(200 * 1e8),
   currency: "BRL",
@@ -564,21 +566,23 @@ blinktrade.requestDeposit({
 
 ```
 
-```shell
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+```shell
+message='{ "MsgType": "U18", "DepositReqID": 3115044, "DepositMethodID": 403, "Value": 150000000000, "Currency": "BRL", "BrokerID": 5 }'
+
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U18","DepositReqID":1,"DepositMethodID":403,"Value":150000000000,"Currency":"BRL","BrokerID":5}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -586,8 +590,8 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name            | Type   | Description/Value
 ----------------|--------|------------------
 MsgType         | string | "U18"
-DepositReqID    | number | Deposit Request ID.
-DepositMethodID | number | Deposit Method ID - Check with your exchange.
+DepositReqID    | number | Deposit Request ID
+DepositMethodID | number | Deposit Method ID - Check with your exchange
 Value           | number | Amount in satoshis
 Currency        | string | [\<CURRENCY\>](#currencies)
 BrokerID        | number | [\<BROKER_ID\>](#brokers)
@@ -632,9 +636,12 @@ BrokerID        | number | [\<BROKER_ID\>](#brokers)
 
 Returns a Deposit Model Object.
 
-**NOTE** The `Data.InputAddress` is the address that you have to deposit, **DO NOT DEPOSIT** on `Data.Destination` address.
+<aside class="notice">
+  <p>NOTE</b>
+  <p>The `Data.InputAddress` is the address that you have to deposit, <b>DO NOT DEPOSIT</b> on `Data.Destination` address.</p>
+<aside class="notice">
 
-## Withdraws
+## Withdrawals
 
 ### Request Withdraw List
 
