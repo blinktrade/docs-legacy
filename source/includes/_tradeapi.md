@@ -264,11 +264,12 @@ TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 
 ## Send Order
 
-[Floats are Evil!](http://floating-point-gui.de/basic/)
-
-Converting Floats to Integers can be dangerous, different programming languages can get weird rounding errors and
-imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format, we also expect Integers
-as input, make sure that you're formatting the values properly to avoid precision issues.
+<aside class="notice">
+<b><a href="http://floating-point-gui.de/basic/">Floats are Evil!</a></b>
+<p>
+  Converting Floats to Integers can be dangerous. Different programming languages can get weird rounding errors and imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format. We also expect Integers as input, make sure that you're formatting the values properly to avoid precision issues.
+</p>
+</aside>
 
 > __MESSAGE EXAMPLE__
 
@@ -342,7 +343,7 @@ it will response as an array together with the balance response.
   "OrderID": 1459028830972,
   "ExecID": 741322,
   "ExecType": "0",
-  "OrdStatus": '0',
+  "OrdStatus": "0",
   "CumQty": 0,
   "Symbol": "BTCUSD",
   "OrderQty": 5000000,
@@ -480,7 +481,7 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 
 Name              | Type          | Description/Value
 ------------------|---------------|------------------
-MsgType           | string        | "U26"
+MsgType           | string        | "U30"
 DepositListReqID  | number        | Request ID
 Page              | number        | **Optional**; defaults to 0.
 PageSize          | number        | **Optional**; defaults to 20.
