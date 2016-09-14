@@ -3,7 +3,7 @@ title: BlinkTrade API
 
 language_tabs:
   - javascript: JavaScript
-  - shell
+  - shell: Shell
 
 includes:
   - restapi
@@ -19,28 +19,25 @@ search: true
 
 Welcome to [BlinkTrade](https://blinktrade.com) API documentation!
 
-BlinkTrade provides a simple and robust [WebSocket API](#websocket-api) to integrate our platform, we strongly recommend you to use it over the [Rest API](#rest-api).
+BlinkTrade provides a simple and robust [WebSocket API](#websocket-api) to integrate our platform, we strongly recommend you to use it over the [REST API](#public-rest-api).
 
 ## BlinkTrade SDK
 
-We provide a simple WebSocket and Rest JavaScript SDK, that enables you runs in either node.js or a browser,
-You can easily send and cancel orders, request deposit and withdraws, and get real time market data through our WebSocket API.
+We provide a simple WebSocket and REST JavaScript SDK that enables you runs in either Node.js or in a browser. You can easily send and cancel orders, request deposits and withdrawals, and get real time market data through our WebSocket API.
 
-All SDK supports either promises and callbacks, if a callback is provided as the last argument, it will be called as `callback(error, result)`,
-otherwise it will just return the original promise, we also provide event emitters that you can use to get realtime updates through our websocket api
+All SDK supports either promises and callbacks. If a callback is provided as the last argument, it will be called as `callback(error, result)`, otherwise it will just return the original promise. We also provide event emitters that you can use to get realtime updates through our WebSocket API.
 
 ### Install
 
 `$ npm install blinktrade`
 
 ```javascript
-
 var BlinkTrade = require('blinktrade');
 
 var BlinkTradeRest = BlinkTrade.BlinkTradeRest;
 var BlinkTradeWS = BlinkTrade.BlinkTradeWS;
 
-// Rest Transport
+// REST Transport
 var blinktrade = new BlinkTradeRest();
 
 // WebSocket Transport
@@ -57,9 +54,7 @@ blinktrade.heartbeat().then(function(heartbeat) {
 <aside class="notice">
   <b>NOTE</b>
   <p>
-    We aimed to design a concise API, we are returning a JSON format that can be slightly different from the original websocket call,
-    these returns aims to increase readability and avoid complexity of the json,
-    some returns such arrays of arrays and a `Column` field that describes each array position, are already formatted for you.
+    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket call. These returns aims to increase readability and avoid complexity of the JSON, some returns such arrays of arrays and a `Columns` field that describes each array position, are already formatted for you.
   </p>
 </aside>
 
