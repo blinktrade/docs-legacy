@@ -490,7 +490,7 @@ Page              | number        | **Optional**; defaults to 0.
 PageSize          | number        | **Optional**; defaults to 20.
 StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled
 
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 
@@ -637,13 +637,13 @@ BrokerID        | number | [\<BROKER_ID\>](#brokers)
 Returns a Deposit Model Object.
 
 <aside class="notice">
-  <p>NOTE</b>
+  <b>NOTE</b>
   <p>The `Data.InputAddress` is the address that you have to deposit, <b>DO NOT DEPOSIT</b> on `Data.Destination` address.</p>
-<aside class="notice">
+</aside>
 
 ## Withdrawals
 
-### Request Withdraw List
+### Request Withdrawal List
 
 > __MESSAGE EXAMPLE__
 
@@ -652,7 +652,7 @@ Returns a Deposit Model Object.
   "MsgType": "U26",
   "WithdrawListReqID": 1,
   "Page": 0,
-  "PageSize": 100,
+  "PageSize": 1,
   "StatusList": ["1", "2"]
 }
 ```
@@ -666,20 +666,21 @@ blinktrade.requestWithdrawList().then(function(withdraws) {
 ```
 
 ```shell
+message='{ "MsgType": "U26", "WithdrawListReqID": 6695476, "Page": 0, "PageSize": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U26","WithdrawListReqID":1,"Page":0,"PageSize":1}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -687,9 +688,9 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name              | Type          | Description/Value
 ------------------|---------------|------------------
 MsgType           | string        | "U26"
-WithdrawListReqID | number        | An ID chosen by you.
-Page              | number        | **Optional**; defaults to 0.
-PageSize          | number        | **Optional**; defaults to 20.
+WithdrawListReqID | number        | An ID chosen by you
+Page              | number        | **Optional**; defaults to 0
+PageSize          | number        | **Optional**; defaults to 20
 StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled
 
 > __RESPONSE EXAMPLE__
@@ -728,12 +729,11 @@ StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In P
 ```
 ### Response
 
-Returns an array of Withdraws Model Objects.
+Returns an array of Withdrawals Model Objects.
 
 ### Request Withdrawal
 
-To request withdraws, you need to pass a "data" information, whichs represents the information to your withdraw,
-it's related to bank accounts, numbers, or a bitcoin address, these informations are dynamically and is different by each broker.
+To request withdrawals, you need to pass a "data" information, which represents the information to your withdrawal. It's related to bank accounts, numbers, or a bitcoin address, this information is dynamically and is different for each broker.
 
 > __MESSAGE EXAMPLE__
 
@@ -797,7 +797,7 @@ WithdrawReqID | number | Request ID
 Method        | string | bitcoin for BTC. Check with the exchange all available withdrawal methods
 Amount        | number | Amount in satoshis
 Currency      | string | Currency code
-Data          | object | Data object containing the withdraws required fields.
+Data          | object | Data object containing the withdraws required fields
 
 **FOXBIT**
 
