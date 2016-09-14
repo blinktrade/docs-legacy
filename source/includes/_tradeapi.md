@@ -9,6 +9,11 @@ The Trade endpoint is internaly a bridge to our WebSocket API, so you can access
   <b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket API
 </aside>
 
+
+<aside class="notice">
+  <b>NOTE</b> that Fiat values are also in "satoshis" precision, so divide it by 10^8 to recover the unit value.
+</aside>
+
 An `HTTP POST` request method should be used to send a RESTful HTTP message.
 
 ### REST HTTP Headers
@@ -86,20 +91,21 @@ blinktrade.balance().then(function(balance) {
 ```
 
 ```shell
+message='{ "MsgType": "U2", "BalanceReqID": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U2","BalanceReqID":1}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 
@@ -108,25 +114,24 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name         | Type   | Description/Value
 -------------|--------|------------------
 MsgType      | string | "U2"
-BalanceReqID | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
+BalanceReqID | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
 
 > __RESPONSE EXAMPLE__
 
 ```json
-
 {
-    "5": {
-        "BTC_locked": 0,
-        "USD": 177911657052760,
-        "BTC": 1468038442214,
-        "USD_locked": 96750050000
-    },
     "MsgType": "U3",
     "ClientID": 90800003,
     "BalanceReqID": 5178228,
     "Available": {
         "USD": 177814907002760,
         "BTC": 1468038442214
+    },
+    "5": {
+        "BTC_locked": 0,
+        "USD": 177911657052760,
+        "BTC": 1468038442214,
+        "USD_locked": 96750050000
     }
 }
 
@@ -138,20 +143,20 @@ Returns your balance for each broker.
 
 Name         | Type    | Description/Value
 -------------|---------|------------------
-MsgType      | string  | "U3" UserBalanceResponse message.
-[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
-ClientID     | number  | Your account ID.
-BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
-Available    | object  | Available balance only returned on JavaScript SDK.
+MsgType      | string  | "U3" UserBalanceResponse message
+[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5
+ClientID     | number  | Your account ID
+BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2"
+Available    | object  | Available balance only returned on JavaScript SDK
 
 Balance model example for BTC and USD:
 
 Name         | Type   | Description
 -------------|--------|------------
-BTC          | number | Amount in satoshis of BTC you have available in your account.
-USD          | number | Amount in USD (or your FIAT currency) you have available in your account.
-BTC_locked   | number | Amount in satoshis of BTC you have locked (open orders, margin positions, etc).
-USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (open orders, margin positions, etc).
+BTC          | number | Amount in satoshis of BTC you have available in your account
+USD          | number | Amount in USD (or your FIAT currency) you have available in your account
+BTC_locked   | number | Amount in satoshis of BTC you have locked (open orders, margin positions, etc)
+USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (open orders, margin positions, etc)
 
 
 ## My Orders
@@ -165,7 +170,7 @@ Request a list of your open orders.
   "MsgType": "U4",
   "OrdersReqID": 1,
   "Page": 0,
-  "PageSize": 20
+  "PageSize": 1
 }
 ```
 
@@ -178,20 +183,21 @@ blinktrade.myOrders().then(function(myOrders) {
 ```
 
 ```shell
+message='{ "MsgType": "U4", "OrdersReqID": 1, "Page": 0, "PageSize": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U4","OrdersReqID":1,"Page":0,"PageSize":20}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 
@@ -200,14 +206,13 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name        | Type          | Description/Value
 ------------|---------------|------------------
 MsgType     | string        | "U4"
-OrdersReqID | number        | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
-Page        | number        | **Optional**; defaults to 0.
-PageSize    | number        | **Optional**; defaults to 20.
+OrdersReqID | number        | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
+Page        | number        | **Optional**; defaults to 0
+PageSize    | number        | **Optional**; defaults to 20
 
 > __RESPONSE EXAMPLE__
 
 ```json
-
 {
     "OrdListGrp": [{
         "ClOrdID": "8475400",
@@ -227,7 +232,7 @@ PageSize    | number        | **Optional**; defaults to 20.
         "TimeInForce": "1"
     }],
     "PageSize": 1,
-    "OrdersReqID": 930019,
+    "OrdersReqID": 1,
     "MsgType": "U5",
     "Page": 0
 }
@@ -240,20 +245,20 @@ Returns an array of Orders Model Objects.
 
 Name        | Type   | Description/Value
 ------------|--------|------------------
-ClOrdID     | string | Client order ID set by you.
-OrderID     | number | Order ID set by blinktrade.
-CumQty      | number | The executed quantity of this order.
+ClOrdID     | string | Client order ID set by you
+OrderID     | number | Order ID set by blinktrade
+CumQty      | number | The executed quantity of this order
 OrdStatus   | string | "0" = New, "1" = Partially filled, "2" = Filled, "4" = Cancelled, "8" = Rejected, "A" = Pending New
-LeavesQty   | number | Quantity open for further execution.
-CxlQty      | number | Total quantity canceled for this order.
-AvgPx       | number | Calculated average price of all fills on this order.
+LeavesQty   | number | Quantity open for further execution
+CxlQty      | number | Total quantity canceled for this order
+AvgPx       | number | Calculated average price of all fills on this order
 Symbol      | string | [\<SYMBOL\>](#symbols)
 Side        | string | "1" = Buy, "2" = Sell
 OrdType     | string | "2" = Limited
-OrderQty    | number | Quantity ordered in satoshis.
-Price       | number | Price per unit in "satoshis" of your local currency.
-OrderDate   | string | Order date in UTC.
-Volume      | number | Quantity * Price
+OrderQty    | number | Quantity ordered in satoshis
+Price       | number | Price per unit in your local currency
+OrderDate   | string | Order date in UTC
+Volume      | number | Quantity x Price
 TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 
 
