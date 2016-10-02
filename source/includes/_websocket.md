@@ -451,3 +451,53 @@ AvgPx       | number | Calculated average price of all fills on this order.
 | EXECUTION_REPORT:EXECUTION | Callback when an order has been sussefully executed |
 | EXECUTION_REPORT:CANCELED  | Callback when your order has been canceled          |
 | EXECUTION_REPORT:REJECTED  | Callback when order has been rejected          |
+
+## Trade History
+
+A list of the last trades executed on an exchange since a chosen date.
+
+**NOTE** if you want to listen the last trades in real time, you should subscribe to market data instead.
+
+```javascript
+
+blinktrade.tradeHistory().then(function(trades) {
+  console.log(trades);
+});
+
+```
+
+### Parameters
+
+| Name                | Type   | Description
+|---------------------|--------|------------
+| MsgType             | string | "U32"
+| TradeHistoryReqID   | number | Request ID
+| Since               | number | **Optional** Since
+| Filter              | number | **Optional** Filter
+| Page                | number | **Optional** defaults to 0.
+| PageSize            | number | **Optional** defaults to 80.
+
+> EXAMPLE RESPONSE
+
+```json
+
+{
+    "TradeHistoryReqID": 1,
+    "PageSize": 80,
+    "TradeHistoryGrp": {
+        "BTCBRL": [{
+            "TradeID": 486649,
+            "Market": "BTCBRL",
+            "Side": "2",
+            "Price": 202152000000,
+            "Size": 76389217,
+            "Buyer": 90869802,
+            "Seller": 90863020,
+            "Created": "2016-10-01 20:51:40"
+        }]
+    },
+    "MsgType": "U33",
+    "Page": 0
+}
+
+```
