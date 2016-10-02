@@ -1,35 +1,36 @@
 # Trade API
 
-On our Rest-ful API, we provide a trade endpoint that you're allowed to send and cancel orders,
-request deposits and withdraws, you need to generate a API Key through our platform and set their respective permission that gives you access to it.
+On our RESTful API, we provide a trade endpoint that you're allowed to send and cancel orders,
+request deposits and withdrawals. You need to [create an API Key](#create-api-key) through our platform and set their respective permission that gives you access to it.
 
-The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `Rest` and `WebSocket API`,
-on `Rest` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`,
-and API Key is needed in order to authenticate your access.
+The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `REST` and `WebSocket API`. On `REST` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`, and API Key is needed in order to authenticate your access.
 
 <aside class="notice">
-
-<b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket api
-
+  <b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket API
 </aside>
 
-An `HTTP POST` request method should be used to send a rest-ful HTTP message.
 
-### Rest HTTP Headers
+<aside class="notice">
+  <b>NOTE</b> that Fiat values are also in "satoshis" precision, so divide it by 10^8 to recover the unit value.
+</aside>
+
+An `HTTP POST` request method should be used to send a RESTful HTTP message.
+
+### REST HTTP Headers
 
 The following headers must be present in your `POST` message:
 
 Header       | Description
 -------------|------------
-APIKey       | Your API Key generated from your exchange or testnet environment.
-Nonce        | Must be an integer, always greater than the previous one.
-Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key.
+APIKey       | Your API Key generated from your exchange or testnet environment
+Nonce        | Must be an integer, always greater than the previous one
+Signature    | The HMAC-SHA256 signature of Nonce using your API Secret as key
 Content-Type | `application/json`
 
 
 ```javascript
 
-// Rest Transport
+// REST Transport
 var BlinkTradeRest = require("blinktrade").BlinkTradeRest;
 var blinktrade = new BlinkTradeRest({
   prod: false,
@@ -38,11 +39,6 @@ var blinktrade = new BlinkTradeRest({
   currency: "BRL",
 });
 
-```
-
-
-```javascript
-
 // WebSocket Transport
 var BlinkTradeWS = require("blinktrade").BlinkTradeWS;
 var blinktrade = new BlinkTradeWS({ prod: false });
@@ -50,26 +46,29 @@ var blinktrade = new BlinkTradeWS({ prod: false });
 ```
 
 ```shell
-# Trade API URL
-api_url='<API_URL>'
+# Message to be sent
+message='JSON_MESSAGE_TO_BE_SENT'
+
+# REST Trade API URL
+api_url='API_URL_REST_ENDPOINT'
 
 # Set API Key and Secret
-api_key='<API_KEY>'
-api_secret='<API_SECRET>'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 # Generate a nonce
 nonce=`date +%s`
 
 # Sign the nonce with secret using HMAC-SHA256
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
 # Send a POST message to API URL
-curl -X POST "$api_url" \
-    -H "APIKey:$api_key" \
-    -H "Nonce:$nonce" \
-    -H "Signature:$signature" \
-    -H "Content-Type:application/json" \
-    -d "$message"
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ## Balance
@@ -92,20 +91,21 @@ blinktrade.balance().then(function(balance) {
 ```
 
 ```shell
+message='{ "MsgType": "U2", "BalanceReqID": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U2","BalanceReqID":1}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 
@@ -114,25 +114,24 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name         | Type   | Description/Value
 -------------|--------|------------------
 MsgType      | string | "U2"
-BalanceReqID | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
+BalanceReqID | number | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
 
 > __RESPONSE EXAMPLE__
 
 ```json
-
 {
-    "5": {
-        "BTC_locked": 0,
-        "USD": 177911657052760,
-        "BTC": 1468038442214,
-        "USD_locked": 96750050000
-    },
     "MsgType": "U3",
     "ClientID": 90800003,
     "BalanceReqID": 5178228,
     "Available": {
         "USD": 177814907002760,
         "BTC": 1468038442214
+    },
+    "5": {
+        "BTC_locked": 0,
+        "USD": 177911657052760,
+        "BTC": 1468038442214,
+        "USD_locked": 96750050000
     }
 }
 
@@ -144,20 +143,20 @@ Returns your balance for each broker.
 
 Name         | Type    | Description/Value
 -------------|---------|------------------
-MsgType      | string  | "U3" UserBalanceResponse message.
-[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5.
-ClientID     | number  | Your account ID.
-BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2".
-Available    | object  | Available balance only returned on JavaScript SDK.
+MsgType      | string  | "U3" UserBalanceResponse message
+[\<BROKER_ID\>](#brokers)| object  | The [Broker ID](#brokers) containing your BTC and FIAT balance, e.g.: "5" stands for your balance with the [Broker ID](#brokers) number 5
+ClientID     | number  | Your account ID
+BalanceReqID | number  | This should match the BalanceReqID sent on the message "U2"
+Available    | object  | Available balance only returned on JavaScript SDK
 
 Balance model example for BTC and USD:
 
 Name         | Type   | Description
 -------------|--------|------------
-BTC          | number | Amount in satoshis of BTC you have available in your account.
-USD          | number | Amount in USD (or your FIAT currency) you have available in your account.
-BTC_locked   | number | Amount in satoshis of BTC you have locked (open orders, margin positions, etc).
-USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (open orders, margin positions, etc).
+BTC          | number | Amount in satoshis of BTC you have available in your account
+USD          | number | Amount in USD (or your FIAT currency) you have available in your account
+BTC_locked   | number | Amount in satoshis of BTC you have locked (open orders, margin positions, etc)
+USD_locked   | number | Amount in USD (or your FIAT currency) you have locked (open orders, margin positions, etc)
 
 
 ## My Orders
@@ -169,9 +168,9 @@ Request a list of your open orders.
 ```json
 {
   "MsgType": "U4",
-  "OrdersReqID": 1,
+  "OrdersReqID": 930019,
   "Page": 0,
-  "PageSize": 20
+  "PageSize": 1
 }
 ```
 
@@ -184,20 +183,21 @@ blinktrade.myOrders().then(function(myOrders) {
 ```
 
 ```shell
+message='{ "MsgType": "U4", "OrdersReqID": 930019, "Page": 0, "PageSize": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U4","OrdersReqID":1,"Page":0,"PageSize":20}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 
@@ -206,14 +206,13 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name        | Type          | Description/Value
 ------------|---------------|------------------
 MsgType     | string        | "U4"
-OrdersReqID | number        | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID.
-Page        | number        | **Optional**; defaults to 0.
-PageSize    | number        | **Optional**; defaults to 20.
+OrdersReqID | number        | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
+Page        | number        | **Optional**; defaults to 0
+PageSize    | number        | **Optional**; defaults to 20
 
 > __RESPONSE EXAMPLE__
 
 ```json
-
 {
     "OrdListGrp": [{
         "ClOrdID": "8475400",
@@ -246,42 +245,43 @@ Returns an array of Orders Model Objects.
 
 Name        | Type   | Description/Value
 ------------|--------|------------------
-ClOrdID     | string | Client order ID set by you.
-OrderID     | number | Order ID set by blinktrade.
-CumQty      | number | The executed quantity of this order.
+ClOrdID     | string | Client order ID set by you
+OrderID     | number | Order ID set by blinktrade
+CumQty      | number | The executed quantity of this order
 OrdStatus   | string | "0" = New, "1" = Partially filled, "2" = Filled, "4" = Cancelled, "8" = Rejected, "A" = Pending New
-LeavesQty   | number | Quantity open for further execution.
-CxlQty      | number | Total quantity canceled for this order.
-AvgPx       | number | Calculated average price of all fills on this order.
+LeavesQty   | number | Quantity open for further execution
+CxlQty      | number | Total quantity canceled for this order
+AvgPx       | number | Calculated average price of all fills on this order
 Symbol      | string | [\<SYMBOL\>](#symbols)
 Side        | string | "1" = Buy, "2" = Sell
 OrdType     | string | "2" = Limited
-OrderQty    | number | Quantity ordered in satoshis.
-Price       | number | Price per unit in "satoshis" of your local currency.
-OrderDate   | string | Order date in UTC.
-Volume      | number | Quantity * Price
+OrderQty    | number | Quantity ordered in satoshis
+Price       | number | Price per unit in your local currency
+OrderDate   | string | Order date in UTC
+Volume      | number | Quantity x Price
 TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 
 
 ## Send Order
 
-[Floats are Evil!](http://floating-point-gui.de/basic/)
-
-Converting Floats to Integers can be dangerous, different programming languages can get weird rounding errors and
-imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format, we also expect Integers
-as input, make sure that you're formatting the values properly to avoid precision issues.
+<aside class="notice">
+<b><a href="http://floating-point-gui.de/basic/">Floats are Evil!</a></b>
+<p>
+  Converting Floats to Integers can be dangerous. Different programming languages can get weird rounding errors and imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format. We also expect Integers as input, make sure that you're formatting the values properly to avoid precision issues.
+</p>
+</aside>
 
 > __MESSAGE EXAMPLE__
 
 ```json
 {
 	"MsgType": "D",
-	"ClOrdID": 123,
+	"ClOrdID": 8426208,
 	"Symbol": "BTCUSD",
 	"Side": "1",
 	"OrdType": "2",
-	"Price": 26381000000,
-	"OrderQty": 2723810,
+	"Price": 55000000000,
+	"OrderQty": 5000000,
 	"BrokerID": 5
 }
 ```
@@ -300,20 +300,21 @@ blinktrade.sendOrder({
 ```
 
 ```shell
+message='{ "MsgType": "D", "ClOrdID": 8426208, "Symbol": "BTCUSD", "Side": "1", "OrdType": "2", "Price": 55000000000, "OrderQty": 5000000, "BrokerID": 5 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"D","ClOrdID":123,"Side":"1","Symbol":"BTCUSD","OrdType":"2","Price":48000000000,"OrderQty":50000000,"BrokerID":5}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -321,17 +322,17 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name     | Type   | Description/Value
 ---------|--------|------------------
 MsgType  | string | "D"
-ClOrdID  | number | Unique identifier for Order as assigned by you.
+ClOrdID  | number | Unique identifier for Order as assigned by you
 Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "2" = Limited
-Price    | number | Price in satoshis.
-OrderQty | number | Quantity in satoshis.
+Price    | number | Price in satoshis
+OrderQty | number | Quantity in satoshis
 BrokerID | number | [\<BROKER_ID\>](#brokers)
 
 ### Response
 
-Returns an Execution Report Model Object, if you're using with `Rest Transport`,
+Returns an Execution Report Model Object, if you're using with `REST Transport`,
 it will response as an array together with the balance response.
 
 > __RESPONSE EXAMPLE__
@@ -343,7 +344,7 @@ it will response as an array together with the balance response.
   "OrderID": 1459028830972,
   "ExecID": 741322,
   "ExecType": "0",
-  "OrdStatus": '0',
+  "OrdStatus": "0",
   "CumQty": 0,
   "Symbol": "BTCUSD",
   "OrderQty": 5000000,
@@ -368,24 +369,24 @@ it will response as an array together with the balance response.
 field       | Type   | Description/Value
 ------------|--------|------------------
 MsgType     | string | "8"
-OrderID     | number | Unique identifier for Order as assigned by broker.
-ExecID      | number | Unique identifier of execution message as assigned by broker.
+OrderID     | number | Unique identifier for Order as assigned by broker
+ExecID      | number | Unique identifier of execution message as assigned by broker
 ExecType    | string | "0" = New, "1" = Partially fill, "2" = Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
 OrdStatus   | string | "0" = New, "1" = Partially fill, "2 "= Fill, "4" = Cancelled, "8" = Rejected, "A" = Pending New
-LeavesQty   | number | Quantity open for further execution.
-Symbol      | string | Currency pair being used.
-OrderQty    | number | Quantity ordered in satoshis.
-LastShares  | number | Quantity of shares bought/sold on this fill.
-LastPx      | number | Price of the last fill.
-CxlQty      | number | Total quantity canceled for this order.
+LeavesQty   | number | Quantity open for further execution
+Symbol      | string | Currency pair being used
+OrderQty    | number | Quantity ordered in satoshis
+LastShares  | number | Quantity of shares bought/sold on this fill
+LastPx      | number | Price of the last fill
+CxlQty      | number | Total quantity canceled for this order
 TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
-CumQty      | number | Total quantity filled.
+CumQty      | number | Total quantity filled
 ClOrdID     | string | Unique identifier for Order as assigned by you
 OrdType     | string | "2" = Limited
 Side        | string | "1" = Buy, "2" = Sell
-Price       | number | Price per unit of quantity in satoshis.
-ExecSide    | string | Side of this fill.
-AvgPx       | number | Calculated average price of all fills on this order.
+Price       | number | Price per unit of quantity in satoshis
+ExecSide    | string | Side of this fill
+AvgPx       | number | Calculated average price of all fills on this order
 
 ## Cancel Order
 
@@ -395,7 +396,7 @@ AvgPx       | number | Calculated average price of all fills on this order.
 {
     "MsgType": "F",
     "OrderID": 1459028830899,
-    "ClOrdID": 123
+    "ClOrdID": 8426208
 }
 ```
 
@@ -408,20 +409,21 @@ blinktrade.cancelOrder({ orderID: order.OrderID, clientId: order.ClOrdID }).then
 ```
 
 ```shell
+message='{ "MsgType": "F", "OrderID": 1459028830899, "ClOrdID": 8426208 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"D","OrderID":1459028830899,"ClOrdID":123}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -447,7 +449,7 @@ The response will be the same as the `sendOrder` with `ExecType`: "4"
     "MsgType": "U30",
     "DepositListReqID": 123,
     "Page": 0,
-    "PageSize": 20,
+    "PageSize": 1,
     "StatusList": ["1", "2", "4", "8"]
 }
 
@@ -462,32 +464,33 @@ blinktrade.requestDepositList().then(function(deposits) {
 ```
 
 ```shell
+message='{ "MsgType": "U30", "DepositListReqID": 7739992, "Page": 0, "PageSize": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U30","DepositListReqID":1,"Page":0,"PageSize":100}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 
 Name              | Type          | Description/Value
 ------------------|---------------|------------------
-MsgType           | string        | "U26"
+MsgType           | string        | "U30"
 DepositListReqID  | number        | Request ID
 Page              | number        | **Optional**; defaults to 0.
 PageSize          | number        | **Optional**; defaults to 20.
 StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled
 
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 
@@ -536,7 +539,7 @@ Returns an array of Deposits Model Object.
 ```json
 {
   "MsgType": "U18",
-  "DepositReqID": 1,
+  "DepositReqID": 3115044,
   "DepositMethodID": 403,
   "Value": 150000000000,
   "Currency": "BRL",
@@ -553,7 +556,6 @@ blinktrade.requestDeposit().then(function(deposit) {
 });
 
 // Fiat Deposit
-
 blinktrade.requestDeposit({
   value: parseInt(200 * 1e8),
   currency: "BRL",
@@ -564,21 +566,23 @@ blinktrade.requestDeposit({
 
 ```
 
-```shell
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+```shell
+message='{ "MsgType": "U18", "DepositReqID": 3115044, "DepositMethodID": 403, "Value": 150000000000, "Currency": "BRL", "BrokerID": 5 }'
+
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U18","DepositReqID":1,"DepositMethodID":403,"Value":150000000000,"Currency":"BRL","BrokerID":5}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -586,8 +590,8 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name            | Type   | Description/Value
 ----------------|--------|------------------
 MsgType         | string | "U18"
-DepositReqID    | number | Deposit Request ID.
-DepositMethodID | number | Deposit Method ID - Check with your exchange.
+DepositReqID    | number | Deposit Request ID
+DepositMethodID | number | Deposit Method ID - Check with your exchange
 Value           | number | Amount in satoshis
 Currency        | string | [\<CURRENCY\>](#currencies)
 BrokerID        | number | [\<BROKER_ID\>](#brokers)
@@ -632,11 +636,14 @@ BrokerID        | number | [\<BROKER_ID\>](#brokers)
 
 Returns a Deposit Model Object.
 
-**NOTE** The `Data.InputAddress` is the address that you have to deposit, **DO NOT DEPOSIT** on `Data.Destination` address.
+<aside class="notice">
+  <b>NOTE</b>
+  <p>The `Data.InputAddress` is the address that you have to deposit, <b>DO NOT DEPOSIT</b> on `Data.Destination` address.</p>
+</aside>
 
-## Withdraws
+## Withdrawals
 
-### Request Withdraw List
+### Request Withdrawal List
 
 > __MESSAGE EXAMPLE__
 
@@ -645,7 +652,7 @@ Returns a Deposit Model Object.
   "MsgType": "U26",
   "WithdrawListReqID": 1,
   "Page": 0,
-  "PageSize": 100,
+  "PageSize": 1,
   "StatusList": ["1", "2"]
 }
 ```
@@ -659,20 +666,21 @@ blinktrade.requestWithdrawList().then(function(withdraws) {
 ```
 
 ```shell
+message='{ "MsgType": "U26", "WithdrawListReqID": 6695476, "Page": 0, "PageSize": 1 }'
 
-api_key=YOUR_API_KEY_GENERATED_IN_API_MODULE
-api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
+api_url='API_URL_REST_ENDPOINT'
+api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
+api_secret='YOUR_SECRET_KEY_GENERATED_IN_API_MODULE'
 
 nonce=`date +%s`
-signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
+signature=`echo -n "$nonce" | openssl dgst -sha256 -hex -hmac "$api_secret" | cut -d ' ' -f 2`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
-    -H "Nonce:$nonce" \
-    -H "APIKey:$api_key" \
-    -H "Content-Type:application/json" \
-    -H "Signature:$signature" \
-    -d '{"MsgType":"U26","WithdrawListReqID":1,"Page":0,"PageSize":1}'
-
+curl -X POST "$api_url"              \
+  -H "APIKey:$api_key"               \
+  -H "Nonce:$nonce"                  \
+  -H "Signature:$signature"          \
+  -H "Content-Type:application/json" \
+  -d "$message"
 ```
 
 ### Parameters
@@ -680,9 +688,9 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
 Name              | Type          | Description/Value
 ------------------|---------------|------------------
 MsgType           | string        | "U26"
-WithdrawListReqID | number        | An ID chosen by you.
-Page              | number        | **Optional**; defaults to 0.
-PageSize          | number        | **Optional**; defaults to 20.
+WithdrawListReqID | number        | An ID chosen by you
+Page              | number        | **Optional**; defaults to 0
+PageSize          | number        | **Optional**; defaults to 20
 StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In Progress, "4" = Completed, "8" = Cancelled
 
 > __RESPONSE EXAMPLE__
@@ -721,12 +729,11 @@ StatusList        | array(string) | "0" = Unconfirmed, "1" = Pending, "2" = In P
 ```
 ### Response
 
-Returns an array of Withdraws Model Objects.
+Returns an array of Withdrawals Model Objects.
 
 ### Request Withdrawal
 
-To request withdraws, you need to pass a "data" information, whichs represents the information to your withdraw,
-it's related to bank accounts, numbers, or a bitcoin address, these informations are dynamically and is different by each broker.
+To request withdrawals, you need to pass a "data" information, which represents the information to your withdrawal. It's related to bank accounts, numbers, or a bitcoin address, this information is dynamically and is different for each broker.
 
 > __MESSAGE EXAMPLE__
 
@@ -790,7 +797,7 @@ WithdrawReqID | number | Request ID
 Method        | string | bitcoin for BTC. Check with the exchange all available withdrawal methods
 Amount        | number | Amount in satoshis
 Currency      | string | Currency code
-Data          | object | Data object containing the withdraws required fields.
+Data          | object | Data object containing the withdraws required fields
 
 **FOXBIT**
 

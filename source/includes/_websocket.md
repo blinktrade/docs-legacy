@@ -13,14 +13,14 @@ var blinktrade = new BlinkTradeWS({ prod: true });
 
 ### Heartbeat
 
-You must send this message each 30 seconds, to keep your connection alive.
+You must send this message every 30 seconds to keep your connection alive.
 
 > __EXAMPLE MESSAGE__
 
 ```json
 {
     "MsgType": "1",
-    "TestReqID": "123",
+    "TestReqID": "1473241552307",
     "SendTime": 1469031953
 }
 ```
@@ -71,7 +71,7 @@ ServerTimestamp | number | Server Unix Time Stamp
 
 ## Authentication
 
-Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection, you will be able to access your account. You can also login with your API Key and API Password, you only be allowed to send messages that your API Key has permission to send.
+Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection, you will be able to access your account. You can also login with your API Key and API Password and you'll only be allowed to send messages that your API Key has permission to send.
 
 ### FingerPrint
 
@@ -87,7 +87,7 @@ If you're not using the JavaScript SDK, You will need to pass a fingerprint from
 ```json
 {
     "MsgType": "BE",
-    "UserReqID": 1123107,
+    "UserReqID": 9696784,
     "BrokerID": 5,
     "Username": "TYD3ZilY0FDB1QdkD1iDdlqvcRdnV0sZILNh3D18ZKs",
     "Password": "ySIMrLdTqSDo3vL",
@@ -183,13 +183,12 @@ UserID                  | number | Integer with the user ID
 UserReqTyp              | number | Returns only if it's equal to 3 when password has been changed
 UserStatus              | number | "1" = Logged In, "2" = Not Logged In, "3" = User Not Recognised
 Username                | string | String with the username of the user
-WithdrawFixedFee        | number | Fixed fee for withdraws
-WithdrawPercentFee      | number |
+WithdrawFixedFee        | number | Fixed fee for withdrawals
+WithdrawPercentFee      | number | Percent fee for withdrawals
 
 ## Subscribe to OrderBook
 
-You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime,
-each Market Data Entry is composed by a bid, offer or a trade occurred.
+You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime. Each Market Data Entry is composed by a bid, offer or a trade occurred.
 
 
 > __EXAMPLE MESSAGE__
@@ -198,7 +197,7 @@ each Market Data Entry is composed by a bid, offer or a trade occurred.
 
 {
     "MsgType": "V",
-    "MDReqID": 123,
+    "MDReqID": 9894272,
     "SubscriptionRequestType": "1",
     "MarketDepth": "0",
     "MDUpdateType": "1",

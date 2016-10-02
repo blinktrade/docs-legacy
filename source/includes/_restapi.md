@@ -35,7 +35,7 @@ BlinkTrade.ticker().then(function(ticker) {
 
 ```shell
 
-$ curl -XGET https://api.blinktrade.com/api/v1/BRL/ticker
+$ curl "https://api.blinktrade.com/api/v1/BRL/ticker"
 
 ```
 
@@ -43,7 +43,7 @@ $ curl -XGET https://api.blinktrade.com/api/v1/BRL/ticker
 
 Name            | Description
 ----------------|------------
-crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
+crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC
 
 > __EXAMPLE RESPONSE__
 
@@ -65,13 +65,13 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 Name             | Type   | Description
 -----------------|--------|------------
 pair             | string | [\<SYMBOL\>](#symbols)
-last             | number | Value of the last price in the last 24 hours.
-high             | number | Price of the highest price in the last 24 hours.
-low              | number | Price of the lowest price in the last 24 hours.
-vol              | number | Trading volume in the last 24 hours.
-vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies) (lowercase).
-buy              | number | Price of the most recent buy order.
-sell             | number | Price of the most recent sell order.
+last             | number | Value of the last price in the last 24 hours
+high             | number | Price of the highest price in the last 24 hours
+low              | number | Price of the lowest price in the last 24 hours
+vol              | number | Trading volume in the last 24 hours
+vol_[\<CURRENCY\>](#currencies) | number | Trading volume in the last 24 hours in [\<CURRENCY\>](#currencies) (lowercase)
+buy              | number | Price of the most recent buy order
+sell             | number | Price of the most recent sell order
 
 
 ## Orderbook
@@ -92,7 +92,7 @@ BlinkTrade.orderbook().then(function(orderbook) {
 
 ```shell
 
-$ curl -XGET https://api.blinktrade.com/api/v1/BRL/orderbook
+$ curl "https://api.blinktrade.com/api/v1/BRL/orderbook"
 
 ```
 
@@ -100,7 +100,7 @@ $ curl -XGET https://api.blinktrade.com/api/v1/BRL/orderbook
 
 Name            | Description
 ----------------|------------
-crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
+crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC
 
 > __EXAMPLE RESPONSE__
 
@@ -125,16 +125,16 @@ crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
 Name       | Type          | Description
 -----------|---------------|------------
 pair       | string        | [\<SYMBOL\>](#symbols)
-bids       | array(array)  | Array of bids from buyers.
-asks       | array(array)  | Array of asks from sellers.
+bids       | array(array)  | Array of bids from buyers
+asks       | array(array)  | Array of asks from sellers
 
 For each element of `bids` or `asks` array:
 
 Index Array | Type    | Description
 :----------:|---------|------------
-0           | number  | Unit price.
-1           | number  | Amount to buy/sell.
-2           | number  | User ID.
+0           | number  | Unit price
+1           | number  | Amount to buy/sell
+2           | number  | User ID
 
 ## Trades
 
@@ -146,7 +146,7 @@ A list of the last trades executed on an exchange since a chosen date.
 
 ```javascript
 
-BlinkTrade.trades({ limit: 100 }).then(function(trades) {
+BlinkTrade.trades({ limit: 2 }).then(function(trades) {
   console.log(trades);
 });
 
@@ -154,7 +154,7 @@ BlinkTrade.trades({ limit: 100 }).then(function(trades) {
 
 ```shell
 
-$ curl -XGET https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2
+$ curl "https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2"
 
 ```
 
@@ -162,9 +162,9 @@ $ curl -XGET https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit
 
 Name            | Description
 ----------------|------------
-crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC.
-since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade.
-limit           | Limit of trades that will be returned. `<NUMBER>` should be a positive integer. **Optional**; defaults to 100 trades.
+crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC
+since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade
+limit           | Limit of trades that will be returned. `<NUMBER>` should be a positive integer. **Optional**; defaults to 100 trades
 
 ### Response
 
@@ -193,8 +193,8 @@ The response is an array of objects where for each object:
 
 Name   | Type   | Description
 -------|--------|------------
-tid    | number | Trade ID.
-date   | number | Executed date in Unix Time.
-price  | number | Unit price.
-amount | number | Amount bought/sold.
-side   | string | "buy" for a buy order or "sell" for a sell order.
+tid    | number | Trade ID
+date   | number | Executed date in Unix Time
+price  | number | Unit price
+amount | number | Amount bought/sold
+side   | string | "buy" for a buy order or "sell" for a sell order
