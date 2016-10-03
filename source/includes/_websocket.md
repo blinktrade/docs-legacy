@@ -417,6 +417,34 @@ blinktrade.executionReport()
 
 ```
 
+> __EXAMPLE RESPONSE__
+
+```json
+
+{
+    "OrderID": 1459028830811,
+    "ExecID": 740972,
+    "ExecType": "0",
+    "OrdStatus": "0",
+    "CumQty": 0,
+    "Symbol": "BTCUSD",
+    "OrderQty": 5000000,
+    "LastShares": 0,
+    "LastPx": 0,
+    "Price": 55000000000,
+    "TimeInForce": "1",
+    "LeavesQty": 5000000,
+    "MsgType": "8",
+    "ExecSide": "1",
+    "OrdType": "2",
+    "CxlQty": 0,
+    "Side": "1",
+    "ClOrdID": 3251968,
+    "AvgPx": 0
+}
+
+```
+
 ### Response
 
 field       | Type   | Description/Value
@@ -476,7 +504,7 @@ blinktrade.tradeHistory().then(function(trades) {
 | Page                | number | **Optional** defaults to 0.
 | PageSize            | number | **Optional** defaults to 80.
 
-> EXAMPLE RESPONSE
+> __EXAMPLE RESPONSE__
 
 ```json
 
