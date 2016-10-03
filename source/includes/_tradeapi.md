@@ -3,15 +3,17 @@
 On our RESTful API, we provide a trade endpoint that you're allowed to send and cancel orders,
 request deposits and withdrawals. You need to [create an API Key](#create-api-key) through our platform and set their respective permission that gives you access to it.
 
-The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `REST` and `WebSocket API`. On `REST` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`, and API Key is needed in order to authenticate your access.
+The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `REST` and `WebSocket API`.
+On `REST` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`,
+and API Key is needed in order to authenticate your access.
+
+<aside class="warning">
+  <b>NOTE</b>
+  <p>Be aware that our Restful trade endpoint can be changed at any time, we strongly recommend using the WebSocket API over the Restful API.</p>
+</aside>
 
 <aside class="notice">
   <b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket API
-</aside>
-
-
-<aside class="notice">
-  <b>NOTE</b> that Fiat values are also in "satoshis" precision, so divide it by 10^8 to recover the unit value.
 </aside>
 
 An `HTTP POST` request method should be used to send a RESTful HTTP message.
