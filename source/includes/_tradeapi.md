@@ -818,6 +818,39 @@ Data          | object | Data object containing the withdraws required fields
 | VPBankinternaltransfer | VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift                                                    |
 | cashtoID               | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient |
 
+
+
+### Confirm Withdraws
+
+After request a withdraw, you might get a error asking for two factor authentication,
+you should call `confirmWithdraw` passing the `confirmationToken` that was sent to your email,
+or `secondFactor` if needed.
+
+
+```json
+
+{
+    "MsgType": 'U24',
+    "WithdrawID": 1,
+    "WithdrawReqID": 1,
+    "ConfirmationToken": "TOKEN",
+    "SecondFactor": "TOKEN",
+    "WithdrawID": 1
+}
+
+```
+
+```javascript
+
+blinktrade.confirmWithdraw({
+  withdrawId: 523,
+  confirmationToken: 'TOKEN'
+}).then(function(withdraw) {
+  console.log(withdraw);
+});
+
+```
+
 > __RESPONSE EXAMPLE__
 
 ```json
@@ -854,3 +887,22 @@ Data          | object | Data object containing the withdraws required fields
 ### Response
 
 Returns a Balance and Withdraw Model Object.
+
+
+### Cancel Withdraw
+
+```json
+
+{
+    "MsgType": "U70",
+    "WithdrawCancelReqID": 1,
+    "WithdrawID" : 1
+};
+
+```
+
+```js
+
+blinktrade.cancelWithdraw(1)
+
+```
