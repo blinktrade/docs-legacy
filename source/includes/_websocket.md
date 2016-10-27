@@ -479,6 +479,47 @@ AvgPx       | number | Calculated average price of all fills on this order.
 | EXECUTION_REPORT:CANCELED  | Callback when your order has been canceled          |
 | EXECUTION_REPORT:REJECTED  | Callback when order has been rejected          |
 
+## Deposit / Withdraw Refresh
+
+When requesting deposits and withdraws, you can listen `DEPOSIT_REFRESH` and `WITHDRAW_REFRESH` receive updates.
+
+```js
+
+blinktrade.requestDeposit().on('DEPOSIT_REFRESH', function(deposit) {
+  console.log(deposit);
+});
+
+blinktrade.requestWithdraw().on('WITHDRAW_REFRESH', function(withdraw) {
+  console.log(withdraw);
+});
+
+```
+
+<aside class="notice">
+  <b>NOTE</b>
+  <p>
+    That these events will only be called to the current deposit / withdraw created,
+    if you want to listen to any deposit / withdraw updates, you should use onDepositRefresh(callback) and onWithdrawRefresh(callback) instead.
+  </p>
+</aside>
+
+
+```js
+
+blinktrade.onDepositRefresh(function(deposit) {
+  console.log(deposit);
+});
+
+blinktrade.onWithdrawRefresh(function(withdraw) {
+  console.log(withdraw);
+});
+
+```
+
+### Reponse
+
+Returns a deposit / withdraw model
+
 ## Trade History
 
 A list of the last trades executed on an exchange since a chosen date.

@@ -598,6 +598,12 @@ Value           | number | Amount in satoshis
 Currency        | string | [\<CURRENCY\>](#currencies)
 BrokerID        | number | [\<BROKER_ID\>](#brokers)
 
+#### Events
+
+| Event           | Description                   |
+|-----------------|-------------------------------|
+| DEPOSIT_REFRESH | Callback when deposit refresh |
+
 > __EXAMPLE RESPONSE__
 
 ```json
@@ -819,6 +825,12 @@ Data          | object | Data object containing the withdraws required fields
 | cashtoID               | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient |
 
 
+### Events
+
+| Event            | Description                    |
+|------------------|--------------------------------|
+| WITHDRAW_REFRESH | Callback when withdraw refresh |
+
 
 ### Confirm Withdraws
 
@@ -830,7 +842,7 @@ or `secondFactor` if needed.
 ```json
 
 {
-    "MsgType": 'U24',
+    "MsgType": "U24",
     "WithdrawID": 1,
     "WithdrawReqID": 1,
     "ConfirmationToken": "TOKEN",
@@ -844,7 +856,7 @@ or `secondFactor` if needed.
 
 blinktrade.confirmWithdraw({
   withdrawId: 523,
-  confirmationToken: 'TOKEN'
+  confirmationToken: "TOKEN"
 }).then(function(withdraw) {
   console.log(withdraw);
 });
