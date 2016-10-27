@@ -1526,6 +1526,20 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </tr>
 </tbody></table>
 
+<h4 id="events">Events</h4>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>DEPOSIT_REFRESH</td>
+<td>Callback when deposit refresh</td>
+</tr>
+</tbody></table>
+
 <blockquote>
 <p><strong>EXAMPLE RESPONSE</strong></p>
 </blockquote>
@@ -1826,6 +1840,46 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">
 </tr>
 </tbody></table>
 
+<h3 id="events">Events</h3>
+
+<table><thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>WITHDRAW_REFRESH</td>
+<td>Callback when withdraw refresh</td>
+</tr>
+</tbody></table>
+
+<h3 id="confirm-withdraws">Confirm Withdraws</h3>
+
+<p>After request a withdraw, you might get a error asking for two factor authentication,
+you should call <code class="prettyprint">confirmWithdraw</code> passing the <code class="prettyprint">confirmationToken</code> that was sent to your email,
+or <code class="prettyprint">secondFactor</code> if needed.</p>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U24"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WithdrawID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WithdrawReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ConfirmationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOKEN"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"SecondFactor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOKEN"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WithdrawID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight javascript"><code>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">confirmWithdraw</span><span class="p">({</span>
+  <span class="na">withdrawId</span><span class="p">:</span> <span class="mi">523</span><span class="p">,</span>
+  <span class="na">confirmationToken</span><span class="p">:</span> <span class="s2">"TOKEN"</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+
 <blockquote>
 <p><strong>RESPONSE EXAMPLE</strong></p>
 </blockquote>
@@ -1862,6 +1916,20 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">
 <h3 id="response">Response</h3>
 
 <p>Returns a Balance and Withdraw Model Object.</p>
+
+<h3 id="cancel-withdraw">Cancel Withdraw</h3>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U70"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WithdrawCancelReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WithdrawID"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="err">;</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight javascript"><code>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">cancelWithdraw</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+</code></pre>
 
           <h1 id="websocket-api">WebSocket API</h1>
 
@@ -2766,6 +2834,42 @@ curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">
 <td>Callback when order has been rejected</td>
 </tr>
 </tbody></table>
+
+<h2 id="deposit-withdraw-refresh">Deposit / Withdraw Refresh</h2>
+
+<p>When requesting deposits and withdraws, you can listen <code class="prettyprint">DEPOSIT_REFRESH</code> and <code class="prettyprint">WITHDRAW_REFRESH</code> receive updates.</p>
+<pre class="highlight javascript"><code>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestDeposit</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'DEPOSIT_REFRESH'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">deposit</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">deposit</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestWithdraw</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">'WITHDRAW_REFRESH'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+
+<aside class="notice">
+  <b>NOTE</b>
+  <p>
+    That these events will only be called to the current deposit / withdraw created,
+    if you want to listen to any deposit / withdraw updates, you should use onDepositRefresh(callback) and onWithdrawRefresh(callback) instead.
+  </p>
+</aside>
+<pre class="highlight javascript"><code>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">onDepositRefresh</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">deposit</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">deposit</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">onWithdrawRefresh</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+
+<h3 id="reponse">Reponse</h3>
+
+<p>Returns a deposit / withdraw model</p>
 
 <h2 id="trade-history">Trade History</h2>
 
