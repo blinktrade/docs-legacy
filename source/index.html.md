@@ -49,7 +49,7 @@ blinktrade.heartbeat().then(function(heartbeat) {
 
 ```
 
-[Check our JavaScript SDK documentation]()
+[Check our JavaScript SDK documentation](https://github.com/blinktrade/BlinkTradeJS)
 
 <aside class="notice">
   <b>NOTE</b>
