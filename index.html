@@ -1936,6 +1936,8 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 <p>With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation <a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784">here</a>.</p>
 
 <h2 id="connectivity">Connectivity</h2>
+
+<p>The a rate limit is 16 messages per second.</p>
 <pre class="highlight javascript"><code>
 <span class="kd">var</span> <span class="nx">BlinkTradeWS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"blinktrade"</span><span class="p">).</span><span class="nx">BlinkTradeWS</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">blinktrade</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlinkTradeWS</span><span class="p">({</span> <span class="na">prod</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
