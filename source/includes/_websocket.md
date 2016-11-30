@@ -4,6 +4,8 @@ With the WebSocket API, you have full access to the exchange, you can also check
 
 ## Connectivity
 
+The a rate limit is 16 messages per second.
+
 ```javascript
 
 var BlinkTradeWS = require("blinktrade").BlinkTradeWS;
