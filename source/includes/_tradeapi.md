@@ -918,3 +918,67 @@ Returns a Balance and Withdraw Model Object.
 blinktrade.cancelWithdraw(1)
 
 ```
+
+## Ledger
+
+> __MESSAGE EXAMPLE__
+
+```json
+{
+  "MsgType": "U34",
+  "LedgerListReqID": 1,
+  "Page": 0,
+  "PageSize": 1,
+  "BrokerID": 4,
+  "Currency": "BTC"
+}
+```
+
+```javascript
+
+blinktrade.requestLedger().then(function(ledger) {
+  console.log(ledger);
+});
+
+```
+
+> __RESPONSE EXAMPLE__
+
+```json
+
+{
+    "PageSize": 20,
+    "LedgerListGrp": [{
+        "LedgerID": 136514,
+        "Currency": "BTC",
+        "Operation": "C",
+        "AccountID": 90800127,
+        "BrokerID": 5,
+        "PayeeID": 90000001,
+        "PayeeBrokerID": 5,
+        "Amount": 10000,
+        "Balance": 3932168134,
+        "Reference": "732",
+        "Created": "2017-01-02 00:08:40",
+        "Description": "WFR",
+        "AccountName": "user"
+    }],
+    "Page": 0,
+    "MsgType": "U35",
+    "LedgerListReqID": 5219413
+}
+
+```
+
+
+### Paramenters
+
+Params          | Type   | Description/Value
+----------------|--------|------------------
+MsgType         | string | "U34"
+LedgerListReqID | number | Request ID
+Page            | number | **Optional**; defaults to 0
+PageSize        | number | **Optional**; defaults to 20
+BrokerID        | number | **Optional**; [\<BROKER_ID\>](#brokers)
+Currency        | string | **Optional**; Currency code. (.e.g: BTC)
+ClientID        | number | **Optional**; UserID used by brokers
