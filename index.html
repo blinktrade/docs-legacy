@@ -1931,6 +1931,101 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 
 </code></pre>
 
+<h2 id="ledger">Ledger</h2>
+
+<blockquote>
+<p><strong>MESSAGE EXAMPLE</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U34"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"LedgerListReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"Page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"PageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight javascript"><code>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestLedger</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ledger</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ledger</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+
+<blockquote>
+<p><strong>RESPONSE EXAMPLE</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"PageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"LedgerListGrp"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"LedgerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">136514</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"AccountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">90800127</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"BrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PayeeID"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000001</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PayeeBrokerID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">3932168134</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"732"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-02 00:08:40"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WFR"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"AccountName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"Page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"MsgType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U35"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"LedgerListReqID"</span><span class="p">:</span><span class="w"> </span><span class="mi">5219413</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h3 id="paramenters">Paramenters</h3>
+
+<table><thead>
+<tr>
+<th>Params</th>
+<th>Type</th>
+<th>Description/Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MsgType</td>
+<td>string</td>
+<td>&ldquo;U34&rdquo;</td>
+</tr>
+<tr>
+<td>LedgerListReqID</td>
+<td>number</td>
+<td>Request ID</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>number</td>
+<td><strong>Optional</strong>; defaults to 0</td>
+</tr>
+<tr>
+<td>PageSize</td>
+<td>number</td>
+<td><strong>Optional</strong>; defaults to 20</td>
+</tr>
+<tr>
+<td>BrokerID</td>
+<td>number</td>
+<td><strong>Optional</strong>; <a href="#brokers">&lt;BROKER_ID&gt;</a></td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>string</td>
+<td><strong>Optional</strong>; Currency code. (.e.g: BTC)</td>
+</tr>
+<tr>
+<td>ClientID</td>
+<td>number</td>
+<td><strong>Optional</strong>; UserID used by brokers</td>
+</tr>
+</tbody></table>
+
           <h1 id="websocket-api">WebSocket API</h1>
 
 <p>With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation <a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784">here</a>.</p>
