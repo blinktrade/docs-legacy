@@ -389,6 +389,15 @@ Side        | string | "1" = Buy, "2" = Sell
 Price       | number | Price per unit of quantity in satoshis
 ExecSide    | string | Side of this fill
 AvgPx       | number | Calculated average price of all fills on this order
+OrdRejReason| string | Rejected reason code if order was rejected based on [fix protocol](http://www.onixs.biz/fix-dictionary/4.3/tagNum_103.html) 
+
+<aside class="notice">
+  <b>NOTE</b>
+  <p>
+    Rejected orders with reason '3' (Order exceeds limit), means that you don't have enough balance or may have open orders,
+    orders with amount below 0.0001 BTC exceeds limits as well, therefore, will also be rejected.
+  </p>
+</aside>
 
 ## Cancel Order
 
