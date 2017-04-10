@@ -1261,7 +1261,20 @@ it will response as an array together with the balance response.</p>
 <td>number</td>
 <td>Calculated average price of all fills on this order</td>
 </tr>
+<tr>
+<td>OrdRejReason</td>
+<td>string</td>
+<td>Rejected reason code if order was rejected based on <a href="http://www.onixs.biz/fix-dictionary/4.3/tagNum_103.html">fix protocol</a></td>
+</tr>
 </tbody></table>
+
+<aside class="notice">
+  <b>NOTE</b>
+  <p>
+    Rejected orders with reason &lsquo;3&rsquo; (Order exceeds limit), means that you don&rsquo;t have enough balance or may have open orders,
+    orders with amount below 0.0001 BTC exceeds limits as well, therefore, will also be rejected.
+  </p>
+</aside>
 
 <h2 id="cancel-order">Cancel Order</h2>
 
