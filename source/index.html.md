@@ -72,7 +72,7 @@ Some features are accessed publicly and others require an API Key based authenti
 ### WebSocket
 
 * `testnet` URL endpoint is `wss://api.testnet.blinktrade.com/trade/`
-* `prod` URL endpoint is `wss://api.blinktrade.com/trade/`
+* `prod` URL endpoint is `wss://ws.blinktrade.com/trade/`
 
 ## Create API Key
 
