@@ -389,6 +389,15 @@ Side        | string | "1" = Buy, "2" = Sell
 Price       | number | Price per unit of quantity in satoshis
 ExecSide    | string | Side of this fill
 AvgPx       | number | Calculated average price of all fills on this order
+OrdRejReason| string | Rejected reason code if order was rejected based on [fix protocol](http://www.onixs.biz/fix-dictionary/4.3/tagNum_103.html) 
+
+<aside class="notice">
+  <b>NOTE</b>
+  <p>
+    Rejected orders with reason '3' (Order exceeds limit), means that you don't have enough balance or may have open orders,
+    orders with amount below 0.0001 BTC exceeds limits as well, therefore, will also be rejected.
+  </p>
+</aside>
 
 ## Cancel Order
 
@@ -918,3 +927,67 @@ Returns a Balance and Withdraw Model Object.
 blinktrade.cancelWithdraw(1)
 
 ```
+
+## Ledger
+
+> __MESSAGE EXAMPLE__
+
+```json
+{
+  "MsgType": "U34",
+  "LedgerListReqID": 1,
+  "Page": 0,
+  "PageSize": 1,
+  "BrokerID": 4,
+  "Currency": "BTC"
+}
+```
+
+```javascript
+
+blinktrade.requestLedger().then(function(ledger) {
+  console.log(ledger);
+});
+
+```
+
+> __RESPONSE EXAMPLE__
+
+```json
+
+{
+    "PageSize": 20,
+    "LedgerListGrp": [{
+        "LedgerID": 136514,
+        "Currency": "BTC",
+        "Operation": "C",
+        "AccountID": 90800127,
+        "BrokerID": 5,
+        "PayeeID": 90000001,
+        "PayeeBrokerID": 5,
+        "Amount": 10000,
+        "Balance": 3932168134,
+        "Reference": "732",
+        "Created": "2017-01-02 00:08:40",
+        "Description": "WFR",
+        "AccountName": "user"
+    }],
+    "Page": 0,
+    "MsgType": "U35",
+    "LedgerListReqID": 5219413
+}
+
+```
+
+
+### Paramenters
+
+Params          | Type   | Description/Value
+----------------|--------|------------------
+MsgType         | string | "U34"
+LedgerListReqID | number | Request ID
+Page            | number | **Optional**; defaults to 0
+PageSize        | number | **Optional**; defaults to 20
+BrokerID        | number | **Optional**; [\<BROKER_ID\>](#brokers)
+Currency        | string | **Optional**; Currency code. (.e.g: BTC)
+ClientID        | number | **Optional**; UserID used by brokers
