@@ -1,6 +1,7 @@
 # WebSocket API
 
-With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation [here](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784).
+With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket
+implementation [here](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784).
 
 ## Connectivity
 
@@ -43,7 +44,8 @@ blinktrade.connect().then(function() {
 Name      | Type   | Description
 ----------|--------|------------
 MsgType   | string | [1](http://www.onixs.biz/fix-dictionary/4.4/msgType_1_1.html)
-[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID
+[TestReqID](http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html) | string | An ID assigned by you.
+It can be any number. The response message associated with this request will contain the same ID
 SendTime  | number | Unix Time Stamp
 
 
@@ -73,11 +75,14 @@ ServerTimestamp | number | Server Unix Time Stamp
 
 ## Authentication
 
-Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection, you will be able to access your account. You can also login with your API Key and API Password and you'll only be allowed to send messages that your API Key has permission to send.
+Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection,
+you will be able to access your account. You can also login with your API Key and API Password and you'll only be
+allowed to send messages that your API Key has permission to send.
 
 ### FingerPrint
 
-If you're not using the JavaScript SDK, You will need to pass a fingerprint from your browser, there's some finger prints implementations that you can use.
+If you're not using the JavaScript SDK, You will need to pass a fingerprint from your browser,
+there's some finger prints implementations that you can use.
 
 * [Our google closure implementation](https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/util/util.js#L96-L157)
 * [fingerprintjs2](https://github.com/Valve/fingerprintjs2)
@@ -190,7 +195,8 @@ WithdrawPercentFee      | number | Percent fee for withdrawals
 
 ## Subscribe to OrderBook
 
-You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime. Each Market Data Entry is composed by a bid, offer or a trade occurred.
+You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime.
+Each Market Data Entry is composed by a bid, offer or a trade occurred.
 
 
 > __EXAMPLE MESSAGE__
@@ -501,7 +507,8 @@ blinktrade.requestWithdraw().on('WITHDRAW_REFRESH', function(withdraw) {
   <b>NOTE</b>
   <p>
     That these events will only be called to the current deposit / withdraw created,
-    if you want to listen to any deposit / withdraw updates, you should use onDepositRefresh(callback) and onWithdrawRefresh(callback) instead.
+    if you want to listen to any deposit / withdraw updates, you should use onDepositRefresh(callback)
+    and onWithdrawRefresh(callback) instead.
   </p>
 </aside>
 

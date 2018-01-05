@@ -9,11 +9,16 @@ and API Key is needed in order to authenticate your access.
 
 <aside class="warning">
   <b>NOTE</b>
-  <p>Be aware that our Restful trade endpoint can be changed at any time, we strongly recommend using the WebSocket API over the Restful API.</p>
+  <p>
+    Be aware that our Restful trade endpoint can be changed at any time,
+    we strongly recommend using the WebSocket API over the Restful API.
+  </p>
 </aside>
 
 <aside class="notice">
-  <b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket API
+  <b>NOTE</b>
+  that when generate the API Key and the API Secret, it will be only shown once, you should save it securely,
+  the API Password is only used in the WebSocket API
 </aside>
 
 An `HTTP POST` request method should be used to send a RESTful HTTP message.
@@ -269,7 +274,9 @@ TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 <aside class="notice">
 <b><a href="http://floating-point-gui.de/basic/">Floats are Evil!</a></b>
 <p>
-  Converting Floats to Integers can be dangerous. Different programming languages can get weird rounding errors and imprecisions, so all API returns prices and bitcoin values as Integers and in "satoshis" format. We also expect Integers as input, make sure that you're formatting the values properly to avoid precision issues.
+  Converting Floats to Integers can be dangerous. Different programming languages can get weird rounding errors and imprecisions,
+  so all API returns prices and bitcoin values as Integers and in "satoshis" format. We also expect Integers as input,
+  make sure that you're formatting the values properly to avoid precision issues.
 </p>
 </aside>
 
