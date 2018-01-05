@@ -9,6 +9,10 @@
 
 > Generated with [Slate](https://github.com/lord/slate)
 
+# Running
+
+`$ bundle exec middleman server`
+
 # Publishing to github-pages
 
 Make sure that you push your changes, and run:
