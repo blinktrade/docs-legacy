@@ -78,6 +78,8 @@ sell             | number | Price of the most recent sell order
 
 Order book is a list of orders that shows the interest of buyers (bids) and sellers (asks).
 
+**NOTE**: There's limit of 100 orders per request and you can't paginate, use WebSockets instead.
+
 ### HTTP Request
 
 `GET /api/v1/<CURRENCY>/orderbook?crypto_currency=BTC`
@@ -142,11 +144,11 @@ A list of the last trades executed on an exchange since a chosen date.
 
 ### HTTP Request
 
-`GET /api/v1/<CURRENCY>/trades?crypto_currency=BTC&since=<TIMESTAMP>&limit=<NUMBER>`
+`GET /api/v1/<CURRENCY>/trades?since=<TID>&limit=<NUMBER>`
 
 ```javascript
 
-BlinkTrade.trades({ limit: 2 }).then(function(trades) {
+BlinkTrade.trades({ limit: 100, since: 2270000 }).then(function(trades) {
   console.log(trades);
 });
 
@@ -154,7 +156,7 @@ BlinkTrade.trades({ limit: 2 }).then(function(trades) {
 
 ```shell
 
-$ curl "https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2"
+$ curl "https://api.blinktrade.com/api/v1/BRL/trades?since=2270000&limit=100"
 
 ```
 
@@ -162,8 +164,7 @@ $ curl "https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2"
 
 Name            | Description
 ----------------|------------
-crypto_currency | Crypto currency to be used. **Optional**; defaults to BTC
-since           | Date which executed trades must be fetched from. `<TIMESTAMP>` is in Unix Time date format. **Optional**; defaults to the date of the first executed trade
+since           | tid (TradeID) which executed trades must be fetched from. Optional; defaults to the date of the first executed trade |
 limit           | Limit of trades that will be returned. `<NUMBER>` should be a positive integer. **Optional**; defaults to 100 trades
 
 ### Response
