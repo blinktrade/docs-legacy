@@ -123,13 +123,18 @@
 
 <p>Welcome to <a href="https://blinktrade.com">BlinkTrade</a> API documentation!</p>
 
-<p>BlinkTrade provides a simple and robust <a href="#websocket-api">WebSocket API</a> to integrate our platform, we strongly recommend you to use it over the <a href="#public-rest-api">REST API</a>.</p>
+<p>BlinkTrade provides a simple and robust <a href="#websocket-api">WebSocket API</a> to integrate our platform,
+we strongly recommend you to use it over the <a href="#public-rest-api">REST API</a>.</p>
 
 <h2 id="blinktrade-sdk">BlinkTrade SDK</h2>
 
-<p>We provide a simple WebSocket and REST JavaScript SDK that enables you runs in either Node.js or in a browser. You can easily send and cancel orders, request deposits and withdrawals, and get real time market data through our WebSocket API.</p>
+<p>We provide a simple WebSocket and REST JavaScript SDK that enables you runs in either Node.js or in a browser.
+You can easily send and cancel orders, request deposits and withdrawals, and get real time market data through our WebSocket API.</p>
 
-<p>All SDK supports either promises and callbacks. If a callback is provided as the last argument, it will be called as <code class="prettyprint">callback(error, result)</code>, otherwise it will just return the original promise. We also provide event emitters that you can use to get realtime updates through our WebSocket API.</p>
+<p>All SDK supports either promises and callbacks.
+If a callback is provided as the last argument, it will be called as <code class="prettyprint">callback(error, result)</code>,
+otherwise it will just return the original promise. We also provide event emitters that you can
+use to get realtime updates through our WebSocket API.</p>
 
 <h3 id="install">Install</h3>
 
@@ -156,7 +161,9 @@
 <aside class="notice">
   <b>NOTE</b>
   <p>
-    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket call. These returns aims to increase readability and avoid complexity of the JSON, some returns such arrays of arrays and a `Columns` field that describes each array position, are already formatted for you.
+    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket call.
+    These returns aims to increase readability and avoid complexity of the JSON, some returns such arrays of arrays and a `Columns`
+    field that describes each array position, are already formatted for you.
   </p>
 </aside>
 
@@ -164,7 +171,8 @@
 
 <p>There are two working environments: <code class="prettyprint">prod</code> for production purporses and <code class="prettyprint">testnet</code> for testing purporses.</p>
 
-<p>Some features are accessed publicly and others require an API Key based authentication. All data messages and responses are in JSON format.</p>
+<p>Some features are accessed publicly and others require an API Key based authentication.
+All data messages and responses are in JSON format.</p>
 
 <h3 id="rest">REST</h3>
 
@@ -409,6 +417,8 @@
 
 <p>Order book is a list of orders that shows the interest of buyers (bids) and sellers (asks).</p>
 
+<p><strong>NOTE</strong>: There&rsquo;s limit of 100 orders per request and you can&rsquo;t paginate, use WebSockets instead.</p>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/orderbook?crypto_currency=BTC</code></p>
@@ -513,15 +523,15 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/trades?crypto_currency=BTC&amp;since=&lt;TIMESTAMP&gt;&amp;limit=&lt;NUMBER&gt;</code></p>
+<p><code class="prettyprint">GET /api/v1/&lt;CURRENCY&gt;/trades?since=&lt;TID&gt;&amp;limit=&lt;NUMBER&gt;</code></p>
 <pre class="highlight javascript"><code>
-<span class="nx">BlinkTrade</span><span class="p">.</span><span class="nx">trades</span><span class="p">({</span> <span class="na">limit</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">trades</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">BlinkTrade</span><span class="p">.</span><span class="nx">trades</span><span class="p">({</span> <span class="na">limit</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="na">since</span><span class="p">:</span> <span class="mi">2270000</span> <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">trades</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">trades</span><span class="p">);</span>
 <span class="p">});</span>
 
 </code></pre>
 <pre class="highlight shell"><code>
-<span class="gp">$ </span>curl <span class="s2">"https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&amp;limit=2"</span>
+<span class="gp">$ </span>curl <span class="s2">"https://api.blinktrade.com/api/v1/BRL/trades?since=2270000&amp;limit=100"</span>
 
 </code></pre>
 
@@ -534,12 +544,8 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>crypto_currency</td>
-<td>Crypto currency to be used. <strong>Optional</strong>; defaults to BTC</td>
-</tr>
-<tr>
 <td>since</td>
-<td>Date which executed trades must be fetched from. <code class="prettyprint">&lt;TIMESTAMP&gt;</code> is in Unix Time date format. <strong>Optional</strong>; defaults to the date of the first executed trade</td>
+<td>tid (TradeID) which executed trades must be fetched from. Optional; defaults to the date of the first executed trade</td>
 </tr>
 <tr>
 <td>limit</td>
@@ -617,11 +623,16 @@ and API Key is needed in order to authenticate your access.</p>
 
 <aside class="warning">
   <b>NOTE</b>
-  <p>Be aware that our Restful trade endpoint can be changed at any time, we strongly recommend using the WebSocket API over the Restful API.</p>
+  <p>
+    Be aware that our Restful trade endpoint can be changed at any time,
+    we strongly recommend using the WebSocket API over the Restful API.
+  </p>
 </aside>
 
 <aside class="notice">
-  <b>NOTE</b> that when generate the API Key and the API Secret, it will be only shown once, you should save it securely, the API Password is only used in the WebSocket API
+  <b>NOTE</b>
+  that when generate the API Key and the API Secret, it will be only shown once, you should save it securely,
+  the API Password is only used in the WebSocket API
 </aside>
 
 <p>An <code class="prettyprint">HTTP POST</code> request method should be used to send a RESTful HTTP message.</p>
@@ -1027,7 +1038,9 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <aside class="notice">
 <b><a href="http://floating-point-gui.de/basic/">Floats are Evil!</a></b>
 <p>
-  Converting Floats to Integers can be dangerous. Different programming languages can get weird rounding errors and imprecisions, so all API returns prices and bitcoin values as Integers and in &ldquo;satoshis&rdquo; format. We also expect Integers as input, make sure that you&rsquo;re formatting the values properly to avoid precision issues.
+  Converting Floats to Integers can be dangerous. Different programming languages can get weird rounding errors and imprecisions,
+  so all API returns prices and bitcoin values as Integers and in &ldquo;satoshis&rdquo; format. We also expect Integers as input,
+  make sure that you&rsquo;re formatting the values properly to avoid precision issues.
 </p>
 </aside>
 
@@ -2041,7 +2054,8 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 
           <h1 id="websocket-api">WebSocket API</h1>
 
-<p>With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket implementation <a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784">here</a>.</p>
+<p>With the WebSocket API, you have full access to the exchange, you can also check our JavaScript WebSocket
+implementation <a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/api/bitex.js#L760-L1784">here</a>.</p>
 
 <h2 id="connectivity">Connectivity</h2>
 
@@ -2091,14 +2105,12 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 <tr>
 <td><a href="http://www.onixs.biz/fix-dictionary/4.4/tagNum_112.html">TestReqID</a></td>
 <td>string</td>
-<td>An ID assigned by you. It can be any number. The response message associated with this request will contain the same ID</td>
-</tr>
-<tr>
-<td>SendTime</td>
-<td>number</td>
-<td>Unix Time Stamp</td>
+<td>An ID assigned by you.</td>
 </tr>
 </tbody></table>
+
+<p>It can be any number. The response message associated with this request will contain the same ID
+SendTime  | number | Unix Time Stamp</p>
 
 <blockquote>
 <p><strong>EXAMPLE RESPONSE</strong></p>
@@ -2147,11 +2159,14 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 
 <h2 id="authentication">Authentication</h2>
 
-<p>Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection, you will be able to access your account. You can also login with your API Key and API Password and you&rsquo;ll only be allowed to send messages that your API Key has permission to send.</p>
+<p>Most of WebSocket calls requires authentication, once you login with your username and password on the WebSocket connection,
+you will be able to access your account. You can also login with your API Key and API Password and you&rsquo;ll only be
+allowed to send messages that your API Key has permission to send.</p>
 
 <h3 id="fingerprint">FingerPrint</h3>
 
-<p>If you&rsquo;re not using the JavaScript SDK, You will need to pass a fingerprint from your browser, there&rsquo;s some finger prints implementations that you can use.</p>
+<p>If you&rsquo;re not using the JavaScript SDK, You will need to pass a fingerprint from your browser,
+there&rsquo;s some finger prints implementations that you can use.</p>
 
 <ul>
 <li><a href="https://github.com/blinktrade/frontend/blob/master/jsdev/bitex/util/util.js#L96-L157">Our google closure implementation</a></li>
@@ -2408,7 +2423,8 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 
 <h2 id="subscribe-to-orderbook">Subscribe to OrderBook</h2>
 
-<p>You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime. Each Market Data Entry is composed by a bid, offer or a trade occurred.</p>
+<p>You can subscribe to one or more Symbols and receive one or more Market Data Entries in realtime.
+Each Market Data Entry is composed by a bid, offer or a trade occurred.</p>
 
 <blockquote>
 <p><strong>EXAMPLE MESSAGE</strong></p>
@@ -2963,7 +2979,8 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
   <b>NOTE</b>
   <p>
     That these events will only be called to the current deposit / withdraw created,
-    if you want to listen to any deposit / withdraw updates, you should use onDepositRefresh(callback) and onWithdrawRefresh(callback) instead.
+    if you want to listen to any deposit / withdraw updates, you should use onDepositRefresh(callback)
+    and onWithdrawRefresh(callback) instead.
   </p>
 </aside>
 <pre class="highlight javascript"><code>
