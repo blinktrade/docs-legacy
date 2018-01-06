@@ -161,7 +161,7 @@ use to get realtime updates through our WebSocket API.</p>
 <aside class="notice">
   <b>NOTE</b>
   <p>
-    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket call.
+    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket response.
     These returns aims to increase readability and avoid complexity of the JSON, some returns such arrays of arrays and a `Columns`
     field that describes each array position, are already formatted for you.
   </p>
@@ -169,24 +169,68 @@ use to get realtime updates through our WebSocket API.</p>
 
 <h2 id="blinktrade-endpoints">BlinkTrade Endpoints</h2>
 
+<aside class="warning">
+  <b>NOTE</b>
+  <p>
+    We impose cross origin policy (cors), even though our SDK can work on the browser,
+    it won&rsquo;t work due our origin policy, so and we recommend you use on server side instead.
+
+    Only the public rest is available on the browser, and other environments only works on testnet
+    and you won&rsquo;t be able use to use production environment on the browser, this might change in the future.
+  </p>
+</aside>
+
 <p>There are two working environments: <code class="prettyprint">prod</code> for production purporses and <code class="prettyprint">testnet</code> for testing purporses.</p>
 
 <p>Some features are accessed publicly and others require an API Key based authentication.
 All data messages and responses are in JSON format.</p>
 
-<h3 id="rest">REST</h3>
+<h3 id="public-rest">Public Rest</h3>
 
 <ul>
-<li><code class="prettyprint">testnet</code> base URL endpoint is <code class="prettyprint">https://api.testnet.blinktrade.com</code></li>
-<li><code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://api.blinktrade.com</code></li>
+<li><code class="prettyprint">testnet</code> base URL endpoint is <code class="prettyprint">https://api_testnet.blinktrade.com/api/v1</code></li>
+<li><code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://api.blinktrade.com/api/v1</code></li>
+</ul>
+
+<h3 id="trade-rest-and-websocket">Trade (Rest and WebSocket)</h3>
+
+<h3 id="rest">Rest</h3>
+
+<ul>
+<li><code class="prettyprint">testnet</code> base URL endpoint is <code class="prettyprint">https://api_testnet.blinktrade.com/tapi/v1/message</code></li>
+<li><code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code></li>
 </ul>
 
 <h3 id="websocket">WebSocket</h3>
 
 <ul>
-<li><code class="prettyprint">testnet</code> URL endpoint is <code class="prettyprint">wss://api.testnet.blinktrade.com/trade/</code></li>
+<li><code class="prettyprint">testnet</code> URL endpoint is <code class="prettyprint">wss://api_testnet.blinktrade.com/trade/</code></li>
 <li><code class="prettyprint">prod</code> URL endpoint is <code class="prettyprint">wss://ws.blinktrade.com/trade/</code></li>
 </ul>
+
+<table><thead>
+<tr>
+<th>Endpoint</th>
+<th>Server</th>
+<th>Browser</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Public Rest</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Trade</td>
+<td>Yes</td>
+<td>No (Origin Policy)</td>
+</tr>
+<tr>
+<td>WebSocket</td>
+<td>Yes</td>
+<td>No (Origin Policy)</td>
+</tr>
+</tbody></table>
 
 <h2 id="create-api-key">Create API Key</h2>
 
@@ -1768,7 +1812,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <span class="nv">nonce</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
 <span class="nv">signature</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> -n <span class="nv">$nonce</span> | openssl dgst -sha256 -hex -hmac <span class="nv">$api_secret</span><span class="sb">`</span>
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
+curl -XPOST https://api_testnet.blinktrade.com/tapi/v1/message <span class="se">\</span>
     -H <span class="s2">"Nonce:</span><span class="nv">$nonce</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"APIKey:</span><span class="nv">$api_key</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type:application/json"</span> <span class="se">\</span>
