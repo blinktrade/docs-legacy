@@ -32,6 +32,7 @@ If a callback is provided as the last argument, it will be called as `callback(e
 otherwise it will just return the original promise. We also provide event emitters that you can
 use to get realtime updates through our WebSocket API.
 
+
 ### Install
 
 `$ npm install blinktrade`
@@ -59,7 +60,7 @@ blinktrade.heartbeat().then(function(heartbeat) {
 <aside class="notice">
   <b>NOTE</b>
   <p>
-    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket call.
+    We aimed to design a concise API by returning a JSON format that can be slightly different from the original WebSocket response.
     These returns aims to increase readability and avoid complexity of the JSON, some returns such arrays of arrays and a `Columns`
     field that describes each array position, are already formatted for you.
   </p>
@@ -67,20 +68,44 @@ blinktrade.heartbeat().then(function(heartbeat) {
 
 ## BlinkTrade Endpoints
 
+<aside class="warning">
+  <b>NOTE</b>
+  <p>
+    We impose cross origin policy (cors), even though our SDK can work on the browser,
+    it won't work due our origin policy, so and we recommend you use on server side instead.
+
+    Only the public rest is available on the browser, and other environments only works on testnet
+    and you won't be able use to use production environment on the browser, this might change in the future.
+  </p>
+</aside>
+
 There are two working environments: `prod` for production purporses and `testnet` for testing purporses.
 
 Some features are accessed publicly and others require an API Key based authentication.
 All data messages and responses are in JSON format.
 
-### REST
+### Public Rest
 
-* `testnet` base URL endpoint is `https://api.testnet.blinktrade.com`
-* `prod` base URL endpoint is `https://api.blinktrade.com`
+* `testnet` base URL endpoint is `https://api_testnet.blinktrade.com/api/v1`
+* `prod` base URL endpoint is `https://api.blinktrade.com/api/v1`
+
+### Trade (Rest and WebSocket)
+
+### Rest
+
+* `testnet` base URL endpoint is `https://api_testnet.blinktrade.com/tapi/v1/message`
+* `prod` base URL endpoint is `https://api.blinktrade.com/tapi/v1/message`
 
 ### WebSocket
 
-* `testnet` URL endpoint is `wss://api.testnet.blinktrade.com/trade/`
+* `testnet` URL endpoint is `wss://api_testnet.blinktrade.com/trade/`
 * `prod` URL endpoint is `wss://ws.blinktrade.com/trade/`
+
+| Endpoint    | Server | Browser
+|-------------|--------|--------------------
+| Public Rest | Yes    | Yes
+| Trade       | Yes    | No (Origin Policy)
+| WebSocket   | Yes    | No (Origin Policy)
 
 ## Create API Key
 

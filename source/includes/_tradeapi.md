@@ -803,7 +803,7 @@ api_secret=YOUR_SECRET_KEY_GENERATED_IN_API_MODULE
 nonce=`date +%s`
 signature=`echo -n $nonce | openssl dgst -sha256 -hex -hmac $api_secret`
 
-curl -XPOST https://api.testnet.blinktrade.com/tapi/v1/message \
+curl -XPOST https://api_testnet.blinktrade.com/tapi/v1/message \
     -H "Nonce:$nonce" \
     -H "APIKey:$api_key" \
     -H "Content-Type:application/json" \
