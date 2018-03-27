@@ -285,7 +285,7 @@ TimeInForce | string | "0" = Day, "1" = Good Till Cancel, "4" = Fill or Kill
 ```json
 {
 	"MsgType": "D",
-	"ClOrdID": 8426208,
+	"ClOrdID": "8426208",
 	"Symbol": "BTCUSD",
 	"Side": "1",
 	"OrdType": "2",
@@ -309,7 +309,7 @@ blinktrade.sendOrder({
 ```
 
 ```shell
-message='{ "MsgType": "D", "ClOrdID": 8426208, "Symbol": "BTCUSD", "Side": "1", "OrdType": "2", "Price": 55000000000, "OrderQty": 5000000, "BrokerID": 5 }'
+message='{ "MsgType": "D", "ClOrdID": "8426208", "Symbol": "BTCUSD", "Side": "1", "OrdType": "2", "Price": 55000000000, "OrderQty": 5000000, "BrokerID": 5 }'
 
 api_url='API_URL_REST_ENDPOINT'
 api_key='YOUR_API_KEY_GENERATED_IN_API_MODULE'
@@ -331,7 +331,7 @@ curl -X POST "$api_url"              \
 Name     | Type   | Description/Value
 ---------|--------|------------------
 MsgType  | string | "D"
-ClOrdID  | number | Unique identifier for Order as assigned by you
+ClOrdID  | string | Unique identifier for Order as assigned by you
 Symbol   | string | [\<SYMBOL\>](#symbols)
 Side     | string | "1" = Buy, "2" = Sell
 OrdType  | string | "2" = Limited
@@ -367,7 +367,7 @@ it will response as an array together with the balance response.
   "OrdType": "2",
   "CxlQty": 0,
   "Side": "1",
-  "ClOrdID": 8426208,
+  "ClOrdID": "8426208",
   "AvgPx": 0
 }
 
@@ -414,7 +414,7 @@ OrdRejReason| string | Rejected reason code if order was rejected based on [fix 
 {
     "MsgType": "F",
     "OrderID": 1459028830899,
-    "ClOrdID": 8426208
+    "ClOrdID": "8426208"
 }
 ```
 
@@ -449,7 +449,7 @@ curl -X POST "$api_url"              \
 Name    | Type   | Description/Value
 --------|--------|------------------
 MsgType | string | "F" Order Cancel Request message. Check for a full doc here: [http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html](http://www.onixs.biz/fix-dictionary/4.4/msgType_F_70.html).
-ClOrdID | number | ID for an Order as assigned by you.
+ClOrdID | string | ID for an Order as assigned by you.
 
 ### Response
 
