@@ -823,24 +823,6 @@ Amount        | number | Amount in satoshis
 Currency      | string | Currency code
 Data          | object | Data object containing the withdraws required fields
 
-**FOXBIT**
-
-| Methods               | Required Data fields                                                      |
-|-----------------------|---------------------------------------------------------------------------|
-| bradesco              | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                       |
-| bb                    | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                       |
-| Caixa                 | AccountBranch, AccountNumber, AccountType, CPF_CNPJ                       |
-| ted                   | BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ |
-
-**VBTC**
-
-| Methods                | Required Data fields                                                                                             |
-|------------------------|------------------------------------------------------------------------------------------------------------------|
-| banktransfer           | BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift                                         |
-| VPBankinternaltransfer | VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift                                                    |
-| cashtoID               | BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient |
-
-
 ### Events
 
 | Event            | Description                    |
