@@ -101,6 +101,13 @@ All data messages and responses are in JSON format.
 * `testnet` URL endpoint is `wss://api_testnet.blinktrade.com/trade/`
 * `prod` URL endpoint is `wss://ws.blinktrade.com/trade/`
 
+
+## BitCambio Endpoints
+
+* bitcambio `prod` base URL endpoint is `https://bitcambio_api.blinktrade.com/tapi/v1/message`
+* bitcambio `prod` URL endpoint is `wss://bitcambio_api.blinktrade.com/trade/`
+
+
 | Endpoint    | Server | Browser
 |-------------|--------|--------------------
 | Public Rest | Yes    | Yes
