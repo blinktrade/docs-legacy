@@ -208,6 +208,13 @@ All data messages and responses are in JSON format.</p>
 <li><code class="prettyprint">prod</code> URL endpoint is <code class="prettyprint">wss://ws.blinktrade.com/trade/</code></li>
 </ul>
 
+<h2 id="bitcambio-endpoints">BitCambio Endpoints</h2>
+
+<ul>
+<li>bitcambio <code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://bitcambio_api.blinktrade.com/tapi/v1/message</code></li>
+<li>bitcambio <code class="prettyprint">prod</code> URL endpoint is <code class="prettyprint">wss://bitcambio_api.blinktrade.com/trade/</code></li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Endpoint</th>
@@ -254,16 +261,12 @@ All data messages and responses are in JSON format.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: center">1</td>
-<td><a href="https://surbitcoin.com">SurBitcoin</a></td>
-</tr>
-<tr>
 <td style="text-align: center">3</td>
 <td><a href="https://vbtc.vn">VBTC</a></td>
 </tr>
 <tr>
-<td style="text-align: center">4</td>
-<td><a href="https://foxbit.com.br">FoxBit</a></td>
+<td style="text-align: center">4̶</td>
+<td>F̶o̶x̶B̶i̶t̶</td>
 </tr>
 <tr>
 <td style="text-align: center"><strong>5</strong></td>
@@ -276,6 +279,10 @@ All data messages and responses are in JSON format.</p>
 <tr>
 <td style="text-align: center">9</td>
 <td><a href="https://chilebit.net">ChileBit</a></td>
+</tr>
+<tr>
+<td style="text-align: center">11</td>
+<td><a href="https://bitcambio.com.br">BitCambio</a></td>
 </tr>
 </tbody></table>
 
@@ -290,16 +297,12 @@ All data messages and responses are in JSON format.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>VEF</td>
-<td>Venezuelan Bolivares (SurBitcoin)</td>
-</tr>
-<tr>
 <td>VND</td>
 <td>Vietnamise Dongs (VBTC)</td>
 </tr>
 <tr>
 <td>BRL</td>
-<td>Brazil Reals (FoxBit)</td>
+<td>Brazil Reals (BitCambio)</td>
 </tr>
 <tr>
 <td>PKR</td>
@@ -322,16 +325,12 @@ All data messages and responses are in JSON format.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>BTCVEF</td>
-<td>BTC Pair - Venezuelan Bolivares (SurBitcoin)</td>
-</tr>
-<tr>
 <td>BTCVND</td>
 <td>BTC Pair - Vietnamise Dongs (VBTC)</td>
 </tr>
 <tr>
 <td>BTCBRL</td>
-<td>BTC Pair - Brazil Reals (FoxBit)</td>
+<td>BTC Pair - Brazil Reals (BitCambio)</td>
 </tr>
 <tr>
 <td>BTCPKR</td>
@@ -1859,54 +1858,6 @@ curl -XPOST https://api_testnet.blinktrade.com/tapi/v1/message <span class="se">
 <td>Data</td>
 <td>object</td>
 <td>Data object containing the withdraws required fields</td>
-</tr>
-</tbody></table>
-
-<p><strong>FOXBIT</strong></p>
-
-<table><thead>
-<tr>
-<th>Methods</th>
-<th>Required Data fields</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>bradesco</td>
-<td>AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
-</tr>
-<tr>
-<td>bb</td>
-<td>AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
-</tr>
-<tr>
-<td>Caixa</td>
-<td>AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
-</tr>
-<tr>
-<td>ted</td>
-<td>BankName, BankNumber, AccountBranch, AccountNumber, AccountType, CPF_CNPJ</td>
-</tr>
-</tbody></table>
-
-<p><strong>VBTC</strong></p>
-
-<table><thead>
-<tr>
-<th>Methods</th>
-<th>Required Data fields</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>banktransfer</td>
-<td>BankName, AccountBranch, BankCity, AccountName, AccountNumber, BankSwift</td>
-</tr>
-<tr>
-<td>VPBankinternaltransfer</td>
-<td>VPbankbranch, BankCity, AccountName, AccountNumber, BankSwift</td>
-</tr>
-<tr>
-<td>cashtoID</td>
-<td>BankName, BankBranch, BankCity, Clientname, ClientIDNr, Issue Date ID, Place of Issue, Phone Number of Recipient</td>
 </tr>
 </tbody></table>
 
