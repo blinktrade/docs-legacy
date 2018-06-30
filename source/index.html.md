@@ -129,7 +129,6 @@ A broker ID is assigned for each exchange powered by BlinkTrade:
 
 | `<BROKER_ID>` |  Description
 |:-------------:|-----------------------------------------------
-|       1       | [SurBitcoin](https://surbitcoin.com)
 |       3       | [VBTC](https://vbtc.vn)
 |       4̶       | F̶o̶x̶B̶i̶t̶
 |     **5**     | [**Testnet**](https://testnet.blinktrade.com/)
@@ -143,7 +142,6 @@ Currency codes and related brokers:
 
 `<CURRENCY>` | Description
 -------------|------------
-VEF          | Venezuelan Bolivares (SurBitcoin)
 VND          | Vietnamise Dongs (VBTC)
 BRL          | Brazil Reals (BitCambio)
 PKR          | Pakistani Ruppe (UrduBit)
@@ -155,7 +153,6 @@ Currency pair symbols and related brokers:
 
 `<SYMBOL>` | Description
 -----------|------------
-BTCVEF     | BTC Pair - Venezuelan Bolivares (SurBitcoin)
 BTCVND     | BTC Pair - Vietnamise Dongs (VBTC)
 BTCBRL     | BTC Pair - Brazil Reals (BitCambio)
 BTCPKR     | BTC Pair - Pakistani Ruppe (UrduBit)
