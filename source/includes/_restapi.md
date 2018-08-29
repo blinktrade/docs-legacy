@@ -35,7 +35,7 @@ BlinkTrade.ticker().then(function(ticker) {
 
 ```shell
 
-$ curl "https://api.blinktrade.com/api/v1/BRL/ticker"
+$ curl "https://bitcambio_api.blinktrade.com/api/v1/BRL/ticker"
 
 ```
 
@@ -94,7 +94,7 @@ BlinkTrade.orderbook().then(function(orderbook) {
 
 ```shell
 
-$ curl "https://api.blinktrade.com/api/v1/BRL/orderbook"
+$ curl "https://bitcambio_api.blinktrade.com/api/v1/BRL/orderbook"
 
 ```
 
@@ -156,7 +156,7 @@ BlinkTrade.trades({ limit: 100, since: 2270000 }).then(function(trades) {
 
 ```shell
 
-$ curl "https://api.blinktrade.com/api/v1/BRL/trades?since=2270000&limit=100"
+$ curl "https://bitcambio_api.blinktrade.com/api/v1/BRL/trades?since=2270000&limit=100"
 
 ```
 
