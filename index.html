@@ -188,8 +188,8 @@ All data messages and responses are in JSON format.</p>
 <h3 id="public-rest">Public Rest</h3>
 
 <ul>
-<li><code class="prettyprint">testnet</code> base URL endpoint is <code class="prettyprint">https://api_testnet.blinktrade.com/api/v1</code></li>
-<li><code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://api.blinktrade.com/api/v1</code></li>
+<li><code class="prettyprint">testnet</code> base URL endpoint: <code class="prettyprint">https://api_testnet.blinktrade.com/api/v1</code></li>
+<li><code class="prettyprint">prod</code> base URL endpoint: <code class="prettyprint">https://api.blinktrade.com/api/v1</code></li>
 </ul>
 
 <h3 id="trade-rest-and-websocket">Trade (Rest and WebSocket)</h3>
@@ -197,22 +197,22 @@ All data messages and responses are in JSON format.</p>
 <h3 id="rest">Rest</h3>
 
 <ul>
-<li><code class="prettyprint">testnet</code> base URL endpoint is <code class="prettyprint">https://api_testnet.blinktrade.com/tapi/v1/message</code></li>
-<li><code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code></li>
+<li><code class="prettyprint">testnet</code> base URL endpoint: <code class="prettyprint">https://api_testnet.blinktrade.com/tapi/v1/message</code></li>
+<li><code class="prettyprint">prod</code> base URL endpoint: <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code></li>
 </ul>
 
 <h3 id="websocket">WebSocket</h3>
 
 <ul>
-<li><code class="prettyprint">testnet</code> URL endpoint is <code class="prettyprint">wss://api_testnet.blinktrade.com/trade/</code></li>
-<li><code class="prettyprint">prod</code> URL endpoint is <code class="prettyprint">wss://ws.blinktrade.com/trade/</code></li>
+<li><code class="prettyprint">testnet</code> URL endpoint: <code class="prettyprint">wss://api_testnet.blinktrade.com/trade/</code></li>
+<li><code class="prettyprint">prod</code> URL endpoint: <code class="prettyprint">wss://ws.blinktrade.com/trade/</code></li>
 </ul>
 
-<h2 id="bitcambio-endpoints">BitCambio Endpoints</h2>
+<h3 id="bitcambio-endpoints">BitCambio Endpoints</h3>
 
 <ul>
-<li>bitcambio <code class="prettyprint">prod</code> base URL endpoint is <code class="prettyprint">https://bitcambio_api.blinktrade.com/tapi/v1/message</code></li>
-<li>bitcambio <code class="prettyprint">prod</code> URL endpoint is <code class="prettyprint">wss://bitcambio_api.blinktrade.com/trade/</code></li>
+<li>bitcambio <code class="prettyprint">prod</code> rest endpoint: <code class="prettyprint">https://bitcambio_api.blinktrade.com/tapi/v1/message</code></li>
+<li>bitcambio <code class="prettyprint">prod</code> websocket endpoint: <code class="prettyprint">wss://bitcambio_api.blinktrade.com/trade/</code></li>
 </ul>
 
 <table><thead>
@@ -354,7 +354,8 @@ All data messages and responses are in JSON format.</p>
 
 </code></pre>
 
-<p>The Public API can be accessed under <code class="prettyprint">/api/v1/&lt;CURRENCY&gt;</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/api/v1/&lt;CURRENCY&gt;</code></p>
+<p>The Public API can be accessed under <code class="prettyprint">/api/v1/&lt;CURRENCY&gt;</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/api/v1/&lt;CURRENCY&gt;</code>
+(or <code class="prettyprint">https://bitcambio_api.blinktrade.com/api/v1/&lt;CURRENCY&gt;</code> if you are using bitcambio)</p>
 
 <p>An <code class="prettyprint">HTTP GET</code> request method should be used to fetch data.</p>
 
@@ -372,6 +373,7 @@ All data messages and responses are in JSON format.</p>
 
 </code></pre>
 <pre class="highlight shell"><code>
+<span class="gp">$ </span>curl <span class="s2">"https://api.blinktrade.com/api/v1/BRL/ticker"</span>
 <span class="gp">$ </span>curl <span class="s2">"https://bitcambio_api.blinktrade.com/api/v1/BRL/ticker"</span>
 
 </code></pre>
@@ -574,7 +576,8 @@ All data messages and responses are in JSON format.</p>
 
 </code></pre>
 <pre class="highlight shell"><code>
-<span class="gp">$ </span>curl <span class="s2">"https://bitcambio_api.blinktrade.com/api/v1/BRL/trades?since=2270000&amp;limit=100"</span>
+<span class="gp">$ </span>curl <span class="s2">"https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&amp;limit=2"</span>
+<span class="gp">$ </span>curl <span class="s2">"https://bitcambio_api.blinktrade.com/api/v1/BRL/trades?since=1467990302&amp;limit=2"</span>
 
 </code></pre>
 
@@ -661,7 +664,7 @@ All data messages and responses are in JSON format.</p>
 request deposits and withdrawals. You need to <a href="#create-api-key">create an API Key</a> through our platform and set their respective permission that gives you access to it.</p>
 
 <p>The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on <code class="prettyprint">REST</code> and <code class="prettyprint">WebSocket API</code>.
-On <code class="prettyprint">REST</code> it can be accessed under <code class="prettyprint">/tapi/v1/message</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code>,
+On <code class="prettyprint">REST</code> it can be accessed under <code class="prettyprint">/tapi/v1/message</code>, e.g, production is <code class="prettyprint">https://api.blinktrade.com/tapi/v1/message</code> (or <code class="prettyprint">https://bitcambio_api.blinktrade.com/tapi/v1/message</code> if your are using bitcambio),
 and API Key is needed in order to authenticate your access.</p>
 
 <aside class="warning">
@@ -709,8 +712,8 @@ and API Key is needed in order to authenticate your access.</p>
 </tbody></table>
 <pre class="highlight javascript"><code>
 <span class="c1">// REST Transport</span>
-<span class="kr">const</span> <span class="nx">BlinkTradeRest</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"blinktrade"</span><span class="p">).</span><span class="nx">BlinkTradeRest</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">blinktrade</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlinkTradeRest</span><span class="p">({</span>
+<span class="kd">var</span> <span class="nx">BlinkTradeRest</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"blinktrade"</span><span class="p">).</span><span class="nx">BlinkTradeRest</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">blinktrade</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlinkTradeRest</span><span class="p">({</span>
   <span class="na">prod</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="na">key</span><span class="p">:</span> <span class="s2">"YOUR_API_KEY_GENERATED_IN_API_MODULE"</span><span class="p">,</span>
   <span class="na">secret</span><span class="p">:</span> <span class="s2">"YOUR_SECRET_KEY_GENERATED_IN_API_MODULE"</span><span class="p">,</span>
@@ -718,8 +721,8 @@ and API Key is needed in order to authenticate your access.</p>
 <span class="p">});</span>
 
 <span class="c1">// WebSocket Transport</span>
-<span class="kr">const</span> <span class="nx">BlinkTradeWS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"blinktrade"</span><span class="p">).</span><span class="nx">BlinkTradeWS</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">blinktrade</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlinkTradeWS</span><span class="p">({</span> <span class="na">prod</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+<span class="kd">var</span> <span class="nx">BlinkTradeWS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"blinktrade"</span><span class="p">).</span><span class="nx">BlinkTradeWS</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">blinktrade</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlinkTradeWS</span><span class="p">({</span> <span class="na">prod</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
 
 </code></pre>
 <pre class="highlight shell"><code><span class="c"># Message to be sent</span>
@@ -758,7 +761,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">balance</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">balance</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">balance</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">balance</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">balance</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -906,7 +909,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">myOrders</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">myOrders</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">myOrders</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">myOrders</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myOrders</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1103,11 +1106,11 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </span></code></pre>
 <pre class="highlight javascript"><code>
 <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">sendOrder</span><span class="p">({</span>
-  <span class="na">side</span><span class="p">:</span> <span class="s2">"BUY"</span><span class="p">,</span>
-  <span class="na">price</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">((</span><span class="mi">550</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-  <span class="na">amount</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">((</span><span class="mf">0.05</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-  <span class="na">symbol</span><span class="p">:</span> <span class="s2">"BTCUSD"</span><span class="p">,</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">order</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="c1">// Buy</span>
+  <span class="s2">"price"</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">((</span><span class="mi">550</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+  <span class="s2">"amount"</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">((</span><span class="mf">0.05</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+  <span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"BTCUSD"</span><span class="p">,</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">order</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1161,7 +1164,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <tr>
 <td>OrdType</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>Price</td>
@@ -1295,7 +1298,7 @@ it will response as an array together with the balance response.</p>
 <tr>
 <td>OrdType</td>
 <td>string</td>
-<td>&ldquo;1&rdquo; = Market, &ldquo;2&rdquo; = Limited, &ldquo;3&rdquo; = Stop, &ldquo;4&rdquo; = Stop Limit</td>
+<td>&ldquo;2&rdquo; = Limited</td>
 </tr>
 <tr>
 <td>Side</td>
@@ -1344,7 +1347,7 @@ it will response as an array together with the balance response.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">cancelOrder</span><span class="p">({</span> <span class="na">orderID</span><span class="p">:</span> <span class="nx">order</span><span class="p">.</span><span class="nx">OrderID</span><span class="p">,</span> <span class="na">clientId</span><span class="p">:</span> <span class="nx">order</span><span class="p">.</span><span class="nx">ClOrdID</span> <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">order</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">cancelOrder</span><span class="p">({</span> <span class="na">orderID</span><span class="p">:</span> <span class="nx">order</span><span class="p">.</span><span class="nx">OrderID</span><span class="p">,</span> <span class="na">clientId</span><span class="p">:</span> <span class="nx">order</span><span class="p">.</span><span class="nx">ClOrdID</span> <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Order Cancelled"</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1409,7 +1412,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestDepositList</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">deposits</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestDepositList</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">deposits</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">deposits</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1523,7 +1526,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 <pre class="highlight javascript"><code>
 
 <span class="c1">// Bitcoin Deposit</span>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestDeposit</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">deposit</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestDeposit</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">deposit</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">deposit</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1532,7 +1535,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
   <span class="na">value</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="mi">200</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">),</span>
   <span class="na">currency</span><span class="p">:</span> <span class="s2">"BRL"</span><span class="p">,</span>
   <span class="na">depositMethodId</span><span class="p">:</span> <span class="mi">403</span><span class="p">,</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">deposit</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">deposit</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">deposit</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1670,7 +1673,7 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestWithdrawList</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">withdraws</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestWithdrawList</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">withdraws</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">withdraws</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1790,16 +1793,16 @@ curl -X POST <span class="s2">"</span><span class="nv">$api_url</span><span clas
 </span></code></pre>
 <pre class="highlight javascript"><code>
 <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestWithdraw</span><span class="p">({</span>
-  <span class="na">amount</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="mi">400</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">),</span>
-  <span class="na">currency</span><span class="p">:</span> <span class="s2">"BRL"</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s2">"bradesco"</span><span class="p">,</span>
-  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">AccountBranch</span><span class="p">:</span> <span class="s2">"111"</span><span class="p">,</span>
-    <span class="na">AccountNumber</span><span class="p">:</span> <span class="s2">"4444-5"</span><span class="p">,</span>
-    <span class="na">AccountType</span><span class="p">:</span> <span class="s2">"corrente"</span><span class="p">,</span>
-    <span class="na">CPF_CNPJ</span><span class="p">:</span> <span class="s2">"00000000000"</span>
+  <span class="s2">"amount"</span><span class="p">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="mi">400</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">),</span>
+  <span class="s2">"currency"</span><span class="p">:</span> <span class="s2">"BRL"</span><span class="p">,</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"bradesco"</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"AccountBranch"</span><span class="p">:</span> <span class="s2">"111"</span><span class="p">,</span>
+    <span class="s2">"AccountNumber"</span><span class="p">:</span> <span class="s2">"4444-5"</span><span class="p">,</span>
+    <span class="s2">"AccountType"</span><span class="p">:</span> <span class="s2">"corrente"</span><span class="p">,</span>
+    <span class="s2">"CPF_CNPJ"</span><span class="p">:</span> <span class="s2">"00000000000"</span>
   <span class="p">}</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">withdraw</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1895,7 +1898,7 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">confirmWithdraw</span><span class="p">({</span>
   <span class="na">withdrawId</span><span class="p">:</span> <span class="mi">523</span><span class="p">,</span>
   <span class="na">confirmationToken</span><span class="p">:</span> <span class="s2">"TOKEN"</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">withdraw</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">withdraw</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -1967,7 +1970,7 @@ or <code class="prettyprint">secondFactor</code> if needed.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestLedger</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">ledger</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">requestLedger</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ledger</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ledger</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -2075,9 +2078,9 @@ implementation <a href="https://github.com/blinktrade/frontend/blob/master/jsdev
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">heartbeat</span><span class="p">();</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">heartbeat</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">heartbeat</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">heartbeat</span><span class="p">.</span><span class="nx">Latency</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -2184,12 +2187,9 @@ there&rsquo;s some finger prints implementations that you can use.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">login</span><span class="p">({</span>
-    <span class="na">username</span><span class="p">:</span> <span class="s2">"&lt;API_KEY&gt;"</span><span class="p">,</span>
-    <span class="na">password</span><span class="p">:</span> <span class="s2">"&lt;API_PASSWORD&gt;"</span><span class="p">,</span>
-  <span class="p">});</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">logged</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">login</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="na">password</span><span class="p">:</span> <span class="s2">""</span> <span class="p">});</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">logged</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">logged</span><span class="p">);</span>
 <span class="p">});</span>
 
@@ -2440,9 +2440,9 @@ Each Market Data Entry is composed by a bid, offer or a trade occurred.</p>
 
 </span></code></pre>
 <pre class="highlight javascript"><code>
-<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">blinktrade</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">blinktrade</span><span class="p">.</span><span class="nx">subscribeOrderbook</span><span class="p">([</span><span class="s2">"BTCUSD"</span><span class="p">]);</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">orderbook</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">orderbook</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orderbook</span><span class="p">);</span>
 <span class="p">});</span>
 
