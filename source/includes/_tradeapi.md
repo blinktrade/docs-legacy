@@ -4,7 +4,7 @@ On our RESTful API, we provide a trade endpoint that you're allowed to send and 
 request deposits and withdrawals. You need to [create an API Key](#create-api-key) through our platform and set their respective permission that gives you access to it.
 
 The Trade endpoint is internaly a bridge to our WebSocket API, so you can access it both on `REST` and `WebSocket API`.
-On `REST` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message`,
+On `REST` it can be accessed under `/tapi/v1/message`, e.g, production is `https://api.blinktrade.com/tapi/v1/message` (or `https://bitcambio_api.blinktrade.com/tapi/v1/message` if your are using bitcambio),
 and API Key is needed in order to authenticate your access.
 
 <aside class="warning">

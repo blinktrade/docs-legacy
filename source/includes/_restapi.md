@@ -13,6 +13,7 @@ var BlinkTrade = new BlinkTradeRest({
 ```
 
 The Public API can be accessed under `/api/v1/<CURRENCY>`, e.g, production is `https://api.blinktrade.com/api/v1/<CURRENCY>`
+(or `https://bitcambio_api.blinktrade.com/api/v1/<CURRENCY>` if you are using bitcambio)
 
 An `HTTP GET` request method should be used to fetch data.
 
@@ -35,6 +36,7 @@ BlinkTrade.ticker().then(function(ticker) {
 
 ```shell
 
+$ curl "https://api.blinktrade.com/api/v1/BRL/ticker"
 $ curl "https://bitcambio_api.blinktrade.com/api/v1/BRL/ticker"
 
 ```
@@ -156,7 +158,8 @@ BlinkTrade.trades({ limit: 100, since: 2270000 }).then(function(trades) {
 
 ```shell
 
-$ curl "https://bitcambio_api.blinktrade.com/api/v1/BRL/trades?since=2270000&limit=100"
+$ curl "https://api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2"
+$ curl "https://bitcambio_api.blinktrade.com/api/v1/BRL/trades?since=1467990302&limit=2"
 
 ```
 

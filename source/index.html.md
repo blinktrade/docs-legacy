@@ -86,26 +86,26 @@ All data messages and responses are in JSON format.
 
 ### Public Rest
 
-* `testnet` base URL endpoint is `https://api_testnet.blinktrade.com/api/v1`
-* `prod` base URL endpoint is `https://api.blinktrade.com/api/v1`
+* `testnet` base URL endpoint: `https://api_testnet.blinktrade.com/api/v1`
+* `prod` base URL endpoint: `https://api.blinktrade.com/api/v1`
 
 ### Trade (Rest and WebSocket)
 
 ### Rest
 
-* `testnet` base URL endpoint is `https://api_testnet.blinktrade.com/tapi/v1/message`
-* `prod` base URL endpoint is `https://api.blinktrade.com/tapi/v1/message`
+* `testnet` base URL endpoint: `https://api_testnet.blinktrade.com/tapi/v1/message`
+* `prod` base URL endpoint: `https://api.blinktrade.com/tapi/v1/message`
 
 ### WebSocket
 
-* `testnet` URL endpoint is `wss://api_testnet.blinktrade.com/trade/`
-* `prod` URL endpoint is `wss://ws.blinktrade.com/trade/`
+* `testnet` URL endpoint: `wss://api_testnet.blinktrade.com/trade/`
+* `prod` URL endpoint: `wss://ws.blinktrade.com/trade/`
 
 
-## BitCambio Endpoints
+### BitCambio Endpoints
 
-* bitcambio `prod` base URL endpoint is `https://bitcambio_api.blinktrade.com/tapi/v1/message`
-* bitcambio `prod` URL endpoint is `wss://bitcambio_api.blinktrade.com/trade/`
+* bitcambio `prod` rest endpoint: `https://bitcambio_api.blinktrade.com/tapi/v1/message`
+* bitcambio `prod` websocket endpoint: `wss://bitcambio_api.blinktrade.com/trade/`
 
 
 | Endpoint    | Server | Browser
